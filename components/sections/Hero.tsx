@@ -32,7 +32,7 @@ export function Hero() {
     >
       <HeroCanvasSlot />
 
-      <Container className="relative z-10 flex flex-1 items-center pt-32">
+      <Container className="relative z-10 flex flex-1 items-center pt-12 md:pt-16">
         <div className="max-w-[44ch] pt-[8vh] lg:w-7/12">
           <h1
             id="hero-heading"

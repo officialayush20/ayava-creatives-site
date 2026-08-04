@@ -1,3 +1,4 @@
+import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ServicesShowcase } from "@/components/sections/ServicesShowcase";
@@ -19,19 +20,22 @@ import { MegaFooter } from "@/components/sections/MegaFooter";
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <TrustBar />
-      <ServicesShowcase />
-      <ResultsStrip />
-      <FeaturedCaseStudies />
-      <AyavaMethod />
-      <IndustriesGrid />
-      <WhyAyava />
-      <InsightsPreview />
-      <GlobalPresence />
-      <CtaBand />
+    <>
+      <SiteHeader />
+      <main>
+        <Hero />
+        <TrustBar />
+        <ServicesShowcase />
+        <ResultsStrip />
+        <FeaturedCaseStudies />
+        <AyavaMethod />
+        <IndustriesGrid />
+        <WhyAyava />
+        <InsightsPreview />
+        <GlobalPresence />
+        <CtaBand />
+      </main>
       <MegaFooter />
-    </main>
+    </>
   );
 }

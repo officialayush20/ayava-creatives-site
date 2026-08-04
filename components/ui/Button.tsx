@@ -5,6 +5,7 @@ type CommonProps = {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost";
   size?: "default" | "large";
+  tone?: "on-ink" | "on-ivory";
   className?: string;
   disabled?: boolean;
 };
@@ -32,11 +33,16 @@ type ButtonProps = ButtonAsLink | ButtonAsButton;
  * implementation treats gold as a focus-ring / hover-accent color only —
  * primary buttons use an ivory fill (on ink) / ink fill (on ivory) instead
  * of a gold fill. Flagged in the handoff notes.
+ *
+ * `tone` controls which surface the button sits on so fills/focus rings
+ * stay legible: "on-ink" (default) is for use on bg-ink sections, "on-ivory"
+ * is for use on bg-ivory sections.
  */
 export function Button({
   children,
   variant = "primary",
   size = "default",
+  tone = "on-ink",
   className = "",
   disabled = false,
   href,
@@ -44,7 +50,9 @@ export function Button({
   type = "button",
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-sans font-medium tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
+    "inline-flex items-center justify-center gap-2 font-sans font-medium tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
+
+  const ringOffset = tone === "on-ink" ? "focus-visible:ring-offset-2 focus-visible:ring-offset-ink" : "focus-visible:ring-offset-2 focus-visible:ring-offset-ivory";
 
   const sizes = {
     default: "px-6 py-3 text-sm",
@@ -52,15 +60,21 @@ export function Button({
   };
 
   const variants = {
-    primary:
-      "bg-ivory text-ink hover:bg-ivory/90 hover:shadow-[0_0_0_1px_var(--color-gold)] rounded-full",
-    secondary:
-      "bg-transparent text-ivory border border-slate hover:border-gold hover:text-ivory rounded-full",
-    ghost:
-      "bg-transparent text-ivory underline-offset-4 hover:underline px-0 py-1",
+    "on-ink": {
+      primary: "bg-ivory text-ink hover:shadow-[0_0_0_1px_var(--color-gold)] rounded-full",
+      secondary:
+        "bg-transparent text-ivory border border-slate hover:border-gold hover:text-ivory rounded-full",
+      ghost: "bg-transparent text-ivory underline-offset-4 hover:underline px-0 py-1",
+    },
+    "on-ivory": {
+      primary: "bg-ink text-ivory hover:shadow-[0_0_0_1px_var(--color-gold)] rounded-full",
+      secondary:
+        "bg-transparent text-ink border border-slate-deep hover:border-gold hover:text-ink rounded-full",
+      ghost: "bg-transparent text-ink underline-offset-4 hover:underline px-0 py-1",
+    },
   };
 
-  const classes = `${base} ${variant === "ghost" ? "" : sizes[size]} ${variants[variant]} ${className}`;
+  const classes = `${base} ${ringOffset} ${variant === "ghost" ? "" : sizes[size]} ${variants[tone][variant]} ${className}`;
 
   if (href) {
     return (

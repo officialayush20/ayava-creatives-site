@@ -38,14 +38,14 @@ function ServiceCard({
         featured ? "md:col-span-6" : "md:col-span-3"
       }`}
     >
-      <span className="font-display text-2xl text-gold">{number}</span>
+      <span className="font-sans text-sm tracking-[0.1em] text-slate">{number}</span>
       <div>
         <h3 className="font-display text-xl font-normal leading-tight md:text-2xl">{name}</h3>
         <p className="mt-3 font-sans text-sm text-slate">{description}</p>
       </div>
       <span
         aria-hidden="true"
-        className="mt-4 inline-block w-fit font-sans text-sm text-ivory transition-transform duration-200 ease-out group-hover:translate-x-1"
+        className="mt-4 inline-block w-fit font-sans text-sm text-ivory opacity-0 transition-all duration-200 ease-out group-hover:translate-x-1 group-hover:opacity-100"
       >
         &rarr;
       </span>

@@ -12,7 +12,7 @@ function MapPlaceholder() {
       className="relative mx-auto flex aspect-[2/1] w-full max-w-4xl items-center justify-center overflow-hidden rounded-sm border border-slate-deep bg-ink-raise"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,var(--color-slate-deep)_0%,transparent_55%)]" />
-      <span className="relative h-2 w-2 rounded-full border border-gold bg-ivory" />
+      <span className="relative h-2 w-2 rounded-full border border-viridian/60 bg-viridian" />
       <span className="absolute font-sans text-xs uppercase tracking-[0.2em] text-slate">
         Map graphic pending
       </span>

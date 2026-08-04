@@ -23,13 +23,15 @@ export function AyavaMethod() {
 
         {/* 5 steps — horizontal-scroll rail at desktop (per spec's recommendation
             for uneven 5-across grids), vertical stacked list from tablet down. */}
-        <ol className="hidden gap-8 overflow-x-auto pb-4 lg:flex lg:gap-6">
+        <ol className="hidden gap-8 overflow-x-auto pb-4 xl:flex xl:gap-6">
           {steps.map((step, index) => (
             <li
               key={step.title}
-              className="relative min-w-[240px] flex-1 border-t border-slate-deep pt-6"
+              className={`relative min-w-[240px] flex-1 border-t pt-6 ${
+                index === 0 ? "border-gold/40" : "border-slate-deep"
+              }`}
             >
-              <span className="font-display text-3xl text-gold">
+              <span className="font-display text-3xl text-slate">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-4 font-display text-xl font-normal">{step.title}</h3>
@@ -38,10 +40,10 @@ export function AyavaMethod() {
           ))}
         </ol>
 
-        <ol className="flex flex-col gap-8 border-l border-slate-deep pl-6 lg:hidden">
+        <ol className="flex flex-col gap-8 border-l border-slate-deep pl-6 xl:hidden">
           {steps.map((step, index) => (
             <li key={step.title} className="relative">
-              <span className="font-display text-2xl text-gold">
+              <span className="font-display text-2xl text-slate">
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-2 font-display text-lg font-normal">{step.title}</h3>

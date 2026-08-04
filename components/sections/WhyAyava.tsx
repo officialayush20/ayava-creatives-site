@@ -42,7 +42,7 @@ export function WhyAyava() {
                     index === 0 ? "border-t border-slate-deep" : ""
                   } border-b border-slate-deep`}
                 >
-                  <span className="font-display text-xl text-gold">
+                  <span className="font-display text-xl text-slate">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>

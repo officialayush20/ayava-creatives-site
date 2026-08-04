@@ -42,15 +42,20 @@
 
   /* Font families.
      display: "GT Sectra Display", Canela, and Instrument Serif are the three
-     candidates under consideration pending a licensing decision. Georgia is
-     the interim system-font fallback until a license is purchased. */
-  --font-display: "GT Sectra Display", Georgia, "Times New Roman", serif;
+     candidates under consideration pending a licensing decision. Instrument
+     Serif (loaded via next/font/google, see app/layout.tsx) is the interim
+     stand-in — it's one of the three named candidates and sets lining
+     figures, unlike the Georgia fallback further down the stack which is
+     kept only as a last resort. */
+  --font-display: var(--font-instrument-serif), "GT Sectra Display", Georgia,
+    "Times New Roman", serif;
 
   /* sans: "Söhne" and "Neue Haas Grotesk Display" are the candidates under
-     consideration pending a licensing decision. system-ui is the interim
-     fallback until a license is purchased. */
-  --font-sans: "Söhne", "Neue Haas Grotesk Display", -apple-system, system-ui,
-    sans-serif;
+     consideration pending a licensing decision. Inter (loaded via
+     next/font/google, see app/layout.tsx) is the interim stand-in ahead of
+     the system-ui/Segoe UI fallback, which reads too warm/soft vs spec. */
+  --font-sans: var(--font-inter), "Söhne", "Neue Haas Grotesk Display", -apple-system,
+    system-ui, sans-serif;
 }
 
 body {
