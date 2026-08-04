@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
 
@@ -5,25 +6,36 @@ const linkColumns = [
   {
     heading: "Services",
     links: [
-      "Meta Ads",
-      "Google Ads",
-      "SEO",
-      "Website Design",
-      "Branding",
-      "E-commerce Growth",
+      { label: "Meta Ads", href: "#" },
+      { label: "Google Ads", href: "#" },
+      { label: "SEO", href: "#" },
+      { label: "Website Design", href: "#" },
+      { label: "Branding", href: "#" },
+      { label: "E-commerce Growth", href: "#" },
     ],
   },
   {
     heading: "Company",
-    links: ["About", "Work", "Careers", "Contact"],
+    links: [
+      { label: "About", href: "#" },
+      { label: "Work", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
   },
   {
     heading: "Resources",
-    links: ["Insights", "Case Studies"],
+    links: [
+      { label: "Insights", href: "#" },
+      { label: "Case Studies", href: "#" },
+    ],
   },
   {
     heading: "Legal",
-    links: ["Privacy Policy", "Terms of Service"],
+    links: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+    ],
   },
 ];
 
@@ -53,13 +65,13 @@ export function MegaFooter() {
                 </h3>
                 <ul className="mt-4 flex flex-col gap-3">
                   {column.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
                         className="font-sans text-sm text-ivory underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                       >
-                        {link}
-                      </a>
+                        {link.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -75,20 +87,20 @@ export function MegaFooter() {
           </p>
           <ul className="flex gap-6">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/privacy"
                 className="font-sans text-xs text-slate underline-offset-4 hover:underline hover:text-ivory"
               >
                 Privacy
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/terms"
                 className="font-sans text-xs text-slate underline-offset-4 hover:underline hover:text-ivory"
               >
                 Terms
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
