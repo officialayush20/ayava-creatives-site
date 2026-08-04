@@ -37,6 +37,24 @@ export default function RootLayout({
     >
       <head>
         {/*
+          No-flash theme init: this must be the very first thing in <head>,
+          before any stylesheet or content, and must be a synchronous
+          blocking script (not useEffect, which fires after hydration/paint).
+          It reads the persisted preference from localStorage and sets
+          `data-theme` on <html> before the browser paints anything. Default
+          for new visitors (no stored preference) is dark, per the
+          "dark-first" brand ruling — so the attribute is only ever set for
+          "light". This keeps the root layout (and every page under it)
+          fully static — no next/headers cookies() read, no forced dynamic
+          rendering. See docs/light-theme-application-map.md.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(localStorage.getItem('ayava-theme')==='light'){document.documentElement.setAttribute('data-theme','light');}}catch(e){}",
+          }}
+        />
+        {/*
           Root cause of the "loads scrolled near the bottom" bug: the browser's
           native `history.scrollRestoration` defaults to "auto", so on any
           reload/re-navigation to a URL the tab has visited before, the browser
@@ -61,7 +79,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-ink text-ivory font-sans antialiased">
+      <body className="min-h-screen bg-surface text-content font-sans antialiased">
         <SmoothScrollProvider />
         {children}
       </body>
