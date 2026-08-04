@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 import { ArrowLink } from "@/components/ui/ArrowLink";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const upcomingAngles = [
   {
@@ -24,8 +27,10 @@ const upcomingAngles = [
  * article angles already drafted in the copy doc for the content pipeline.
  */
 export function InsightsPreview() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="insights-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="insights-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Field notes"
@@ -41,7 +46,7 @@ export function InsightsPreview() {
         />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {upcomingAngles.map((angle) => (
-            <div key={angle.title} className="flex flex-col">
+            <div key={angle.title} data-reveal-item className="flex flex-col">
               <MediaFrame alt={`${angle.title} — coming soon`} aspect="16/9" />
               <span className="mt-4 inline-block w-fit rounded-full border border-slate-deep/30 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-slate-deep">
                 Coming soon

@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Tag } from "@/components/ui/Tag";
 import { MediaFrame } from "@/components/ui/MediaFrame";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const caseStudies = [
   {
@@ -44,6 +47,7 @@ function CaseStudySpread({
     <a
       href="/work"
       aria-label={`View case study — ${study.name}`}
+      data-reveal-item
       className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-ivory md:grid-cols-12 md:items-center md:gap-x-10"
     >
       <div className={`md:col-span-7 ${reverse ? "md:order-2" : "md:order-1"}`}>
@@ -73,8 +77,13 @@ function CaseStudySpread({
 }
 
 export function FeaturedCaseStudies() {
+  // Larger stagger + offset than the default: these are full editorial
+  // spreads, not small grid tiles, so a more deliberate, spaced-out reveal
+  // reads as more considered rather than busy.
+  const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.15, y: 32 });
+
   return (
-    <section aria-labelledby="case-studies-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="case-studies-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Selected work"

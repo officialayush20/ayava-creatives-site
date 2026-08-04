@@ -1,6 +1,10 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { StatCounter } from "@/components/ui/StatCounter";
+import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 
 const stats = [
   { display: "15", label: "Marketing systems operated", value: 15 },
@@ -25,8 +29,35 @@ function HeroCanvasSlot() {
 }
 
 export function Hero() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return; // fallback: headline/subhead/CTAs render in final state instantly
+
+    const root = rootRef.current;
+    if (!root) return;
+
+    const targets = root.querySelectorAll<HTMLElement>("[data-hero-item]");
+    if (targets.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(targets, { opacity: 0, y: 24 });
+      gsap.to(targets, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: EASE,
+        stagger: 0.12,
+        delay: 0.15, // brief settle beat before the entry plays, feels intentional not instant
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={rootRef}
       aria-labelledby="hero-heading"
       className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink"
     >
@@ -36,16 +67,20 @@ export function Hero() {
         <div className="max-w-[44ch] pt-[8vh] lg:w-7/12">
           <h1
             id="hero-heading"
+            data-hero-item
             className="font-display text-[clamp(32px,10vw,128px)] font-normal leading-[0.95] lg:text-[clamp(48px,7vw,128px)]"
           >
             Marketing, engineered like infrastructure.
           </h1>
-          <p className="mt-6 max-w-[44ch] font-sans text-base text-slate sm:text-lg">
+          <p
+            data-hero-item
+            className="mt-6 max-w-[44ch] font-sans text-base text-slate sm:text-lg"
+          >
             Ayava Creatives builds and runs the 15 systems &mdash; from Meta Ads to CRO to AI
             marketing &mdash; that take a brand from &ldquo;running ads&rdquo; to &ldquo;running
             a growth engine.&rdquo; Built in Dehradun. Built for scale.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div data-hero-item className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button href="/contact" variant="primary" size="large" className="w-full sm:w-auto">
               Get Free Audit
             </Button>

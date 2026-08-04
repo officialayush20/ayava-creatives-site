@@ -1,14 +1,20 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 export function CtaBand() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
     <section
+      ref={revealRef}
       aria-labelledby="cta-band-heading"
       className="bg-ivory py-16 md:py-32"
     >
       <Container className="flex flex-col items-center text-center">
-        <div className="mx-auto flex max-w-3xl flex-col items-center">
+        <div data-reveal-item className="mx-auto flex max-w-3xl flex-col items-center">
           <h2
             id="cta-band-heading"
             className="font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-ink"

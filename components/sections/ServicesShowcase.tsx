@@ -1,5 +1,8 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const services = [
   { name: "Social Media Marketing (SMM)", description: "Turn scrolling into a scheduled habit around your brand." },
@@ -34,6 +37,7 @@ function ServiceCard({
     <a
       href="/services"
       aria-label={`${name} — ${description}`}
+      data-reveal-item
       className={`group flex min-h-[160px] flex-col justify-between rounded-sm border border-slate-deep p-6 transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:scale-[0.98] md:min-h-[280px] md:p-8 ${
         featured ? "md:col-span-6" : "md:col-span-3"
       }`}
@@ -55,9 +59,12 @@ function ServiceCard({
 
 export function ServicesShowcase() {
   const [first, ...rest] = services;
+  // 15 cards is a lot of simultaneous stagger; keep the per-item delay tight
+  // so the whole grid finishes revealing quickly rather than trailing off.
+  const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
 
   return (
-    <section aria-labelledby="services-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="services-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="What we run"

@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 /**
  * Static/CSS-only placeholder in place of a real map graphic (the
@@ -21,25 +24,28 @@ function MapPlaceholder() {
 }
 
 export function GlobalPresence() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="global-presence-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="global-presence-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <h2
           id="global-presence-heading"
+          data-reveal-item
           className="max-w-2xl font-display text-[clamp(28px,4vw,44px)] font-normal leading-[1.05]"
         >
           Based in Dehradun. Built for anywhere.
         </h2>
-        <p className="mt-6 max-w-xl font-sans text-sm text-slate">
+        <p data-reveal-item className="mt-6 max-w-xl font-sans text-sm text-slate">
           Ayava Creatives operates from Dehradun, India, serving clients across a growing set of
           regions with the same operating system: audit, architect, build, measure, scale.
         </p>
 
-        <div className="mt-16">
+        <div className="mt-16" data-reveal-item>
           <MapPlaceholder />
         </div>
 
-        <div className="mt-12">
+        <div className="mt-12" data-reveal-item>
           <h3 className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
             Locations
           </h3>

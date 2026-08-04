@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const differentiators = [
   {
@@ -21,11 +24,13 @@ const differentiators = [
 ];
 
 export function WhyAyava() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="why-ayava-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="why-ayava-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-4">
+          <div className="md:col-span-4" data-reveal-item>
             <h2
               id="why-ayava-heading"
               className="font-display text-[clamp(28px,4vw,44px)] font-normal leading-[1.05] md:sticky md:top-32"
@@ -38,6 +43,7 @@ export function WhyAyava() {
               {differentiators.map((item, index) => (
                 <li
                   key={item.title}
+                  data-reveal-item
                   className={`flex items-start gap-4 py-8 ${
                     index === 0 ? "border-t border-slate-deep" : ""
                   } border-b border-slate-deep`}

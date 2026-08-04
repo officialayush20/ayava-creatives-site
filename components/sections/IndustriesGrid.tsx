@@ -1,5 +1,8 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const industries = [
   { name: "Real Estate", caption: "Sell the property before the site visit." },
@@ -19,6 +22,7 @@ function IndustryTile({ name, caption }: { name: string; caption: string }) {
     <a
       href="/industries"
       aria-label={`${name} — ${caption}`}
+      data-reveal-item
       className="group relative flex aspect-square flex-col justify-end overflow-hidden rounded-sm border border-slate-deep bg-ink-raise p-4 transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
     >
       <div
@@ -36,8 +40,10 @@ function IndustryTile({ name, caption }: { name: string; caption: string }) {
 }
 
 export function IndustriesGrid() {
+  const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
+
   return (
-    <section aria-labelledby="industries-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="industries-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Where we work"

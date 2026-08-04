@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const platforms = [
   "Google Partner",
@@ -30,16 +33,26 @@ const portfolioNames = [
  * since these are honest, finite, real items rather than decorative filler.
  */
 export function TrustBar() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="trust-bar-heading" className="bg-ivory py-12 md:py-24">
+    <section
+      ref={revealRef}
+      aria-labelledby="trust-bar-heading"
+      className="bg-ivory py-12 md:py-24"
+    >
       <Container>
         <h2
           id="trust-bar-heading"
+          data-reveal-item
           className="mb-8 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep"
         >
           Platforms &amp; frameworks we operate on
         </h2>
-        <ul className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-slate-deep/20 pb-10">
+        <ul
+          data-reveal-item
+          className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-slate-deep/20 pb-10"
+        >
           {platforms.map((platform) => (
             <li
               key={platform}
@@ -50,10 +63,13 @@ export function TrustBar() {
           ))}
         </ul>
 
-        <p className="mb-6 mt-10 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+        <p
+          data-reveal-item
+          className="mb-6 mt-10 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep"
+        >
           Real portfolio work
         </p>
-        <ul className="flex flex-wrap items-center gap-x-10 gap-y-6">
+        <ul data-reveal-item className="flex flex-wrap items-center gap-x-10 gap-y-6">
           {portfolioNames.map((name) => (
             <li
               key={name}
