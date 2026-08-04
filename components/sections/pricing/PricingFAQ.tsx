@@ -38,7 +38,7 @@ export function PricingFAQ() {
   return (
     <section
       aria-labelledby="pricing-faq-heading"
-      className="border-t border-slate-deep bg-ink py-16 md:py-40"
+      className="bg-ink py-16 md:py-40"
     >
       <Container>
         <SectionHeader
