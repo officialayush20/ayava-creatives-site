@@ -10,6 +10,11 @@ type CtaBandProps = {
   primaryLabel?: string;
   /** Pass `null` to omit the secondary button entirely (e.g. services hub's single-CTA closing band). */
   secondary?: { href: string; label: string } | null;
+  /** Which background the band sits on — generalized so the Industries Hub
+   * and individual industry pages can close on ink (per their rhythm spec)
+   * without duplicating this component. Defaults to "on-ivory" to preserve
+   * the homepage/services-hub behavior this component originally shipped with. */
+  tone?: "on-ink" | "on-ivory";
 };
 
 export function CtaBand({
@@ -17,20 +22,23 @@ export function CtaBand({
   primaryHref = "/contact",
   primaryLabel = "Get Free Audit",
   secondary = { href: "/contact#call", label: "Book a Call" },
+  tone = "on-ivory",
 }: CtaBandProps = {}) {
   const revealRef = useScrollReveal<HTMLElement>();
+  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
+  const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
 
   return (
     <section
       ref={revealRef}
       aria-labelledby="cta-band-heading"
-      className="bg-ivory py-16 md:py-32"
+      className={`${bg} py-16 md:py-32`}
     >
       <Container className="flex flex-col items-center text-center">
         <div data-reveal-item className="mx-auto flex max-w-3xl flex-col items-center">
           <h2
             id="cta-band-heading"
-            className="font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-ink"
+            className={`font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] ${headingColor}`}
           >
             {headline}
           </h2>
@@ -38,7 +46,7 @@ export function CtaBand({
             <Button
               href={primaryHref}
               variant="primary"
-              tone="on-ivory"
+              tone={tone}
               size="large"
               className="w-full sm:w-auto"
             >
@@ -48,7 +56,7 @@ export function CtaBand({
               <Button
                 href={secondary.href}
                 variant="ghost"
-                tone="on-ivory"
+                tone={tone}
                 size="large"
                 className="w-full sm:w-auto"
               >
