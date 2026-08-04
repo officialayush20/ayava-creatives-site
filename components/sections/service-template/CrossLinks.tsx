@@ -6,21 +6,16 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { services } from "@/lib/services-data";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
-const relatedSlugs = ["google-ads", "analytics-cro", "content-marketing", "video-motion-production"];
-const relatedServices = relatedSlugs
-  .map((slug) => services.find((service) => service.slug === slug))
-  .filter((service): service is NonNullable<typeof service> => Boolean(service));
+type RelatedServicesCrossLinksProps = {
+  relatedSlugs: string[];
+};
 
-const relatedIndustries = [
-  "D2C / E-commerce",
-  "Real Estate",
-  "Hospitality & Travel",
-  "Fashion & Luxury",
-  "F&B / QSR",
-];
-
-export function RelatedServicesCrossLinks() {
+/** Promoted from `components/sections/meta-ads/CrossLinks.tsx`. */
+export function RelatedServicesCrossLinks({ relatedSlugs }: RelatedServicesCrossLinksProps) {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
+  const relatedServices = relatedSlugs
+    .map((slug) => services.find((service) => service.slug === slug))
+    .filter((service): service is NonNullable<typeof service> => Boolean(service));
 
   return (
     <section ref={revealRef} aria-labelledby="related-services-heading" className="bg-ink py-16 md:py-32">
@@ -57,7 +52,12 @@ export function RelatedServicesCrossLinks() {
   );
 }
 
-export function RelatedIndustriesCrossLinks() {
+type RelatedIndustriesCrossLinksProps = {
+  serviceName: string;
+  industries: string[];
+};
+
+export function RelatedIndustriesCrossLinks({ serviceName, industries }: RelatedIndustriesCrossLinksProps) {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
 
   return (
@@ -75,11 +75,11 @@ export function RelatedIndustriesCrossLinks() {
           className="mb-12 md:mb-16"
         />
         <ul className="flex snap-x gap-3 overflow-x-auto pb-2 md:flex-wrap md:overflow-visible">
-          {relatedIndustries.map((industry) => (
+          {industries.map((industry) => (
             <li key={industry} data-reveal-item className="shrink-0 snap-start md:shrink">
               <Link
                 href="/industries"
-                aria-label={`${industry} — an industry we serve with Meta Ads`}
+                aria-label={`${industry} — an industry we serve with ${serviceName}`}
                 className="inline-flex items-center rounded-full border border-slate-deep/40 px-5 py-2 font-sans text-sm text-ink transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
               >
                 {industry}

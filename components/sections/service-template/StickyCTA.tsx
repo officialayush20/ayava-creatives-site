@@ -3,24 +3,20 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
+type StickyCTAProps = {
+  serviceName: string;
+};
+
 /**
  * Simplified persistent CTA rather than the full spec'd StickyServiceCTA /
- * StickyMobileCTABar pair (service-page-layout-spec §12). Deviation, noted:
- * the full spec calls for two responsive shells with IntersectionObserver
- * sentinels on both the Hero and the Lead-Capture/Footer boundary, an
- * icon-collapsed 1024 state, and a dedicated compact Button size token. That
- * is a reasonable amount of net-new surface for a single-page CTA whose job
- * is simple: "always give a scrolled-past-hero visitor a way back to
- * Contact." This implementation keeps the two-sentinel show/hide logic (the
- * core UX requirement — appear after Hero, disappear once the Lead-Capture
- * widget is already in view so we never show two competing CTAs at once)
- * but renders one bottom-docked bar at every breakpoint instead of a
- * separate desktop right-rail shell, and reuses the existing `Button`
- * sizes rather than introducing a new compact variant. Placed early in DOM
- * order (rendered right after the Hero) so it never breaks natural tab
- * order for keyboard users, positioned visually via `fixed`.
+ * StickyMobileCTABar pair (service-page-layout-spec §12) — same deliberate
+ * deviation as the original Meta Ads implementation, now parameterized by
+ * service name. Two-sentinel show/hide logic preserved: appear after Hero,
+ * disappear once the Lead-Capture widget is already in view.
+ *
+ * Promoted from `components/sections/meta-ads/StickyCTA.tsx`.
  */
-export function StickyCTA() {
+export function StickyCTA({ serviceName }: StickyCTAProps) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -66,7 +62,7 @@ export function StickyCTA() {
       }`}
     >
       <div className="mx-auto flex max-w-[1760px] items-center justify-between gap-4 px-4 py-3 md:px-10">
-        <p className="hidden font-sans text-sm text-slate sm:block">Ready to talk about Meta Ads?</p>
+        <p className="hidden font-sans text-sm text-slate sm:block">Ready to talk about {serviceName}?</p>
         <Button href="/contact" variant="primary" tone="on-ink" className="w-full sm:w-auto">
           Get a Quote
         </Button>

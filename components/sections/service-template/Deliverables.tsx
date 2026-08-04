@@ -4,29 +4,19 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
-const deliverables = [
-  "Meta Pixel & Conversions API setup and verification",
-  "Full account audit (for existing accounts) before strategy begins",
-  "Audience research and segmentation (core, lookalike, interest, retargeting)",
-  "Creative brief development per audience segment",
-  "Ad creative testing plan (static, carousel, video, Reels placements)",
-  "Campaign structure built for clean signal reading (no audience overlap)",
-  "Budget allocation and bid-strategy management",
-  "Retargeting funnel design across warm-audience stages",
-  "Ongoing creative refresh to prevent ad fatigue",
-  "Performance reporting tied to the agreed conversion event",
-  "Standing review cadence with your team",
-  "Recommendations for creative and landing-page improvements based on live performance data",
-];
-
-const tools = ["Meta Business Suite", "Meta Ads Manager", "Google Analytics", "Canva", "Adobe Premiere Pro"];
+type DeliverablesProps = {
+  deliverables: string[];
+  tools: string[];
+};
 
 /**
  * §4 Deliverables + §5 Tools, composed as one tightly-coupled sub-section
  * per the spec's template-level rhythm note (hairline divider, no full
  * section-break padding between them).
+ *
+ * Promoted from `components/sections/meta-ads/Deliverables.tsx`.
  */
-export function Deliverables() {
+export function Deliverables({ deliverables, tools }: DeliverablesProps) {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
@@ -52,7 +42,7 @@ export function Deliverables() {
             Tools &amp; Platforms
           </p>
           <ul
-            aria-label="Tools and platforms used: Meta Business Suite, Meta Ads Manager, Google Analytics, Canva, Adobe Premiere Pro."
+            aria-label={`Tools and platforms used: ${tools.join(", ")}.`}
             className="flex flex-wrap items-center gap-x-10 gap-y-4"
           >
             {tools.map((tool) => (

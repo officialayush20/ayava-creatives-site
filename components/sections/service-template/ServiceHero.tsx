@@ -3,13 +3,24 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 
+type ServiceHeroProps = {
+  serviceName: string;
+  headline: string;
+  subhead: string;
+  heroImageAlt: string;
+};
+
 /**
  * Shorter, wayfinding-first hero for service subpages (not the homepage's
  * full-viewport cinematic hero) per service-page-layout-spec §1. Static
  * MediaFrame slot deliberately — no WebGL canvas here, this hero repeats
- * across 15 service pages so it must stay lightweight for performance.
+ * across all service pages so it must stay lightweight for performance.
+ *
+ * Promoted from `components/sections/meta-ads/ServiceHero.tsx` into the
+ * shared service-template directory now that a second real service page
+ * exists — parameterized by content rather than hardcoded per service.
  */
-export function ServiceHero() {
+export function ServiceHero({ serviceName, headline, subhead, heroImageAlt }: ServiceHeroProps) {
   return (
     <section aria-labelledby="service-hero-heading" className="bg-ink pt-8 pb-16 md:pt-12 md:pb-24">
       <Container>
@@ -28,7 +39,7 @@ export function ServiceHero() {
             </li>
             <li aria-hidden="true">/</li>
             <li aria-current="page" className="text-ivory">
-              Meta Ads
+              {serviceName}
             </li>
           </ol>
         </nav>
@@ -39,13 +50,9 @@ export function ServiceHero() {
               Service
             </p>
             <h1 className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05]">
-              Paid Media That Pays for Itself
+              {headline}
             </h1>
-            <p className="mt-6 max-w-[42ch] font-sans text-base text-slate md:text-lg">
-              We run Meta Ads as a revenue system, not a boost-button habit — every audience,
-              creative, and rupee of spend tied back to a measurable outcome, not a vanity
-              impression count.
-            </p>
+            <p className="mt-6 max-w-[42ch] font-sans text-base text-slate md:text-lg">{subhead}</p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Button href="/contact" variant="primary" tone="on-ink" size="large">
                 Get a Quote
@@ -57,7 +64,7 @@ export function ServiceHero() {
           </div>
 
           <div className="md:col-span-5">
-            <MediaFrame alt="Meta Ads campaign dashboard and creative review" aspect="4/5" />
+            <MediaFrame alt={heroImageAlt} aspect="4/5" />
           </div>
         </div>
       </Container>
