@@ -6,6 +6,8 @@ import { useScrollReveal } from "@/lib/useScrollReveal";
 
 type CtaBandProps = {
   headline?: string;
+  /** Optional short supporting line below the headline (e.g. Work Hub's closing CTA). */
+  supportingLine?: string;
   primaryHref?: string;
   primaryLabel?: string;
   /** Pass `null` to omit the secondary button entirely (e.g. services hub's single-CTA closing band). */
@@ -19,6 +21,7 @@ type CtaBandProps = {
 
 export function CtaBand({
   headline = "Your next campaign shouldn't be a guess.",
+  supportingLine,
   primaryHref = "/contact",
   primaryLabel = "Get Free Audit",
   secondary = { href: "/contact#call", label: "Book a Call" },
@@ -27,6 +30,7 @@ export function CtaBand({
   const revealRef = useScrollReveal<HTMLElement>();
   const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
   const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
+  const supportingColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
 
   return (
     <section
@@ -42,6 +46,9 @@ export function CtaBand({
           >
             {headline}
           </h2>
+          {supportingLine ? (
+            <p className={`mt-4 max-w-xl font-sans text-base ${supportingColor}`}>{supportingLine}</p>
+          ) : null}
           <div className="mt-10 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
             <Button
               href={primaryHref}

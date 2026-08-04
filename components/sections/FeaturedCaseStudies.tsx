@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Tag } from "@/components/ui/Tag";
@@ -9,6 +10,7 @@ import { useScrollReveal } from "@/lib/useScrollReveal";
 const caseStudies = [
   {
     name: "Aura Estates",
+    slug: "aura-estates",
     industry: "Luxury Real Estate",
     challenge:
       "A luxury real-estate developer needed a digital presence that matched the caliber of the properties themselves — most real-estate sites undersell what they're selling.",
@@ -18,6 +20,7 @@ const caseStudies = [
   },
   {
     name: "College IQ",
+    slug: "college-iq",
     industry: "EdTech",
     challenge:
       "An AI-driven EdTech platform needed a product website that could explain a technically complex offering to students and institutions without diluting it.",
@@ -27,6 +30,7 @@ const caseStudies = [
   },
   {
     name: "NextepSolution",
+    slug: "nextepsolution",
     industry: "CRM Platform (B2B)",
     challenge:
       "A CRM platform serving B2B clients needed a site that could sell software to operators, not consumers — a different trust bar entirely.",
@@ -44,8 +48,8 @@ function CaseStudySpread({
   reverse: boolean;
 }) {
   return (
-    <a
-      href="/work"
+    <Link
+      href={`/work/${study.slug}`}
       aria-label={`View case study — ${study.name}`}
       data-reveal-item
       className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-ivory md:grid-cols-12 md:items-center md:gap-x-10"
@@ -72,7 +76,7 @@ function CaseStudySpread({
           </span>
         </span>
       </div>
-    </a>
+    </Link>
   );
 }
 
