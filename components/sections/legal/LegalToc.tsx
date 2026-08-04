@@ -47,7 +47,7 @@ export function LegalToc({ sections }: LegalTocProps) {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className={`flex gap-2 border-l-2 pl-3 font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
+                className={`flex gap-2 border-l-2 pl-3 font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-deep ${
                   isActive ? "border-bronze text-ink" : "border-transparent text-slate-deep"
                 }`}
               >

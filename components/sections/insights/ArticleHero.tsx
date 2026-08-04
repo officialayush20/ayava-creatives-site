@@ -7,9 +7,9 @@ type ArticleHeroProps = {
 };
 
 /**
- * Article template hero — the one deliberate centered/narrow-measure
- * exception to the site's left-aligned SectionHeader convention, per
- * insights-page-layout-spec.md §2.1 (editorial long-form entry point).
+ * Article template hero — left-aligned editorial entry point, matching the
+ * site's WorkHero/IndustriesHubHero pattern (insights-page-layout-spec.md
+ * §2.1).
  */
 export function ArticleHero({ article }: ArticleHeroProps) {
   const isPublished = article.status === "published";
@@ -17,7 +17,7 @@ export function ArticleHero({ article }: ArticleHeroProps) {
   return (
     <section aria-labelledby="article-hero-heading" className="bg-ink py-16 md:py-24">
       <Container>
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+        <div className="flex max-w-3xl flex-col">
           <Tag tone="on-ink">{article.category}</Tag>
           <h1
             id="article-hero-heading"
@@ -30,7 +30,7 @@ export function ArticleHero({ article }: ArticleHeroProps) {
               {article.author} &middot; {article.readTime} &middot; {article.publishDate}
             </p>
           ) : (
-            <div className="mt-6 flex flex-col items-center gap-3">
+            <div className="mt-6 flex flex-col items-start gap-3">
               <p className="font-sans text-sm text-slate">Coming soon &mdash; {article.angle}</p>
               <span className="inline-flex w-fit items-center rounded-full border border-slate/40 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-slate">
                 Coming soon

@@ -6,6 +6,9 @@ type NarrativeStageProps = {
   headingId: string;
   /** Challenge/Execution = "a" (text cols 1-6), Strategy/Results = "b" (text cols 7-12) — A-B-A-B rhythm per case-study-layout-spec.md §3. */
   side: "a" | "b";
+  /** Alternates the four narrative stages ivory/ink so the template isn't
+   * four-in-a-row same-tone sections. Defaults to "on-ivory". */
+  tone?: "on-ivory" | "on-ink";
 };
 
 /**
@@ -15,21 +18,40 @@ type NarrativeStageProps = {
  * Text sits in its alternating column with generous whitespace instead of
  * an empty chart placeholder.
  */
-export function NarrativeStage({ stage, headingId, side }: NarrativeStageProps) {
+export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: NarrativeStageProps) {
+  const isInk = tone === "on-ink";
+
   return (
-    <section aria-labelledby={headingId} className="bg-ivory py-16 md:py-24">
+    <section
+      aria-labelledby={headingId}
+      className={`${isInk ? "bg-ink" : "bg-ivory"} py-16 md:py-24`}
+    >
       <Container>
         <div className={`grid grid-cols-1 md:grid-cols-12 ${side === "b" ? "md:justify-items-end" : ""}`}>
           <div className={`flex flex-col gap-4 md:col-span-6 ${side === "b" ? "md:col-start-7" : ""}`}>
-            <p className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+            <p
+              className={`font-sans text-xs font-medium uppercase tracking-[0.18em] ${
+                isInk ? "text-slate" : "text-slate-deep"
+              }`}
+            >
               {stage.label}
             </p>
-            <h2 id={headingId} className="font-display text-3xl font-normal text-ink md:text-4xl">
+            <h2
+              id={headingId}
+              className={`font-display text-3xl font-normal md:text-4xl ${
+                isInk ? "text-ivory" : "text-ink"
+              }`}
+            >
               {stage.heading}
             </h2>
             <div className="flex flex-col gap-4">
               {stage.paragraphs.map((paragraph, index) => (
-                <p key={index} className="max-w-[62ch] font-sans text-base text-slate-deep md:text-lg">
+                <p
+                  key={index}
+                  className={`max-w-[62ch] font-sans text-base md:text-lg ${
+                    isInk ? "text-slate" : "text-slate-deep"
+                  }`}
+                >
                   {paragraph}
                 </p>
               ))}

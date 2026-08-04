@@ -1,47 +1,33 @@
-import { Container } from "@/components/ui/Container";
+import { CaseStudyEmptyState } from "@/components/ui/CaseStudyEmptyState";
+
+const pendingMetrics = [
+  "Cost per qualified lead, before and after",
+  "Conversion rate at the point of engagement",
+  "Return on ad/creative spend over the engagement",
+];
 
 /**
- * Before/After Metrics empty state — distinct from `CaseStudyEmptyState`
- * (components/ui/CaseStudyEmptyState.tsx) by design intent, not oversight:
- *
- * `CaseStudyEmptyState` answers "no case study exists here at all yet" on
- * an industry/service page — full-width, a CTA routing to /contact, a 3-up
- * row of em-dash metric placeholders standing in for an entire missing
- * case study.
- *
- * This component answers a narrower, different question: "this real,
- * narrated project exists, but its Before/After numbers aren't verified
- * yet." Per case-study-layout-spec.md §4 that calls for a single centered
- * message inside a bordered "data module" panel (not full page width) with
- * a link back UP to the qualitative Results copy already on the page —
- * not a CTA to /contact, since the visitor is mid-page, not at a decision
- * point about whether Ayava exists as an option. Reusing CaseStudyEmptyState
- * here would misrepresent both the panel width (spec explicitly wants a
- * bordered, scoped-down "data module" here, distinct from the ivory zone
- * around it) and the CTA target.
+ * Results-at-a-glance empty state for case studies whose Before/After
+ * numbers aren't verified yet. Rebuilt on the shared `CaseStudyEmptyState`
+ * primitive (components/ui/CaseStudyEmptyState.tsx) — full-width,
+ * left-aligned, no border, no centering — matching the corrected pattern
+ * from Meta Ads `CaseStudySpotlight`. The earlier centered-bordered-box
+ * version reproduced the exact pattern already rejected once and has been
+ * replaced.
  */
 export function MetricsEmptyState({ resultsAnchorId }: { resultsAnchorId: string }) {
   return (
     <section aria-labelledby="metrics-heading" className="bg-ivory py-16 md:py-24">
-      <Container>
-        <div className="border border-slate-deep/40 px-6 py-16 md:px-12">
-          <h2
-            id="metrics-heading"
-            className="mb-4 text-center font-display text-2xl font-normal text-ink md:text-3xl"
-          >
-            Results at a Glance
-          </h2>
-          <p className="mx-auto max-w-[52ch] text-center font-sans text-base text-slate-deep">
-            Measured results for this project are being finalized.{" "}
-            <a
-              href={`#${resultsAnchorId}`}
-              className="font-medium text-ink underline underline-offset-4 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
-            >
-              Read about the outcomes ↑
-            </a>
-          </p>
-        </div>
-      </Container>
+      <CaseStudyEmptyState
+        eyebrow="Results at a Glance"
+        title="Measured Numbers, Coming Soon"
+        headingId="metrics-heading"
+        body="Quantified Before/After results for this project are being finalized. Read the qualitative outcomes above, or check back for the confirmed figures — we publish measured numbers, not estimates."
+        metrics={pendingMetrics}
+        ctaLabel="Read About the Outcomes"
+        ctaHref={`#${resultsAnchorId}`}
+        tone="on-ivory"
+      />
     </section>
   );
 }

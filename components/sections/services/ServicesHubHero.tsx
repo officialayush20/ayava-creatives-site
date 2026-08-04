@@ -32,14 +32,14 @@ export function ServicesHubHero() {
             </li>
           </ol>
         </nav>
-        <div className="mx-auto max-w-3xl text-center md:col-span-8 md:col-start-3">
+        <div className="max-w-3xl md:col-span-8">
           <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
             Services
           </p>
           <h1 className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-ivory">
             Fifteen services. Pick your starting point.
           </h1>
-          <p className="mx-auto mt-4 max-w-xl font-sans text-base text-slate md:text-lg">
+          <p className="mt-4 max-w-xl font-sans text-base text-slate md:text-lg">
             Grouped by what you&apos;re trying to fix first.
           </p>
         </div>

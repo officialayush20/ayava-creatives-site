@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NarrativeColumn } from "@/components/ui/NarrativeColumn";
@@ -7,11 +8,9 @@ const credentials = [
   { label: "Full-Stack Development", value: "NextepSolution" },
   { label: "Web Development", value: "Dreamzcraft" },
   { label: "Performance Marketing", value: "banksathi" },
-  {
-    label: "Real Project Work",
-    value: "NextepSolution, Nextep Ventures, Dreamzcraft, FineTaxConsultancy, Woodcraft Store Premium, Wooden Handicraft 3D, Aura Estates, College IQ",
-  },
 ];
+
+const featuredProjects = ["NextepSolution", "Nextep Ventures", "Dreamzcraft", "FineTaxConsultancy"];
 
 /**
  * Founder narrative / manifesto (about-page-layout-spec.md §2). Editorial
@@ -76,7 +75,7 @@ export function FounderNarrative() {
               </p>
             </NarrativeColumn>
           </div>
-          <div className="md:col-span-5 md:col-start-9">
+          <div className="md:col-span-4 md:col-start-9">
             <div className="md:sticky md:top-32">
               <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
                 At a Glance
@@ -95,6 +94,20 @@ export function FounderNarrative() {
                     <dd className="font-sans text-sm text-ink">{item.value}</dd>
                   </div>
                 ))}
+                <div className="flex flex-col gap-1 border-b border-slate-deep py-4">
+                  <dt className="font-sans text-xs uppercase tracking-[0.1em] text-slate-deep">
+                    Real Project Work
+                  </dt>
+                  <dd className="font-sans text-sm text-ink">
+                    {featuredProjects.join(", ")}, and four more —{" "}
+                    <Link
+                      href="/work"
+                      className="underline underline-offset-4 hover:text-slate-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                    >
+                      see Work
+                    </Link>
+                  </dd>
+                </div>
               </dl>
             </div>
           </div>

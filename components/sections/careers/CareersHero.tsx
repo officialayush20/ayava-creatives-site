@@ -13,7 +13,7 @@ export function CareersHero() {
       aria-labelledby="careers-hero-heading"
       className="flex min-h-[50vh] items-center bg-ivory py-16 md:py-24"
     >
-      <Container className="mx-auto flex max-w-3xl flex-col items-center text-center">
+      <Container className="flex max-w-3xl flex-col">
         <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
           Careers
         </p>

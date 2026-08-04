@@ -1,6 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import type { NarrativeThemeData } from "@/lib/industry-page-content";
 
@@ -43,15 +44,12 @@ export function IndustryNarrative({ industryName, themes }: IndustryNarrativePro
       <Container>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
-              Our Point of View
-            </p>
-            <h2
-              id="industry-narrative-heading"
-              className="font-display text-[length:var(--type-display-section)] font-normal leading-[1.05] text-ink"
-            >
-              How We Think About {industryName}
-            </h2>
+            <SectionHeader
+              eyebrow="Our Point of View"
+              title={`How We Think About ${industryName}`}
+              headingId="industry-narrative-heading"
+              tone="on-ivory"
+            />
           </div>
           <div className="md:col-span-8">
             {themes.map((theme, index) => (

@@ -88,7 +88,7 @@ export function WorkGridSection() {
             <p aria-live="polite">
               {hasActiveFilters ? (
                 <>
-                  Showing <span className="font-display text-gold">{filtered.length}</span> of{" "}
+                  Showing <span className="font-display text-slate-deep">{filtered.length}</span> of{" "}
                   {caseStudies.length} projects
                 </>
               ) : (
@@ -99,7 +99,7 @@ export function WorkGridSection() {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="font-sans text-sm font-medium text-ink underline underline-offset-4 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                className="font-sans text-sm font-medium text-ink underline underline-offset-4 hover:text-ink hover:underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
               >
                 Clear filters
               </button>

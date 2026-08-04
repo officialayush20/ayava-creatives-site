@@ -36,8 +36,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
         {article.category}
       </Tag>
       <h3
-        className={`mt-3 line-clamp-2 font-display text-lg font-normal leading-snug text-ink transition-colors duration-200 ease-out ${
-          isPublished ? "group-hover:text-gold" : ""
+        className={`mt-3 line-clamp-2 inline-block border-b border-transparent font-display text-lg font-normal leading-snug text-ink transition-colors duration-200 ease-out ${
+          isPublished ? "group-hover:border-gold" : ""
         }`}
       >
         {article.title}

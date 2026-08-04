@@ -31,16 +31,11 @@ export function IndustryFAQ({ industryName, slug, items, tone }: IndustryFAQProp
     })),
   };
 
-  // Case Study Spotlight (above) also renders on-ivory per the template's
-  // fixed rhythm, so this section adds its own top hairline to break the
-  // same-tone adjacency per industry-page-layout-spec §5's explicit note.
-  const hairline = tone === "on-ivory" ? "border-t border-slate-deep/40" : "";
-
   return (
     <section
       ref={revealRef}
       aria-labelledby="industry-faq-heading"
-      className={`${bg} ${hairline} py-16 md:py-40`}
+      className={`${bg} py-16 md:py-40`}
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <Container>

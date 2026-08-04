@@ -47,10 +47,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <CaseStudyHero study={study} />
         <SnapshotBar study={study} />
 
-        <NarrativeStage stage={study.narrative.challenge} headingId="challenge-heading" side="a" />
-        <NarrativeStage stage={study.narrative.strategy} headingId="strategy-heading" side="b" />
-        <NarrativeStage stage={study.narrative.execution} headingId="execution-heading" side="a" />
-        <NarrativeStage stage={study.narrative.results} headingId={resultsHeadingId} side="b" />
+        <NarrativeStage stage={study.narrative.challenge} headingId="challenge-heading" side="a" tone="on-ivory" />
+        <NarrativeStage stage={study.narrative.strategy} headingId="strategy-heading" side="b" tone="on-ink" />
+        <NarrativeStage stage={study.narrative.execution} headingId="execution-heading" side="a" tone="on-ivory" />
+        <NarrativeStage stage={study.narrative.results} headingId={resultsHeadingId} side="b" tone="on-ink" />
 
         <MetricsEmptyState resultsAnchorId={resultsHeadingId} />
 

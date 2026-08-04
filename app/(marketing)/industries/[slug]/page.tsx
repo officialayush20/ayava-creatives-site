@@ -35,9 +35,9 @@ export async function generateMetadata({ params }: IndustryPageProps): Promise<M
 // (Narrative) -> ink (Relevant Services) -> ivory (Case Study, State A or B —
 // always follows Relevant Services/ink so it's fixed to "on-ivory" rather
 // than the spec's conditional, holding alternation for all 10 instances) ->
-// ivory (FAQ, same tone as Case Study per spec §5 — `IndustryFAQ` renders its
-// own top hairline in this case to break the same-tone adjacency) -> ink
-// (CTA Band).
+// ink (FAQ — switched from ivory per creative review: back-to-back ivory
+// sections with only a hairline couldn't separate ~640px of same-tone
+// content) -> ink (CTA Band, an intentional ink-on-ink coda).
 export default async function IndustryPage({ params }: IndustryPageProps) {
   const { slug } = await params;
   const industry = getIndustryBySlug(slug);
@@ -63,7 +63,7 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
           industryName={industry.name}
           slug={industry.slug}
           items={content.faqItems}
-          tone="on-ivory"
+          tone="on-ink"
         />
         <CtaBand
           headline={`Let's Talk About Your ${industry.name} Project`}

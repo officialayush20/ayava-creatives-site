@@ -21,7 +21,7 @@ export function NextCaseStudyPreview({ next }: { next: CaseStudy }) {
           </p>
           <h2
             id="next-case-study-heading"
-            className="font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-ivory transition-colors duration-200 ease-out group-hover:text-gold"
+            className="inline-block border-b border-transparent font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-ivory transition-colors duration-200 ease-out group-hover:border-gold"
           >
             {next.name}
           </h2>
