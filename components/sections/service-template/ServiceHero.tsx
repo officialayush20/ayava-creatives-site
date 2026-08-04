@@ -8,6 +8,10 @@ type ServiceHeroProps = {
   headline: string;
   subhead: string;
   heroImageAlt: string;
+  /** Content-driven per service — state-B (empty-state) pages must not
+   * claim "See Case Study" when the section they jump to admits there
+   * isn't one yet. */
+  secondaryCtaLabel: string;
 };
 
 /**
@@ -20,7 +24,7 @@ type ServiceHeroProps = {
  * shared service-template directory now that a second real service page
  * exists — parameterized by content rather than hardcoded per service.
  */
-export function ServiceHero({ serviceName, headline, subhead, heroImageAlt }: ServiceHeroProps) {
+export function ServiceHero({ serviceName, headline, subhead, heroImageAlt, secondaryCtaLabel }: ServiceHeroProps) {
   return (
     <section aria-labelledby="service-hero-heading" className="bg-ink pt-8 pb-16 md:pt-12 md:pb-24">
       <Container>
@@ -58,7 +62,7 @@ export function ServiceHero({ serviceName, headline, subhead, heroImageAlt }: Se
                 Get a Quote
               </Button>
               <Button href="#case-study" variant="secondary" tone="on-ink" size="large">
-                See Case Study
+                {secondaryCtaLabel}
               </Button>
             </div>
           </div>

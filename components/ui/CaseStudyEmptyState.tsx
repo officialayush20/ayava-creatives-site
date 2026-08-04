@@ -7,6 +7,10 @@ type CaseStudyEmptyStateProps = {
   title: string;
   headingId: string;
   body: string;
+  /** Optional line rendered before the em-dash metrics row, for cases where
+   * the row means "no engagement exists" rather than "results are
+   * pending" and needs that reframing (e.g. AI Marketing). */
+  metricsLead?: string;
   metrics: string[];
   ctaLabel: string;
   ctaHref?: string;
@@ -29,6 +33,7 @@ export function CaseStudyEmptyState({
   title,
   headingId,
   body,
+  metricsLead,
   metrics,
   ctaLabel,
   ctaHref = "/contact",
@@ -37,13 +42,17 @@ export function CaseStudyEmptyState({
   const bodyColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
   const metricLabelColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
   const metricValueColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const hairline = "border-slate-deep";
+  const hairline = tone === "on-ink" ? "border-slate-deep" : "border-slate-deep/40";
 
   return (
     <Container>
       <SectionHeader eyebrow={eyebrow} title={title} headingId={headingId} tone={tone} className="mb-8" />
       <div data-reveal-item className="flex flex-col gap-8">
         <p className={`max-w-[70ch] font-sans text-base md:text-lg ${bodyColor}`}>{body}</p>
+
+        {metricsLead ? (
+          <p className={`-mb-2 font-sans text-sm ${metricLabelColor}`}>{metricsLead}</p>
+        ) : null}
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {metrics.map((metric) => (

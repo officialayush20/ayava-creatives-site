@@ -9,10 +9,7 @@ import { Deliverables } from "@/components/sections/service-template/Deliverable
 import { CaseStudySpotlight } from "@/components/sections/service-template/CaseStudySpotlight";
 import { Pricing } from "@/components/sections/service-template/Pricing";
 import { FAQ } from "@/components/sections/service-template/FAQ";
-import {
-  RelatedServicesCrossLinks,
-  RelatedIndustriesCrossLinks,
-} from "@/components/sections/service-template/CrossLinks";
+import { WhereThisFits } from "@/components/sections/service-template/CrossLinks";
 import { LeadCapture } from "@/components/sections/service-template/LeadCapture";
 import { StickyCTA } from "@/components/sections/service-template/StickyCTA";
 import { servicePageContent, getServicePageContent } from "@/lib/service-page-content";
@@ -44,8 +41,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
 // Background rhythm identical to the proven Meta Ads reference instance:
 // ink (Hero) -> ivory (Problem) -> ink (Approach) -> ivory (Deliverables) ->
-// ink (Case Study) -> ivory (Pricing) -> ink (FAQ) -> ink (Related Services)
-// -> ivory (Related Industries) -> ink (Lead Capture).
+// ink (Case Study) -> ivory (Pricing) -> ink (FAQ) -> ivory (Where This Fits,
+// merged Related Services + Related Industries) -> ink (Lead Capture).
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
   const content = getServicePageContent(slug);
@@ -65,6 +62,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           headline={content.hero.headline}
           subhead={content.hero.subhead}
           heroImageAlt={content.hero.heroImageAlt}
+          secondaryCtaLabel={content.hero.secondaryCtaLabel}
         />
         <StickyCTA serviceName={content.name} />
         <ProblemWeSolve
@@ -80,10 +78,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
         />
         <Deliverables deliverables={content.deliverables} tools={content.tools} />
         <CaseStudySpotlight caseStudy={content.caseStudy} imageLeft={serviceIndex % 2 === 0} />
-        <Pricing description={content.pricingDescription} tiers={content.pricingTiers} />
+        <Pricing
+          description={content.pricingDescription}
+          tiers={content.pricingTiers}
+          scopeFactors={content.pricingScopeFactors}
+        />
         <FAQ items={content.faqItems} idPrefix={`${content.slug}-faq`} />
-        <RelatedServicesCrossLinks relatedSlugs={content.relatedServiceSlugs} />
-        <RelatedIndustriesCrossLinks serviceName={content.name} industries={content.relatedIndustries} />
+        <WhereThisFits
+          serviceName={content.name}
+          relatedSlugs={content.relatedServiceSlugs}
+          industries={content.relatedIndustries}
+        />
         <LeadCapture slug={slug} />
       </main>
       <MegaFooter />

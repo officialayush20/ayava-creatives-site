@@ -8,10 +8,7 @@ import { Deliverables } from "@/components/sections/service-template/Deliverable
 import { CaseStudySpotlight } from "@/components/sections/service-template/CaseStudySpotlight";
 import { Pricing } from "@/components/sections/service-template/Pricing";
 import { FAQ } from "@/components/sections/service-template/FAQ";
-import {
-  RelatedServicesCrossLinks,
-  RelatedIndustriesCrossLinks,
-} from "@/components/sections/service-template/CrossLinks";
+import { WhereThisFits } from "@/components/sections/service-template/CrossLinks";
 import { LeadCapture } from "@/components/sections/service-template/LeadCapture";
 import { StickyCTA } from "@/components/sections/service-template/StickyCTA";
 import { servicePageContent } from "@/lib/service-page-content";
@@ -40,6 +37,7 @@ export default function MetaAdsPage() {
           headline={content.hero.headline}
           subhead={content.hero.subhead}
           heroImageAlt={content.hero.heroImageAlt}
+          secondaryCtaLabel={content.hero.secondaryCtaLabel}
         />
         <StickyCTA serviceName={content.name} />
         <ProblemWeSolve
@@ -55,10 +53,17 @@ export default function MetaAdsPage() {
         />
         <Deliverables deliverables={content.deliverables} tools={content.tools} />
         <CaseStudySpotlight caseStudy={content.caseStudy} imageLeft />
-        <Pricing description={content.pricingDescription} tiers={content.pricingTiers} />
+        <Pricing
+          description={content.pricingDescription}
+          tiers={content.pricingTiers}
+          scopeFactors={content.pricingScopeFactors}
+        />
         <FAQ items={content.faqItems} idPrefix="meta-ads-faq" />
-        <RelatedServicesCrossLinks relatedSlugs={content.relatedServiceSlugs} />
-        <RelatedIndustriesCrossLinks serviceName={content.name} industries={content.relatedIndustries} />
+        <WhereThisFits
+          serviceName={content.name}
+          relatedSlugs={content.relatedServiceSlugs}
+          industries={content.relatedIndustries}
+        />
         <LeadCapture slug="meta-ads" />
       </main>
       <MegaFooter />

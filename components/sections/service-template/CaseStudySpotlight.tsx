@@ -36,9 +36,11 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
     return (
       <section ref={revealRef} id="case-study" aria-labelledby="case-study-heading" className="bg-ink py-16 md:py-40">
         <CaseStudyEmptyState
+          eyebrow={caseStudy.eyebrow}
           title={caseStudy.heading}
           headingId="case-study-heading"
           body={caseStudy.body}
+          metricsLead={caseStudy.metricsLead}
           metrics={caseStudy.metrics}
           ctaLabel={caseStudy.ctaLabel}
           tone="on-ink"
@@ -60,14 +62,13 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
           tone="on-ink"
           className="mb-10 md:mb-12"
         />
-        <a
-          href={href}
-          aria-label={`${caseStudy.heading} — view case study`}
-          data-reveal-item
-          className={`group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 md:grid-cols-12 md:gap-10`}
-        >
+        <div data-reveal-item className="group grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
           <div className={`md:col-span-7 ${imageLeft ? "md:order-1" : "md:order-2"}`}>
-            <MediaFrame alt={`${project?.name ?? caseStudy.heading} project preview`} aspect="16/9" />
+            <MediaFrame
+              alt={`${project?.name ?? caseStudy.heading} project preview`}
+              aspect="16/9"
+              className="border border-transparent transition-colors duration-200 ease-out group-hover:border-gold"
+            />
           </div>
           <div className={`flex flex-col justify-center md:col-span-5 ${imageLeft ? "md:order-2" : "md:order-1"}`}>
             <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
@@ -82,7 +83,7 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
               {caseStudy.ctaLabel}
             </ArrowLink>
           </div>
-        </a>
+        </div>
       </Container>
     </section>
   );

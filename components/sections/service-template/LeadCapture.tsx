@@ -117,7 +117,7 @@ function FormLeadCapture({ config }: { config: Extract<LeadCaptureConfig, { vari
         <div className="mx-auto max-w-2xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
           {status === "success" ? (
             <div aria-live="polite">
-              <h2 className="font-display text-[length:var(--type-display-card)] font-normal">
+              <h2 id="lead-capture-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
                 {config.successMessage}
               </h2>
               <Button href="/contact" variant="primary" tone="on-ink" size="large" className="mt-8 w-full sm:w-auto">

@@ -3,90 +3,84 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { HairlineRowList } from "@/components/ui/HairlineRowList";
 import { services } from "@/lib/services-data";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
-type RelatedServicesCrossLinksProps = {
+type WhereThisFitsProps = {
+  serviceName: string;
   relatedSlugs: string[];
+  industries: string[];
 };
 
-/** Promoted from `components/sections/meta-ads/CrossLinks.tsx`. */
-export function RelatedServicesCrossLinks({ relatedSlugs }: RelatedServicesCrossLinksProps) {
+/**
+ * Merged Related Services + Related Industries into a single `bg-ivory`
+ * section (creative review §5 / checklist item 2) — the previous two
+ * separate ink sections ran straight into FAQ (also ink) with no rule
+ * between them, producing ~1,000px of unbroken ink on all 15 pages.
+ * Retires the 4-col card grid for related services in favor of the
+ * already-approved `HairlineRowList` pattern, then a hairline break, then
+ * the existing industry chip row underneath.
+ *
+ * Replaces the previous `RelatedServicesCrossLinks` (ink) and
+ * `RelatedIndustriesCrossLinks` (ivory) exports.
+ */
+export function WhereThisFits({ serviceName, relatedSlugs, industries }: WhereThisFitsProps) {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
   const relatedServices = relatedSlugs
     .map((slug) => services.find((service) => service.slug === slug))
     .filter((service): service is NonNullable<typeof service> => Boolean(service));
 
   return (
-    <section ref={revealRef} aria-labelledby="related-services-heading" className="bg-ink py-16 md:py-32">
+    <section ref={revealRef} aria-labelledby="where-this-fits-heading" className="bg-ivory py-16 md:py-32">
       <Container>
         <SectionHeader
-          eyebrow="Pairs Well With"
-          title="Related Services"
-          headingId="related-services-heading"
-          tone="on-ink"
-          className="mb-12 md:mb-16"
-        />
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
-          {relatedServices.map((service) => (
-            <Link
-              key={service.slug}
-              href={`/services/${service.slug}`}
-              data-reveal-item
-              aria-label={`${service.name} — ${service.oneLiner}`}
-              className="group flex min-h-[160px] flex-col justify-between rounded-sm border border-slate-deep p-6 transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-            >
-              <h3 className="font-display text-lg font-normal leading-tight">{service.name}</h3>
-              <p className="mt-3 font-sans text-sm text-slate">{service.oneLiner}</p>
-              <span
-                aria-hidden="true"
-                className="mt-4 inline-block w-fit font-sans text-sm text-ivory opacity-0 transition-all duration-200 ease-out group-hover:translate-x-1 group-hover:opacity-100"
-              >
-                &rarr;
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-type RelatedIndustriesCrossLinksProps = {
-  serviceName: string;
-  industries: string[];
-};
-
-export function RelatedIndustriesCrossLinks({ serviceName, industries }: RelatedIndustriesCrossLinksProps) {
-  const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
-
-  return (
-    <section
-      ref={revealRef}
-      aria-labelledby="related-industries-heading"
-      className="bg-ivory py-16 md:py-32"
-    >
-      <Container>
-        <SectionHeader
-          eyebrow="Who We Do This For"
-          title="Industries We Serve With This Service"
-          headingId="related-industries-heading"
+          eyebrow="Where This Fits"
+          title="Pairs well with, and who we run it for."
+          headingId="where-this-fits-heading"
           tone="on-ivory"
           className="mb-12 md:mb-16"
         />
-        <ul className="flex snap-x gap-3 overflow-x-auto pb-2 md:flex-wrap md:overflow-visible">
-          {industries.map((industry) => (
-            <li key={industry} data-reveal-item className="shrink-0 snap-start md:shrink">
-              <Link
-                href="/industries"
-                aria-label={`${industry} — an industry we serve with ${serviceName}`}
-                className="inline-flex items-center rounded-full border border-slate-deep/40 px-5 py-2 font-sans text-sm text-ink transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
-              >
-                {industry}
-              </Link>
-            </li>
-          ))}
-        </ul>
+
+        <HairlineRowList
+          tone="on-ivory"
+          numbered={false}
+          items={relatedServices.map((service) => ({
+            title: service.name,
+            description: (
+              <>
+                <span>{service.oneLiner}</span>{" "}
+                <Link
+                  href={`/services/${service.slug}`}
+                  aria-label={`${service.name} — ${service.oneLiner}`}
+                  className="inline-flex items-center gap-1 font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                >
+                  See the service
+                  <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </>
+            ),
+          }))}
+        />
+
+        <div className="border-t border-slate-deep/40 pt-10 md:pt-12">
+          <p className="mb-6 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+            Who We Do This For
+          </p>
+          <ul className="flex snap-x gap-3 overflow-x-auto pb-2 md:flex-wrap md:overflow-visible">
+            {industries.map((industry) => (
+              <li key={industry} data-reveal-item className="shrink-0 snap-start md:shrink">
+                <Link
+                  href="/industries"
+                  aria-label={`${industry} — an industry we serve with ${serviceName}`}
+                  className="inline-flex items-center rounded-full border border-slate-deep/40 px-5 py-2 font-sans text-sm text-ink transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                >
+                  {industry}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </section>
   );

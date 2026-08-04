@@ -23,8 +23,16 @@ export type CaseStudyStateA = {
 
 export type CaseStudyStateB = {
   state: "B";
+  /** Overrides the default "Case Study Spotlight" eyebrow — needed on
+   * pages like AI Marketing where that default would contradict a body
+   * that explicitly says no case study exists yet. */
+  eyebrow?: string;
   heading: string;
   body: string;
+  /** Optional line rendered before the em-dash metrics row, for cases
+   * (like AI Marketing) where the row means "no engagement exists" rather
+   * than "results are pending" and needs that reframing. */
+  metricsLead?: string;
   metrics: string[];
   ctaLabel: string;
 };
@@ -33,6 +41,19 @@ export type PricingTier = {
   name: string;
   featured?: boolean;
   features: string[];
+};
+
+/**
+ * A single "what shapes the scope" factor — the tier-less alternative to
+ * `PricingTier`, rendered as a `HairlineRowList` (the pattern already
+ * approved on `pricing/EngagementModels.tsx`). Used for every service page
+ * whose pricing genuinely doesn't have distinct named tiers rather than
+ * writing 13+ sets of cosmetically-different tier copy to fill a card grid
+ * (see decision note above `Pricing.tsx`).
+ */
+export type PricingScopeFactor = {
+  title: string;
+  description: string;
 };
 
 export type FAQItemData = {
@@ -70,6 +91,10 @@ export type ServicePageContent = {
     headline: string;
     subhead: string;
     heroImageAlt: string;
+    /** Content-driven secondary CTA label — real case-study (state A) pages
+     * keep "See Case Study"; state-B (empty-state) pages get an honest
+     * label that doesn't overclaim a case study that doesn't exist yet. */
+    secondaryCtaLabel: string;
   };
   problem: {
     title: string;
@@ -84,43 +109,18 @@ export type ServicePageContent = {
   tools: string[];
   caseStudy: CaseStudyStateA | CaseStudyStateB;
   pricingDescription: string;
-  pricingTiers: PricingTier[];
+  /** Present only for pages with genuinely distinct, named tiers (Meta Ads
+   * currently the only one) — otherwise use `pricingScopeFactors`. */
+  pricingTiers?: PricingTier[];
+  /** Tier-less "what shapes the scope" list — the default for every page
+   * that doesn't have real per-tier differentiation. See decision note
+   * above `Pricing.tsx`. */
+  pricingScopeFactors?: PricingScopeFactor[];
   faqItems: FAQItemData[];
   relatedServiceSlugs: string[];
   relatedIndustries: string[];
   leadCapture: LeadCaptureConfig;
 };
-
-const genericTiers = (unit: string): PricingTier[] => [
-  {
-    name: "Starter",
-    features: [
-      `Initial ${unit} audit`,
-      "Core strategy build",
-      "Foundational setup",
-      "Monthly performance report",
-    ],
-  },
-  {
-    name: "Growth",
-    featured: true,
-    features: [
-      "Everything in Starter",
-      "Full-scope strategy and build",
-      "Ongoing optimization cadence",
-      "Standing review call",
-    ],
-  },
-  {
-    name: "Enterprise",
-    features: [
-      "Everything in Growth",
-      "Multi-market / multi-team scope",
-      "Dedicated support",
-      "Custom reporting cadence",
-    ],
-  },
-];
 
 export const servicePageContent: Record<string, ServicePageContent> = {
   "meta-ads": {
@@ -133,11 +133,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We run Meta Ads as a revenue system, not a boost-button habit — every audience, creative, and rupee of spend tied back to a measurable outcome, not a vanity impression count.",
       heroImageAlt: "Meta Ads campaign dashboard and creative review",
+      secondaryCtaLabel: "See What We'll Report",
     },
     problem: {
       title: "Most accounts don't fail. They go unwatched.",
       paragraphs: [
-        "Most Meta Ads accounts aren't underperforming because the platform failed — they're underperforming because nobody's watching them closely enough. Budgets get set once and left alone. The same three creatives run for months past their expiry date. Audiences overlap and cannibalize each other's reach. And by the time someone checks the dashboard, the account has been quietly burning spend on fatigue and guesswork for weeks.",
+        "Budgets get set once at kickoff and then treated as finished work, not a live decision that needs revisiting. The same three creatives run for months past their expiry date. Audiences overlap and cannibalize each other's reach. And by the time someone checks the dashboard, the account has been quietly burning spend on fatigue and guesswork for weeks.",
         "The second failure mode is worse: campaigns optimized for the wrong signal entirely. Cheap clicks that never convert. Likes and comments mistaken for pipeline. A pixel that was never configured to track what the business actually sells, so every “optimization” the algorithm makes is optimizing for the wrong outcome.",
       ],
       quote:
@@ -186,7 +187,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     tools: ["Meta Business Suite", "Meta Ads Manager", "Google Analytics", "Canva", "Adobe Premiere Pro"],
     caseStudy: {
       state: "B",
-      heading: "In Progress, Not Invented",
+      heading: "The Numbers Aren't In Yet",
       body: "A documented Meta Ads case study is in the field now. We'd rather publish confirmed numbers than dress up a project that hasn't been measured — so here's what we'll report when it lands: cost per qualified lead before and after, creative win rate by audience segment, and spend efficiency across the retargeting funnel.",
       metrics: [
         "Cost per qualified lead, before and after",
@@ -294,6 +295,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We don't chase attention on Google Ads — we intercept intent. Every campaign is built around what a buyer typed into the search bar the moment before they were ready to act.",
       heroImageAlt: "Google Ads account dashboard and search campaign review",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "Budget leaks, structurally.",
@@ -354,7 +356,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Google Ads spend, competitiveness of your keyword space, and the number of campaign types you're running (Search, Shopping, Performance Max, Display) all change the size of the job — we scope against your actual account, not a one-size template.",
-    pricingTiers: genericTiers("account"),
+    pricingScopeFactors: [
+      { title: "Monthly ad spend", description: "The volume flowing through the account shapes how much testing and management the job actually requires." },
+      { title: "Keyword space competitiveness", description: "A crowded, high-CPC category needs tighter ongoing optimization than a niche one." },
+      { title: "Campaign types running", description: "Search-only is a different job than Search plus Shopping, Performance Max, and Display together." },
+      { title: "New account vs. existing", description: "An existing account starts with a full audit; a new one starts with clean architecture." },
+    ],
     faqItems: [
       {
         question: "How is Google Ads different from SEO — do I need both?",
@@ -415,6 +422,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We build SEO as compounding infrastructure — technical foundations, content, and authority stacked in the right order — so your rankings survive algorithm updates instead of evaporating with them.",
       heroImageAlt: "SEO technical audit and keyword research dashboard",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "Content can't fix a broken foundation.",
@@ -474,7 +482,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "SEO scope depends on site size, technical debt, competitiveness of your keyword space, and how much content production is included — an audit-only engagement and a full content-and-link-building program are different jobs.",
-    pricingTiers: genericTiers("site"),
+    pricingScopeFactors: [
+      { title: "Site size and technical debt", description: "A five-page brochure site and a thousand-page catalog carry very different technical audit scope." },
+      { title: "Keyword space competitiveness", description: "Winning against a decade of accumulated authority takes more sustained work than an under-served niche." },
+      { title: "Content production included", description: "Strategy-and-briefs-only is a lighter engagement than full content production." },
+      { title: "Audit-only vs. full program", description: "A one-time technical fix and an ongoing content-and-link-building program are different jobs." },
+    ],
     faqItems: [
       {
         question: "How long does SEO take to show results?",
@@ -523,9 +536,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We design and build websites as revenue infrastructure — fast, structurally sound, and laid out around how your specific visitor actually decides, not a template borrowed from a portfolio site.",
       heroImageAlt: "Website design wireframes and visual design system",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
-      title: "Most sites are decoration, not infrastructure.",
+      title: "A polished screenshot isn't a functioning site.",
       paragraphs: [
         "Most business websites are decoration, not infrastructure. They look acceptable in a screenshot and fail in practice: slow load times that lose mobile visitors before the hero image finishes loading, navigation built around the org chart instead of the buyer's decision path, and a homepage that tries to say everything at once and therefore convinces no one of anything.",
         "The second failure is treating the website as a one-time deliverable instead of a living asset. It launches, gets forgotten, and six months later still reflects a business that's since evolved — wrong pricing, dead case studies, a contact form nobody's checked in weeks.",
@@ -582,7 +596,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Website design scope varies by page count, custom functionality (booking systems, e-commerce, gated content), and whether we're building on an existing brand system or establishing one from scratch.",
-    pricingTiers: genericTiers("website"),
+    pricingScopeFactors: [
+      { title: "Page count", description: "A five-page site and a twenty-five-page site are different builds, not the same template scaled up." },
+      { title: "Custom functionality", description: "Booking systems, e-commerce, or gated content each add real scope beyond a standard page build." },
+      { title: "Existing brand system or not", description: "Designing within an established system is lighter than establishing the visual foundation from scratch." },
+      { title: "Content readiness", description: "Whether final copy and imagery already exist changes the timeline and scope materially." },
+    ],
     faqItems: [
       {
         question: "Do you design and develop, or just one or the other?",
@@ -639,9 +658,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We build brand systems from strategy down — positioning, voice, and visual identity locked together tightly enough that a competitor lifting your color palette still wouldn't sound or feel like you.",
       heroImageAlt: "Brand identity system, logo marks, and typography board",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
-      title: "Most identities are chosen, not built.",
+      title: "A mood board isn't a brand strategy.",
       paragraphs: [
         "Most brand identities are chosen, not built — a logo picked from a mood board, a color palette selected because it looked nice in the deck, a tone of voice that was never actually written down anywhere so every piece of content sounds slightly different. It photographs fine in isolation and falls apart the moment it has to scale across a website, an ad, a product package, and a sales deck consistently.",
         "The deeper problem is strategic: a visual identity built before the positioning underneath it was decided. Nobody can articulate why the brand looks the way it does, which means nobody can defend it when a new designer, a new agency, or a rebrand pressure test comes along — it just gets changed.",
@@ -697,7 +717,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Branding scope depends on whether this is a full identity build from zero, a strategic repositioning of an existing brand, or a narrower visual refresh — these are different engagements with different depth.",
-    pricingTiers: genericTiers("brand"),
+    pricingScopeFactors: [
+      { title: "Build, reposition, or refresh", description: "A from-zero identity, a strategic repositioning, and a narrower visual refresh are different depths of engagement." },
+      { title: "Verbal and visual scope", description: "Full tone-of-voice and naming work adds scope beyond a visual-identity-only project." },
+      { title: "Touchpoint rollout breadth", description: "Website, social, packaging, and sales collateral each add rollout work beyond the core system." },
+      { title: "Strategy phase depth", description: "Genuine positioning and competitive audit work takes real time — rushing it is the biggest cause of a brand that doesn't hold." },
+    ],
     faqItems: [
       {
         question: "Do we need full brand strategy, or can we just get a logo?",
@@ -745,6 +770,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We plan content against search intent and buyer stage from the start, so what you publish keeps earning traffic and trust months after it goes live — instead of vanishing off the feed by the following Tuesday.",
       heroImageAlt: "Content strategy editorial calendar and keyword mapping",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "A publishing calendar isn't a strategy.",
@@ -803,7 +829,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Content marketing scope depends on production volume, content depth (short-form vs. long-form/pillar content), and whether strategy-only or full production is included.",
-    pricingTiers: genericTiers("content program"),
+    pricingScopeFactors: [
+      { title: "Production volume", description: "A smaller set of pieces built around real search demand is a different scope than a high-volume calendar." },
+      { title: "Content depth", description: "Short-form pieces and long-form pillar content take meaningfully different production time." },
+      { title: "Strategy-only or full production", description: "Some teams need briefs and direction; others need the writing done end to end." },
+      { title: "Distribution scope", description: "Planning where content gets repurposed and shared is different from executing paid distribution or email sends directly." },
+    ],
     faqItems: [
       {
         question: "How much content do we need to publish to see results?",
@@ -851,6 +882,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "Every platform you advertise on can change its algorithm or its price overnight. Your email list can't be de-ranked. We build the flows, segmentation, and CRM discipline that make it your highest-margin channel.",
       heroImageAlt: "Email flow automation and CRM segmentation dashboard",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "A list isn't a CRM strategy.",
@@ -908,7 +940,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Email/CRM scope depends on list size, number of flows needed, and whether this includes full CRM platform setup or works within an existing one.",
-    pricingTiers: genericTiers("program"),
+    pricingScopeFactors: [
+      { title: "List size", description: "Segmentation and deliverability work scale with the number of subscribers actually being managed." },
+      { title: "Number of flows needed", description: "A welcome series alone is lighter than welcome, abandoned cart, post-purchase, and win-back built together." },
+      { title: "Platform setup scope", description: "Working within an existing CRM is different from standing up the platform itself." },
+      { title: "Campaign cadence", description: "Ongoing promotional and editorial sends add scope on top of the core automated flows." },
+    ],
     faqItems: [
       {
         question: "We already have Mailchimp/Klaviyo set up — do you rebuild from scratch?",
@@ -956,6 +993,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We treat e-commerce growth as a full-funnel discipline — traffic, merchandising, and checkout flow diagnosed together, because a store that's optimized for clicks but leaks at checkout is optimized for the wrong number.",
       heroImageAlt: "E-commerce funnel audit and checkout flow diagnostics",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "More traffic into a leaking funnel just leaks faster.",
@@ -1014,7 +1052,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "E-commerce growth scope depends on whether this is an audit-only engagement, a full funnel rebuild, or an ongoing optimization retainer.",
-    pricingTiers: genericTiers("store"),
+    pricingScopeFactors: [
+      { title: "Audit-only, rebuild, or retainer", description: "A diagnostic pass, a full funnel rebuild, and an ongoing optimization retainer are different engagements." },
+      { title: "Catalog complexity", description: "A handful of products and a large, multi-category catalog need different merchandising depth." },
+      { title: "Checkout and retention scope", description: "Fixing checkout friction is a narrower job than also building out loyalty and repeat-purchase mechanics." },
+      { title: "Acquisition alignment", description: "Whether spend scaling is included, or the engagement stops at fixing the funnel itself." },
+    ],
     faqItems: [
       {
         question: "Do you rebuild our store, or optimize what we have?",
@@ -1071,9 +1114,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We run influencer partnerships the way we run paid campaigns — vetted for genuine audience fit, briefed against a specific outcome, and measured, not just gifted and hoped for.",
       heroImageAlt: "Creator content review board for an influencer marketing campaign",
+      secondaryCtaLabel: "See Our Approach",
     },
     problem: {
-      title: "Most influencer marketing is chosen on follower count.",
+      title: "Reach isn't the same currency as relevance.",
       paragraphs: [
         "Most influencer marketing is chosen on follower count and gut feeling — a creator with a large audience but no genuine overlap with your actual buyer, briefed loosely with \"just talk about the product however feels natural,\" and then never measured against anything beyond the vanity metrics on the post itself. The brand gets content; it rarely gets a business outcome.",
         "The second failure is treating each partnership as a one-off transaction instead of a system. No consistent briefing process, no clear usage rights negotiated for the content afterward, no tracking mechanism (unique codes, links) to separate what actually drove action from what just generated impressions.",
@@ -1120,7 +1164,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     tools: ["Instagram Creator Marketplace", "Modash", "Bitly", "Airtable"],
     caseStudy: {
       state: "B",
-      heading: "In Progress, Not Invented",
+      heading: "No Campaign We'd Stand Behind Yet",
       body: "We haven't yet run a documented influencer marketing campaign we can show real numbers for. Rather than borrow an unrelated project to fill this space, we'd rather show you real results once they exist. In the meantime, talk to us about how we'd approach your category.",
       metrics: [
         "Trackable click-throughs by creator",
@@ -1131,7 +1175,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Influencer marketing scope depends on creator tier (micro vs. macro), number of partnerships, and whether this is a single campaign or an ongoing ambassador-style program.",
-    pricingTiers: genericTiers("creator-fit"),
+    pricingScopeFactors: [
+      { title: "Creator tier", description: "Micro-influencer partnerships and macro-creator campaigns carry very different negotiation and cost profiles." },
+      { title: "Number of partnerships", description: "A single-creator activation is a lighter job than a multi-creator campaign run in parallel." },
+      { title: "Single campaign or ongoing program", description: "A one-off activation and a standing ambassador-style program are scoped differently." },
+      { title: "Usage rights complexity", description: "Negotiating broader content usage rights (paid ads, long-term reuse) adds scope beyond the post itself." },
+    ],
     faqItems: [
       {
         question: "Should we work with micro-influencers or larger creators?",
@@ -1179,11 +1228,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "App Store Optimization is the SEO of the app economy — we optimize what actually drives store-search visibility and install intent, not just the screenshots that looked best in a meeting.",
       heroImageAlt: "App store listing optimization review across iOS and Android",
+      secondaryCtaLabel: "See Our Approach",
     },
     problem: {
       title: "Most listings get built once and never revisited.",
       paragraphs: [
-        "Most apps get their store listing built once, at launch, and never revisited — keyword fields chosen without real research, screenshots that show features instead of outcomes, and a description written for the founder's pride rather than the searcher's decision. Meanwhile install-to-uninstall ratio (the metric that actually determines long-term store ranking on some platforms) gets ignored entirely in favor of raw install count.",
+        "Keyword fields get chosen without real research, screenshots show features instead of outcomes, and the description reads like it was written for the founder's pride rather than the searcher's decision. Meanwhile install-to-uninstall ratio (the metric that actually determines long-term store ranking on some platforms) gets ignored entirely in favor of raw install count.",
         "The second failure is disconnecting ASO from the rest of acquisition — paid user acquisition campaigns running with zero connection to what the store listing itself is optimized to convert, so traffic arrives and bounces at the listing page before it ever reaches the app.",
       ],
       quote:
@@ -1230,14 +1280,19 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     tools: ["App Store Connect", "Google Play Console", "Sensor Tower", "AppTweak"],
     caseStudy: {
       state: "B",
-      heading: "In Progress, Not Invented",
+      heading: "No Listing We've Measured Yet",
       body: "No portfolio project we've shipped maps honestly to an app store listing engagement yet — we build our portfolio with real, documented work, not borrowed relevance. Talk to us about your app and how we'd approach the listing.",
       metrics: ["Store-search keyword ranking", "Listing-to-install conversion rate", "Install-to-uninstall ratio"],
       ctaLabel: "Talk to Us About Your App",
     },
     pricingDescription:
       "ASO scope depends on whether this is a new listing build, an optimization pass on an existing listing, or an ongoing program including creative testing.",
-    pricingTiers: genericTiers("listing"),
+    pricingScopeFactors: [
+      { title: "New listing or optimization pass", description: "Building a listing from scratch and optimizing a live one require different research depth." },
+      { title: "Platforms covered", description: "iOS, Android, or both — each store's algorithm is researched and optimized separately." },
+      { title: "One-time or ongoing program", description: "Initial optimization is a defined project; sustained ranking needs ongoing monitoring." },
+      { title: "Creative testing scope", description: "Structured A/B testing on icon, screenshots, and preview video adds scope beyond a static listing pass." },
+    ],
     faqItems: [
       {
         question: "Is ASO a one-time setup or an ongoing service?",
@@ -1296,9 +1351,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We produce video and motion content built for how it's actually watched — sound-off on a feed, fast-skipping on a story, patient on a landing page — not a single cut repurposed everywhere and hoping it works.",
       heroImageAlt: "Video production edit timeline with platform-specific cuts",
+      secondaryCtaLabel: "See Our Approach",
     },
     problem: {
-      title: "Most brand video is produced for one context, then force-fit everywhere.",
+      title: "A single cut can't serve every platform's attention span.",
       paragraphs: [
         "Most brand video is produced for a single context — usually a polished, long-form brand film — and then force-fit into every placement it's later needed for: cropped awkwardly into a Story, missing captions for sound-off feed viewing, paced for a cinema attention span on a platform where the average viewer decides to keep watching in under two seconds.",
         "The second failure is treating production as the end of the process instead of the start of a testing cycle. One hero video gets made, runs everywhere, and never gets iterated against what's actually retaining viewers versus losing them in the first three seconds — the exact data that would make the next piece better.",
@@ -1346,14 +1402,19 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     tools: ["Adobe Premiere Pro", "After Effects", "DaVinci Resolve", "Cinema 4D"],
     caseStudy: {
       state: "B",
-      heading: "In Progress, Not Invented",
+      heading: "Nothing Shipped We Can Show Honestly",
       body: "We haven't yet shipped a documented video/motion production project we can spotlight with confidence — several portfolio projects involved web and brand work, but not confirmed video deliverables. Talk to us about your project instead of us dressing up an unrelated one.",
       metrics: ["Hook retention in the first 3 seconds", "Completion rate by format", "Cut-to-cut engagement drop-off"],
       ctaLabel: "Talk to Us About Your Project",
     },
     pricingDescription:
       "Video production scope depends on format count, whether this is live-action or motion graphics (or both), shoot-day requirements, and revision rounds.",
-    pricingTiers: genericTiers("production"),
+    pricingScopeFactors: [
+      { title: "Format count", description: "One hero cut is a different job than a full set of platform-specific exports." },
+      { title: "Live-action, motion graphics, or both", description: "Shoots and animation are different production paths, often combined on one project." },
+      { title: "Shoot-day requirements", description: "Location, talent, and crew needs scale the production timeline and cost directly." },
+      { title: "Revision rounds", description: "Scoped and confirmed in the brief before production starts, so expectations are clear on both sides." },
+    ],
     faqItems: [
       {
         question: "Do you handle both filming and animation, or just one?",
@@ -1401,9 +1462,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We manage brand reputation as an active discipline — proactive coverage, review response, and crisis-readiness — rather than something you only think about the week a bad review goes viral.",
       heroImageAlt: "Reputation monitoring dashboard across press and review platforms",
+      secondaryCtaLabel: "See Our Approach",
     },
     problem: {
-      title: "Most businesses only engage reactively — after the narrative is already set.",
+      title: "By the time you respond, someone else already wrote the story.",
       paragraphs: [
         "Most businesses only engage with PR and reputation management reactively — a bad review, a social media complaint that's picking up traction, a negative press mention — and by the time it's addressed, the narrative has already been set by whoever spoke first and loudest. Meanwhile positive coverage opportunities (founder story angles, product launches genuinely newsworthy to a trade publication, customer success stories) go untouched because nobody owns proactive outreach.",
         "The second failure is inconsistent review and reputation monitoring — no defined process for responding to reviews across platforms, no early-warning system for reputation risk, so problems compound in public for days before anyone at the company even sees them.",
@@ -1451,14 +1513,19 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     tools: ["Google Alerts", "Brand24", "Meltwater", "Google Business Profile"],
     caseStudy: {
       state: "B",
-      heading: "In Progress, Not Invented",
+      heading: "We Haven't Owned a Narrative Long Enough to Prove It",
       body: "No portfolio project we've delivered maps honestly to a PR or reputation-management engagement yet. Rather than stretch an unrelated project to fit, we'd rather talk through your specific reputation situation directly.",
       metrics: ["Response time to new reviews", "Sentiment trend over time", "Proactive coverage secured"],
       ctaLabel: "Talk to Us About Your Situation",
     },
     pricingDescription:
       "PR/reputation scope depends on whether this is proactive coverage building, ongoing review/reputation monitoring, or active crisis response — these require very different levels of engagement and urgency.",
-    pricingTiers: genericTiers("reputation"),
+    pricingScopeFactors: [
+      { title: "Proactive, monitoring, or crisis response", description: "Building coverage, ongoing sentiment monitoring, and active crisis response carry very different urgency and depth." },
+      { title: "Urgency", description: "An active reputation issue is triaged and scoped differently from a standing intake." },
+      { title: "Review and response volume", description: "The platforms and volume of reviews being actively managed shapes the ongoing workload." },
+      { title: "Media relationship building", description: "Ongoing press outreach and relationship development add scope beyond a single pitch cycle." },
+    ],
     faqItems: [
       {
         question: "We're dealing with a reputation issue right now — how fast can you start?",
@@ -1506,6 +1573,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We build the measurement infrastructure first, then run structured conversion testing on top of it — so every design or copy change is validated by real visitor behavior, not internal opinion.",
       heroImageAlt: "Conversion funnel and A/B test dashboard review",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
       title: "Most analytics are installed but not actually instrumented.",
@@ -1564,7 +1632,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "Analytics/CRO scope depends on current tracking maturity (starting from broken instrumentation vs. a solid foundation) and testing cadence (one-off audit vs. ongoing testing program).",
-    pricingTiers: genericTiers("tracking"),
+    pricingScopeFactors: [
+      { title: "Current tracking maturity", description: "Starting from broken instrumentation is a different job than building on a solid analytics foundation." },
+      { title: "Testing cadence", description: "A one-off audit and an ongoing testing program are scoped and priced differently." },
+      { title: "Traffic volume", description: "Enough traffic to reach statistical significance changes whether formal split testing or qualitative research leads." },
+      { title: "Qualitative research needs", description: "Heatmaps, session recordings, and on-site surveys add scope beyond the core analytics build." },
+    ],
     faqItems: [
       {
         question: "We already have Google Analytics installed — isn't that enough?",
@@ -1612,6 +1685,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We deploy AI where it genuinely compounds marketing output — segmentation, personalization, and workflow automation — without pretending a chatbot bolted onto your site counts as an AI strategy.",
       heroImageAlt: "AI-assisted marketing workflow and automation review",
+      secondaryCtaLabel: "How We'd Approach It",
     },
     problem: {
       title: "Most \"AI marketing\" is a single tool bolted onto an existing process.",
@@ -1674,8 +1748,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     // forking the shared component for one page.
     caseStudy: {
       state: "B",
+      eyebrow: "How We'd Approach It",
       heading: "How We'd Approach This for You",
       body: "College IQ, one of our portfolio projects, is itself an AI-driven EdTech platform — but that's a client who builds AI product, not an Ayava AI-marketing engagement, and we won't blur the two just because both involve the word \"AI.\" We don't yet have a documented AI-marketing engagement of our own to spotlight honestly. If you're evaluating where AI-driven automation could genuinely help your marketing, talk to us — we'll tell you plainly where it would help and where it wouldn't.",
+      metricsLead: "If we ran this for you, this is what we'd hold ourselves to:",
       metrics: [
         "Automation leverage identified vs. manual baseline",
         "Human-review checkpoint pass rate",
@@ -1685,7 +1761,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "AI marketing scope depends on which workflows are being automated, the complexity of integration with your existing stack, and whether this is a one-time setup or an ongoing managed service.",
-    pricingTiers: genericTiers("workflow"),
+    pricingScopeFactors: [
+      { title: "Workflows being automated", description: "Automated reporting synthesis is a lighter job than a full personalization or segmentation build." },
+      { title: "Integration complexity", description: "Connecting into an existing stack via native features or automation platforms changes the setup scope." },
+      { title: "One-time setup or managed service", description: "A defined implementation project and an ongoing managed service are scoped differently." },
+      { title: "Human-review scope", description: "The review checkpoint required for customer-facing output adds process, not just tooling." },
+    ],
     faqItems: [
       {
         question: "Will AI replace our need for human marketers?",
@@ -1733,9 +1814,10 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       subhead:
         "We run social as a content system with a strategy underneath it — consistent posting cadence, platform-specific formats, and community management — not a monthly content calendar assembled the week it's due.",
       heroImageAlt: "Social media content calendar and platform-native creative review",
+      secondaryCtaLabel: "See Case Study",
     },
     problem: {
-      title: "Most brand social accounts post inconsistently, chasing every platform equally.",
+      title: "Being everywhere is why nowhere notices you.",
       paragraphs: [
         "Most brand social accounts post inconsistently, in a format that doesn't match how the platform's algorithm actually distributes content, with captions written for the brand's internal voice rather than the audience actually scrolling past. Engagement stalls, and the account gets treated as a broadcast channel — post and disappear — instead of a two-way conversation with the people already following.",
         "The second failure is chasing every platform equally instead of prioritizing where your actual audience spends attention. A brand with limited content production capacity spread thin across five platforms typically underperforms the same brand focused deliberately on the two platforms where its buyer actually is.",
@@ -1791,7 +1873,12 @@ export const servicePageContent: Record<string, ServicePageContent> = {
     },
     pricingDescription:
       "SMM scope depends on number of platforms managed, content production volume, and whether community management is included or handled in-house by your team.",
-    pricingTiers: genericTiers("content"),
+    pricingScopeFactors: [
+      { title: "Number of platforms managed", description: "One or two well-run platforms is a different scope than a presence spread across five." },
+      { title: "Production volume", description: "Posting cadence and format mix directly shape the production workload each month." },
+      { title: "Community management included", description: "Handling comments and DMs within a defined response standard adds ongoing scope." },
+      { title: "In-house vs. full-service", description: "Some teams handle publishing themselves and just need strategy; others need the full production loop." },
+    ],
     faqItems: [
       {
         question: "How many platforms should we actually be on?",
