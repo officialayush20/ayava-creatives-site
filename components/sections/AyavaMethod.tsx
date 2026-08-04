@@ -13,7 +13,21 @@ const steps = [
   { title: "Scale", description: "What works gets funded harder. What doesn't gets cut fast. No sentimental campaigns." },
 ];
 
-export function AyavaMethod() {
+type AyavaMethodProps = {
+  /** Which surface this instance sits on. Defaults to "on-ink" so the
+   * homepage instance's behavior/markup is unchanged — the About page
+   * passes "on-ivory" per about-page-layout-spec.md §4 to preserve
+   * ink/ivory alternation on that route without forking a second copy of
+   * this component (and its step content, which must stay a single source
+   * of truth per the spec). */
+  tone?: "on-ink" | "on-ivory";
+  /** Optional intro line rendered above the step sequence — used by the
+   * About page to tie the generic method back into its founder-narrative
+   * frame per spec §4. Omitted by default (homepage instance). */
+  introLine?: string;
+};
+
+export function AyavaMethod({ tone = "on-ink", introLine }: AyavaMethodProps = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const desktopRailRef = useRef<HTMLDivElement>(null);
   const mobileRailRef = useRef<HTMLDivElement>(null);
@@ -68,16 +82,26 @@ export function AyavaMethod() {
     return () => ctx.revert();
   }, []);
 
+  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
+  const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
+  const numeralColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const descColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const railColor = tone === "on-ink" ? "bg-gold/50" : "bg-gold/60";
+  const mobileBorderColor = tone === "on-ink" ? "border-slate-deep" : "border-slate-deep/60";
+
   return (
-    <section ref={sectionRef} aria-labelledby="method-heading" className="bg-ink py-16 md:py-40">
+    <section ref={sectionRef} aria-labelledby="method-heading" className={`${bg} py-16 md:py-40`}>
       <Container>
         <SectionHeader
           eyebrow="How we operate"
           title="The Ayava Method."
           headingId="method-heading"
-          tone="on-ink"
-          className="mb-16 md:mb-20"
+          tone={tone}
+          className="mb-8 md:mb-10"
         />
+        {introLine ? (
+          <p className={`mb-16 max-w-[60ch] font-sans text-base md:mb-20 ${descColor}`}>{introLine}</p>
+        ) : null}
 
         {/* 5 steps — horizontal-scroll rail at desktop (per spec's recommendation
             for uneven 5-across grids), vertical stacked list from tablet down.
@@ -88,7 +112,7 @@ export function AyavaMethod() {
           <div
             aria-hidden="true"
             ref={desktopRailRef}
-            className="absolute left-0 top-0 h-px w-full origin-left bg-gold/50"
+            className={`absolute left-0 top-0 h-px w-full origin-left ${railColor}`}
           />
           <ol className="flex gap-8 overflow-x-auto pb-4 xl:gap-6">
             {steps.map((step, index) => (
@@ -97,11 +121,11 @@ export function AyavaMethod() {
                 data-method-step-desktop
                 className="relative min-w-[240px] flex-1 border-t border-transparent pt-6"
               >
-                <span className="font-display text-3xl text-slate">
+                <span className={`font-display text-3xl ${numeralColor}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 font-display text-xl font-normal">{step.title}</h3>
-                <p className="mt-2 font-sans text-sm text-slate">{step.description}</p>
+                <h3 className={`mt-4 font-display text-xl font-normal ${headingColor}`}>{step.title}</h3>
+                <p className={`mt-2 font-sans text-sm ${descColor}`}>{step.description}</p>
               </li>
             ))}
           </ol>
@@ -111,16 +135,16 @@ export function AyavaMethod() {
           <div
             aria-hidden="true"
             ref={mobileRailRef}
-            className="absolute left-0 top-0 h-full w-px origin-top bg-gold/50"
+            className={`absolute left-0 top-0 h-full w-px origin-top ${railColor}`}
           />
-          <ol className="flex flex-col gap-8 border-l border-slate-deep pl-6">
+          <ol className={`flex flex-col gap-8 border-l ${mobileBorderColor} pl-6`}>
             {steps.map((step, index) => (
               <li key={step.title} data-method-step-mobile className="relative">
-                <span className="font-display text-2xl text-slate">
+                <span className={`font-display text-2xl ${numeralColor}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-2 font-display text-lg font-normal">{step.title}</h3>
-                <p className="mt-2 font-sans text-sm text-slate">{step.description}</p>
+                <h3 className={`mt-2 font-display text-lg font-normal ${headingColor}`}>{step.title}</h3>
+                <p className={`mt-2 font-sans text-sm ${descColor}`}>{step.description}</p>
               </li>
             ))}
           </ol>
