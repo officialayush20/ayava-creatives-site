@@ -46,14 +46,22 @@ export function OurApproach() {
           tone="on-ink"
           className="mb-16 md:mb-20"
         />
-        <ol className="grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-8">
+        <ol className="flex flex-col">
           {steps.map((step, index) => (
-            <li key={step.title} data-reveal-item className="border-t border-slate-deep pt-6">
-              <span className="font-display text-3xl text-slate">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 font-display text-xl font-normal">{step.title}</h3>
-              <p className="mt-2 font-sans text-sm text-slate">{step.description}</p>
+            <li
+              key={step.title}
+              data-reveal-item
+              className="grid grid-cols-1 gap-3 border-t border-slate-deep py-8 md:grid-cols-12 md:gap-8 md:py-10"
+            >
+              <div className="md:col-span-3">
+                <span className="font-display text-3xl text-slate">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-4 font-display text-xl font-normal">{step.title}</h3>
+              </div>
+              <p className="font-sans text-sm text-slate md:col-span-9 md:text-base">
+                {step.description}
+              </p>
             </li>
           ))}
         </ol>

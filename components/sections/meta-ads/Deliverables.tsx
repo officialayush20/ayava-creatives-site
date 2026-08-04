@@ -21,14 +21,6 @@ const deliverables = [
 
 const tools = ["Meta Business Suite", "Meta Ads Manager", "Google Analytics", "Canva", "Adobe Premiere Pro"];
 
-function CheckIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="mt-0.5 h-5 w-5 shrink-0 text-ink">
-      <path d="M4 10.5l3.5 3.5L16 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /**
  * §4 Deliverables + §5 Tools, composed as one tightly-coupled sub-section
  * per the spec's template-level rhythm note (hairline divider, no full
@@ -47,10 +39,9 @@ export function Deliverables() {
           tone="on-ivory"
           className="mb-12 md:mb-16"
         />
-        <ul data-reveal-item className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
+        <ul data-reveal-item className="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
           {deliverables.map((item) => (
-            <li key={item} className="flex items-start gap-3">
-              <CheckIcon />
+            <li key={item} className="border-t border-slate-deep/30 py-4">
               <span className="font-sans text-sm text-ink/80 md:text-base">{item}</span>
             </li>
           ))}

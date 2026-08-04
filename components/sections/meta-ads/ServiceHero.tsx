@@ -38,7 +38,7 @@ export function ServiceHero() {
             <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
               Service
             </p>
-            <h1 className="font-display text-[clamp(28px,5vw,56px)] font-normal leading-[1.05]">
+            <h1 className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05]">
               Paid Media That Pays for Itself
             </h1>
             <p className="mt-6 max-w-[42ch] font-sans text-base text-slate md:text-lg">

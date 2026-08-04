@@ -2,7 +2,6 @@
 
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
@@ -47,17 +46,17 @@ export function Pricing() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="pricing-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="pricing-heading" className="bg-ivory py-16 md:py-48">
       <Container>
         <SectionHeader
           eyebrow="Investment"
           title="Scoped to your account, not a template."
           headingId="pricing-heading"
           tone="on-ivory"
-          align="center"
+          align="left"
           className="mb-6"
         />
-        <p className="mx-auto mb-16 max-w-[60ch] text-center font-sans text-base text-ink/70 md:mb-20">
+        <p className="mb-16 max-w-[60ch] font-sans text-base text-ink/70 md:mb-20">
           Meta Ads engagements are scoped to your ad spend, account complexity, and creative
           production needs — a brand new account and an established one with a full retargeting
           funnel are not the same job, and we don&apos;t price them as if they were.
@@ -68,17 +67,10 @@ export function Pricing() {
             <div
               key={tier.name}
               data-reveal-item
-              className={`flex flex-col rounded-sm border p-8 ${
-                tier.featured
-                  ? "border-gold bg-white md:-translate-y-4"
-                  : "border-slate-deep/40 bg-white/60"
+              className={`flex flex-col rounded-sm border border-slate-deep/40 p-8 ${
+                tier.featured ? "border-t border-t-gold" : ""
               }`}
             >
-              {tier.featured ? (
-                <Tag tone="on-ivory" className="mb-4 w-fit">
-                  Most Popular
-                </Tag>
-              ) : null}
               <h3 className="font-display text-2xl font-normal text-ink">{tier.name}</h3>
               <p className="mt-2 font-sans text-sm text-slate-deep">Custom Quote</p>
               <ul className="mt-6 flex flex-col gap-3">
@@ -88,12 +80,7 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Button
-                href="/contact"
-                variant={tier.featured ? "primary" : "secondary"}
-                tone="on-ivory"
-                className="mt-8"
-              >
+              <Button href="/contact" variant="secondary" tone="on-ivory" className="mt-8">
                 Contact for Pricing
               </Button>
             </div>

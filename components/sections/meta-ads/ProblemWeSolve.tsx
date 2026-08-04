@@ -1,19 +1,23 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
 export function ProblemWeSolve() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="problem-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="problem-heading" className="bg-ivory py-16 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div data-reveal-item className="md:col-span-4">
-            <h2 id="problem-heading" className="font-display text-[clamp(24px,3vw,36px)] font-normal text-ink">
-              The Problem
-            </h2>
+            <SectionHeader
+              eyebrow="The Problem"
+              title="Most accounts don't fail. They go unwatched."
+              headingId="problem-heading"
+              tone="on-ivory"
+            />
           </div>
           <div data-reveal-item className="md:col-span-8 flex flex-col gap-6 font-sans text-base leading-relaxed text-ink/80 md:text-lg">
             <p>

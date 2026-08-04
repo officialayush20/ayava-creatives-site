@@ -1,13 +1,21 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
+const pendingMetrics = [
+  "Cost per qualified lead, before and after",
+  "Creative win rate by audience segment",
+  "Spend efficiency across the retargeting funnel",
+];
+
 /**
  * Honest empty-state per service-page-layout-spec §6: no real, confirmed
- * Meta Ads case study exists yet. Do not force-fit or fabricate one —
- * render a plain prompt card instead of a CaseStudySpread.
+ * Meta Ads case study exists yet. Do not force-fit or fabricate one — this
+ * renders full-width, left-aligned, matching every other section's
+ * SectionHeader treatment rather than a small centered "apology" card.
  */
 export function CaseStudySpotlight() {
   const revealRef = useScrollReveal<HTMLElement>();
@@ -20,24 +28,35 @@ export function CaseStudySpotlight() {
       className="bg-ink py-16 md:py-40"
     >
       <Container>
-        <div
-          data-reveal-item
-          className="mx-auto flex max-w-2xl flex-col items-start gap-6 rounded-sm border border-slate-deep bg-ink-raise p-8 md:items-center md:p-16 md:text-center"
-        >
-          <p className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
-            Case Study Spotlight
+        <SectionHeader
+          eyebrow="Case Study Spotlight"
+          title="In Progress, Not Invented"
+          headingId="case-study-heading"
+          tone="on-ink"
+          className="mb-8"
+        />
+        <div data-reveal-item className="flex flex-col gap-8">
+          <p className="max-w-[70ch] font-sans text-base text-slate md:text-lg">
+            A documented Meta Ads case study is in the field now. We&apos;d rather publish
+            confirmed numbers than dress up a project that hasn&apos;t been measured — so here&apos;s
+            what we&apos;ll report when it lands: cost per qualified lead before and after,
+            creative win rate by audience segment, and spend efficiency across the retargeting
+            funnel.
           </p>
-          <h2 id="case-study-heading" className="font-display text-[clamp(24px,3vw,36px)] font-normal">
-            In Progress, Not Invented
-          </h2>
-          <p className="max-w-[55ch] font-sans text-base text-slate">
-            Our first documented Meta Ads case study is currently in the field — we&apos;d rather
-            show you real numbers once they&apos;re confirmed than dress up a project that
-            hasn&apos;t been measured yet. In the meantime, talk to us about your account and how
-            we&apos;d approach it.
-          </p>
-          <Button href="/contact" variant="primary" tone="on-ink" size="large">
-            Talk to Us About Your Account
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {pendingMetrics.map((metric) => (
+              <div key={metric} className="border-t border-slate-deep pt-4">
+                <p className="font-sans text-sm text-slate">{metric}</p>
+                <p aria-hidden="true" className="mt-3 font-display text-3xl font-normal text-slate">
+                  —
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <Button href="/contact" variant="primary" tone="on-ink" size="large" className="w-fit">
+            Talk Through Your Account
           </Button>
         </div>
       </Container>

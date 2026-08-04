@@ -88,6 +88,18 @@ body {
   font-family: var(--font-sans);
 }
 
+/*
+ * Shared display type-scale tiers — consolidates six previously ad-hoc
+ * clamp() values scattered across ServiceHero, ContactHero, SectionHeader,
+ * CaseStudySpotlight, ProblemWeSolve, LeadCapture, and ResponseTimeBand into
+ * three named tiers by role, not by page.
+ */
+:root {
+  --type-display-hero: clamp(28px, 5vw, 64px); /* page-level H1s */
+  --type-display-section: clamp(28px, 4vw, 44px); /* SectionHeader H2s */
+  --type-display-card: clamp(22px, 3vw, 32px); /* smaller card/inline headings */
+}
+
 h1,
 h2,
 h3,

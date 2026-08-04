@@ -12,7 +12,7 @@ export function ResponseTimeBand() {
   return (
     <section aria-labelledby="response-time-heading" className="bg-ink py-12 md:py-24">
       <Container className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <h2 id="response-time-heading" className="font-display text-[clamp(22px,3vw,32px)] font-normal">
+        <h2 id="response-time-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
           We personally read every inquiry.
         </h2>
         <p className="mt-4 font-sans text-base text-slate">

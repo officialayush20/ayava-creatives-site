@@ -25,6 +25,10 @@ export function SectionHeader({
   className = "",
 }: SectionHeaderProps) {
   const eyebrowColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  // Explicit heading color per tone — the h2 has no ancestor color class,
+  // so without this it silently inherits body's `color: var(--color-ivory)`
+  // and renders invisible ivory-on-ivory on every tone="on-ivory" section.
+  const headingColor = tone === "on-ivory" ? "text-ink" : "text-ivory";
 
   return (
     <div
@@ -42,7 +46,7 @@ export function SectionHeader({
         ) : null}
         <h2
           id={headingId}
-          className="font-display text-[clamp(28px,4vw,44px)] font-normal leading-[1.05]"
+          className={`font-display text-[length:var(--type-display-section)] font-normal leading-[1.05] ${headingColor}`}
         >
           {title}
         </h2>

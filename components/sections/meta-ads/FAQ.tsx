@@ -53,7 +53,7 @@ export function FAQ() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="faq-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="faq-heading" className="bg-ink py-16 md:py-40">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -63,11 +63,11 @@ export function FAQ() {
           eyebrow="Questions"
           title="Frequently Asked Questions"
           headingId="faq-heading"
-          tone="on-ivory"
+          tone="on-ink"
           className="mb-12 md:mb-16"
         />
         <div data-reveal-item className="max-w-3xl">
-          <FAQAccordion items={faqItems} tone="on-ivory" idPrefix="meta-ads-faq" />
+          <FAQAccordion items={faqItems} tone="on-ink" idPrefix="meta-ads-faq" />
         </div>
       </Container>
     </section>

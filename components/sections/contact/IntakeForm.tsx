@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { FormField, inputBaseClass, inputBorderClass, fieldDescribedBy } from "./FormField";
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 3;
 
-const stepNames = ["Business Info", "Goals", "Budget Range", "Services Needed", "Brief & Review"];
+const stepNames = ["Business Info", "Goals & Budget", "Scope & Brief"];
 
 const goalOptions = [
   "More Leads",
@@ -129,7 +130,7 @@ function StepIndicator({ current, name }: { current: number; name: string }) {
   return (
     <div className="mb-8">
       <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.14em] text-ivory">
-        Step <span className="text-gold">{current}</span> of {TOTAL_STEPS} — {name}
+        Step {current} of {TOTAL_STEPS} — {name}
       </p>
       <div
         role="progressbar"
@@ -158,6 +159,11 @@ export function IntakeForm() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Shared across the step-1/2/3 <h3> headings below (~line 365+) — safe
+  // only because exactly one step's block renders at a time (the others are
+  // `null`). If a future refactor ever renders two steps' content
+  // simultaneously (e.g. a "review all steps" mode), this ref must be split
+  // per-heading or focus-on-step-change will silently target the wrong node.
   const headingRef = useRef<HTMLHeadingElement>(null);
   const liveRegionRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
@@ -203,20 +209,16 @@ export function IntakeForm() {
     }
 
     if (current === 2) {
-      if (!form.primaryGoal) {
-        setStepError("Select a primary goal to continue.");
+      const missing: string[] = [];
+      if (!form.primaryGoal) missing.push("a primary goal");
+      if (!form.budgetRange) missing.push("a budget range");
+      if (missing.length > 0) {
+        setStepError(`Select ${missing.join(" and ")} to continue.`);
         return false;
       }
     }
 
     if (current === 3) {
-      if (!form.budgetRange) {
-        setStepError("Select a budget range to continue.");
-        return false;
-      }
-    }
-
-    if (current === 4) {
       if (form.servicesNeeded.length === 0) {
         setStepError("Select at least one service.");
         return false;
@@ -301,7 +303,7 @@ export function IntakeForm() {
 
   return (
     <section id="intake-form" aria-labelledby="intake-form-heading" className="bg-ink py-16 pb-12 md:py-40 md:pb-24">
-      <div className="mx-auto max-w-[1760px] px-4 min-[428px]:px-5 md:px-8 lg:px-10 xl:px-16 2xl:px-20">
+      <Container>
         <h2 id="intake-form-heading" className="sr-only">
           Let&apos;s Scope Your Project
         </h2>
@@ -310,12 +312,18 @@ export function IntakeForm() {
             from the focused heading, per contact-page-layout-spec §2.8. */}
         <div ref={liveRegionRef} aria-live="polite" className="sr-only" />
 
-        <div className="mx-auto max-w-3xl rounded-sm border border-slate bg-ink-raise p-5 md:p-16">
+        <div className="mx-auto max-w-3xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
+          {/* The rust-error state (stepError/submitError, above) and this
+              viridian success state must remain mutually exclusive — never
+              rendered in the same viewport. That's currently guaranteed
+              structurally (this block replaces the entire form, so the
+              error paragraphs above can't co-render with it), not by an
+              explicit check — preserve that structure in any future edit. */}
           {status === "success" ? (
             <div aria-live="polite" className="flex flex-col items-center gap-6 py-8 text-center">
               <span
                 aria-hidden="true"
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--color-viridian)]/15 text-[color:var(--color-viridian)]"
+                className="flex h-14 w-14 items-center justify-center rounded-full border border-[color:var(--color-viridian)]/40 text-[color:var(--color-viridian)]"
               >
                 <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7">
                   <path
@@ -370,7 +378,7 @@ export function IntakeForm() {
                       <input
                         id="fullName"
                         type="text"
-                        readOnly={status === "loading"}
+                        disabled={status === "loading"}
                         value={form.fullName}
                         onChange={(e) => update("fullName", e.target.value)}
                         placeholder="Your name"
@@ -383,7 +391,7 @@ export function IntakeForm() {
                       <input
                         id="company"
                         type="text"
-                        readOnly={status === "loading"}
+                        disabled={status === "loading"}
                         value={form.company}
                         onChange={(e) => update("company", e.target.value)}
                         placeholder="Your company or brand"
@@ -415,7 +423,7 @@ export function IntakeForm() {
                       <input
                         id="phone"
                         type="tel"
-                        readOnly={status === "loading"}
+                        disabled={status === "loading"}
                         value={form.phone}
                         onChange={(e) => update("phone", e.target.value)}
                         placeholder="+91"
@@ -430,7 +438,7 @@ export function IntakeForm() {
                       <input
                         id="website"
                         type="text"
-                        readOnly={status === "loading"}
+                        disabled={status === "loading"}
                         value={form.website}
                         onChange={(e) => update("website", e.target.value)}
                         placeholder="yoursite.com or @handle"
@@ -445,7 +453,7 @@ export function IntakeForm() {
               {step === 2 ? (
                 <div className="flex flex-col gap-6">
                   <h3 ref={headingRef} tabIndex={-1} className="font-display text-xl font-normal focus:outline-none">
-                    What Are You Trying to Achieve?
+                    Goals &amp; Budget
                   </h3>
                   <fieldset>
                     <legend className="mb-3 font-sans text-sm font-medium text-ivory">
@@ -492,17 +500,10 @@ export function IntakeForm() {
                       {form.goalNotes.length}/500
                     </p>
                   </FormField>
-                </div>
-              ) : null}
-
-              {step === 3 ? (
-                <div className="flex flex-col gap-6">
-                  <h3 ref={headingRef} tabIndex={-1} className="font-display text-xl font-normal focus:outline-none">
-                    What&apos;s Your Monthly Marketing Budget?
-                  </h3>
                   <fieldset>
                     <legend className="mb-3 font-sans text-sm text-slate">
-                      This helps us recommend the right scope, not oversell or undersell you.
+                      Monthly marketing budget — this helps us recommend the right scope, not
+                      oversell or undersell you.
                     </legend>
                     <div className="flex flex-col gap-3">
                       {budgetOptions.map((option) => {
@@ -537,15 +538,15 @@ export function IntakeForm() {
                 </div>
               ) : null}
 
-              {step === 4 ? (
-                <div className="flex flex-col gap-6">
+              {step === 3 ? (
+                <div className="flex flex-col gap-8">
                   <h3
                     ref={headingRef}
                     tabIndex={-1}
                     aria-describedby="services-helper"
                     className="font-display text-xl font-normal focus:outline-none"
                   >
-                    What Do You Need Help With?
+                    Scope &amp; Brief
                   </h3>
                   <p id="services-helper" className="font-sans text-sm text-slate">
                     Select as many as apply. Not sure? Select &ldquo;Not sure yet&rdquo; below and
@@ -595,20 +596,12 @@ export function IntakeForm() {
                       ) : null}
                     </button>
                   </div>
-                </div>
-              ) : null}
-
-              {step === 5 ? (
-                <div className="flex flex-col gap-8">
-                  <h3 ref={headingRef} tabIndex={-1} className="font-display text-xl font-normal focus:outline-none">
-                    Have a Brief? Share It.
-                  </h3>
 
                   <FormField id="additionalNotes" label="Anything else? (optional)">
                     <textarea
                       id="additionalNotes"
                       rows={5}
-                      readOnly={status === "loading"}
+                      disabled={status === "loading"}
                       value={form.additionalNotes}
                       onChange={(e) => update("additionalNotes", e.target.value)}
                       placeholder="Timeline, past agency experience, anything else worth knowing."
@@ -670,11 +663,11 @@ export function IntakeForm() {
                         { label: "Email", value: form.email || "—", step: 1 },
                         { label: "Company", value: form.company || "—", step: 1 },
                         { label: "Goal", value: form.primaryGoal || "—", step: 2 },
-                        { label: "Budget", value: form.budgetRange || "—", step: 3 },
+                        { label: "Budget", value: form.budgetRange || "—", step: 2 },
                         {
                           label: "Services",
                           value: form.servicesNeeded.length ? form.servicesNeeded.join(", ") : "—",
-                          step: 4,
+                          step: 3,
                         },
                       ].map((row) => (
                         <div key={row.label} className="flex items-start justify-between gap-4 py-3">
@@ -725,7 +718,7 @@ export function IntakeForm() {
             </form>
           )}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

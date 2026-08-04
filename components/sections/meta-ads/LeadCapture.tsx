@@ -47,7 +47,7 @@ export function LeadCapture() {
     <section aria-labelledby="lead-capture-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <div className="mx-auto max-w-3xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
-          <h2 id="lead-capture-heading" className="font-display text-[clamp(24px,3vw,32px)] font-normal">
+          <h2 id="lead-capture-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
             Let&apos;s Scope Your Meta Ads Project
           </h2>
           <p className="mt-3 font-sans text-sm text-slate">
