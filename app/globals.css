@@ -40,6 +40,30 @@
      Max one use per page. */
   --color-viridian: #0f5c4b;
 
+  /*
+   * Error/validation tokens (creative-director ruling — form-error color gap
+   * closed here rather than inventing an unreviewed one-off hex).
+   * --color-rust: use on ivory/light surfaces.
+   * --color-rust-raise: use on ink/dark surfaces.
+   * Never swap the two — rust on ink and rust-raise on ivory both fail
+   * contrast, which is the entire reason two values exist instead of one.
+   *
+   * Usage discipline, same standing as the gold hard rule above:
+   *  - Never a fill larger than a 16px icon (border/text/icon only, no
+   *    background fills, no error-colored cards or panels).
+   *  - Never share a viewport with viridian — pick one accent per screen.
+   *  - No shake/flash/pulse animation on error states; if it animates at
+   *    all, use the same easing as everything else on the site
+   *    (cubic-bezier(0.16,1,0.3,1) / GSAP power3.out — slow, confident,
+   *    never attention-grabbing via motion).
+   *  - Never bold, never uppercase, never larger than 14px.
+   *  - Never used on the submit button itself (errors live on the field/
+   *    message that caused them, not on the action the user is trying to
+   *    take).
+   */
+  --color-rust: #9a3b2a; /* ivory/light surfaces */
+  --color-rust-raise: #c97b63; /* ink/dark surfaces */
+
   /* Font families.
      display: "GT Sectra Display", Canela, and Instrument Serif are the three
      candidates under consideration pending a licensing decision. Instrument
