@@ -1,4 +1,7 @@
+"use client";
+
 import { CaseStudyEmptyState } from "@/components/ui/CaseStudyEmptyState";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const pendingMetrics = [
   "Cost per qualified lead, before and after",
@@ -16,8 +19,10 @@ const pendingMetrics = [
  * replaced.
  */
 export function MetricsEmptyState({ resultsAnchorId }: { resultsAnchorId: string }) {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="metrics-heading" className="bg-ivory py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="metrics-heading" className="bg-ivory py-16 md:py-24">
       <CaseStudyEmptyState
         eyebrow="Results at a Glance"
         title="Measured Numbers, Coming Soon"

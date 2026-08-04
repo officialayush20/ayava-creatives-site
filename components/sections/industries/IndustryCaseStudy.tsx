@@ -1,8 +1,11 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 import { CaseStudyEmptyState } from "@/components/ui/CaseStudyEmptyState";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 import type { CaseStudyStateA, CaseStudyStateB } from "@/lib/industry-page-content";
 
 type IndustryCaseStudyProps = {
@@ -20,11 +23,12 @@ type IndustryCaseStudyProps = {
  * split; State B reuses the shared `CaseStudyEmptyState` primitive.
  */
 export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCaseStudyProps) {
+  const revealRef = useScrollReveal<HTMLElement>();
   const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
 
   if (caseStudy.state === "B") {
     return (
-      <section aria-labelledby="case-study-heading" className={`${bg} py-16 md:py-40`}>
+      <section ref={revealRef} aria-labelledby="case-study-heading" className={`${bg} py-16 md:py-40`}>
         <CaseStudyEmptyState
           title="In Progress, Not Invented"
           headingId="case-study-heading"
@@ -40,7 +44,7 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCas
   const bodyColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
 
   return (
-    <section aria-labelledby="case-study-heading" className={`${bg} py-16 md:py-40`}>
+    <section ref={revealRef} aria-labelledby="case-study-heading" className={`${bg} py-16 md:py-40`}>
       <Container>
         <SectionHeader
           eyebrow="Case Study Spotlight"
@@ -52,6 +56,7 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCas
         <a
           href={caseStudy.href}
           aria-label={`${caseStudy.title} — view case study`}
+          data-reveal-item
           className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 md:grid-cols-12 md:gap-10"
         >
           <div className="md:col-span-7">

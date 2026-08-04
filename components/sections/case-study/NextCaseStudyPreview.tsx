@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { MediaFrame } from "@/components/ui/MediaFrame";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 import type { CaseStudy } from "@/lib/case-studies-data";
 
 /**
@@ -9,11 +12,14 @@ import type { CaseStudy } from "@/lib/case-studies-data";
  * literal in-page infinite scroll.
  */
 export function NextCaseStudyPreview({ next }: { next: CaseStudy }) {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="next-case-study-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="next-case-study-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <Link
           href={`/work/${next.slug}`}
+          data-reveal-item
           className="group mx-auto flex max-w-3xl flex-col items-center gap-8 text-center focus-visible:outline-none"
         >
           <p className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">

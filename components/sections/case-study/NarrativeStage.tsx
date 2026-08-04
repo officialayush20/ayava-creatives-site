@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 import type { NarrativeStage as NarrativeStageType } from "@/lib/case-studies-data";
 
 type NarrativeStageProps = {
@@ -20,15 +23,20 @@ type NarrativeStageProps = {
  */
 export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: NarrativeStageProps) {
   const isInk = tone === "on-ink";
+  const revealRef = useScrollReveal<HTMLElement>();
 
   return (
     <section
+      ref={revealRef}
       aria-labelledby={headingId}
       className={`${isInk ? "bg-ink" : "bg-ivory"} py-16 md:py-24`}
     >
       <Container>
         <div className={`grid grid-cols-1 md:grid-cols-12 ${side === "b" ? "md:justify-items-end" : ""}`}>
-          <div className={`flex flex-col gap-4 md:col-span-6 ${side === "b" ? "md:col-start-7" : ""}`}>
+          <div
+            data-reveal-item
+            className={`flex flex-col gap-4 md:col-span-6 ${side === "b" ? "md:col-start-7" : ""}`}
+          >
             <p
               className={`font-sans text-xs font-medium uppercase tracking-[0.18em] ${
                 isInk ? "text-slate" : "text-slate-deep"
