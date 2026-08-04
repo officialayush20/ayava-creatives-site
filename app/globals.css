@@ -4,31 +4,53 @@
  * Ayava Creatives design tokens.
  * Tailwind v4 uses CSS-first theme configuration (no tailwind.config.js).
  * These custom properties become Tailwind utilities automatically, e.g.
- * bg-ink, text-ivory, text-gold, border-bronze, font-display, font-sans.
+ * bg-ink, text-ivory, text-slate, border-slate-deep, font-display, font-sans.
+ *
+ * Brand is dark-first by identity — there is intentionally no
+ * `prefers-color-scheme` media query here. Ivory sections are an editorial
+ * choice made per-section in markup, not a user-toggled light mode.
  */
 @theme {
   /* Brand colors */
-  --color-ink: #0b0a08;
-  --color-ivory: #f8f1e2;
+  --color-ink: #0b0a08; /* canvas */
+  --color-ink-raise: #141210; /* elevated surfaces / cards — use instead of white-opacity overlays */
+  --color-ivory: #f8f1e2; /* display type + light surfaces */
+
+  /* Cool neutral (~210° hue, near-zero chroma) — body copy on dark, borders,
+     hairlines, metadata, all UI chrome. Replaces the old warm gray scale. */
+  --color-slate: #8a8c8f;
+  --color-slate-deep: #2a2d30; /* dividers, table rules, disabled states */
+
+  /*
+   * Gold accent. HARD RULE: gold is reserved for hairline rules/borders and
+   * numeric/metric values ONLY. Never use gold for large fills, backgrounds,
+   * or body text color. Target: max ~4% of viewport per page. Enforce this
+   * by convention/review until a lint rule is introduced.
+   */
   --color-gold: #cba135;
-  --color-bronze: #6b5a2e;
 
-  /* Standard grayscale for UI (neutral, slightly warm to sit with ink/ivory) */
-  --color-gray-50: #f7f7f6;
-  --color-gray-100: #e9e8e5;
-  --color-gray-200: #d3d1cb;
-  --color-gray-300: #b3b0a6;
-  --color-gray-400: #8c887c;
-  --color-gray-500: #6c685d;
-  --color-gray-600: #524f47;
-  --color-gray-700: #3c3a34;
-  --color-gray-800: #262521;
-  --color-gray-900: #171612;
+  /*
+   * Bronze is intentionally NOT exposed as a standalone color token/utility
+   * (no bg-bronze / text-bronze / border-bronze). It exists only as a raw
+   * hex value for gradient stops if/when a gradient needs it:
+   *   background: linear-gradient(180deg, #cba135 0%, #6b5a2e 100%);
+   */
 
-  /* Font families */
-  --font-display: Georgia, "Times New Roman", serif;
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
-    Arial, sans-serif;
+  /* Single jewel tone — data-viz primary + rare editorial accent.
+     Max one use per page. */
+  --color-viridian: #0f5c4b;
+
+  /* Font families.
+     display: "GT Sectra Display", Canela, and Instrument Serif are the three
+     candidates under consideration pending a licensing decision. Georgia is
+     the interim system-font fallback until a license is purchased. */
+  --font-display: "GT Sectra Display", Georgia, "Times New Roman", serif;
+
+  /* sans: "Söhne" and "Neue Haas Grotesk Display" are the candidates under
+     consideration pending a licensing decision. system-ui is the interim
+     fallback until a license is purchased. */
+  --font-sans: "Söhne", "Neue Haas Grotesk Display", -apple-system, system-ui,
+    sans-serif;
 }
 
 body {
