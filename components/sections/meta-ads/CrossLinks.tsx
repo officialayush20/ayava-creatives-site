@@ -3,14 +3,13 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { services } from "@/lib/services-data";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 
-const relatedServices = [
-  { name: "Google Ads", description: "Capture demand at the exact second someone searches for you." },
-  { name: "Analytics/CRO", description: "Decisions made on data, not on whoever pitched loudest in the meeting." },
-  { name: "Content Marketing", description: "Content built to compound in search and shareability, not just publish and disappear." },
-  { name: "Video & Motion Production", description: "Motion that earns the first three seconds and keeps them." },
-];
+const relatedSlugs = ["google-ads", "analytics-cro", "content-marketing", "video-motion-production"];
+const relatedServices = relatedSlugs
+  .map((slug) => services.find((service) => service.slug === slug))
+  .filter((service): service is NonNullable<typeof service> => Boolean(service));
 
 const relatedIndustries = [
   "D2C / E-commerce",
@@ -36,14 +35,14 @@ export function RelatedServicesCrossLinks() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
           {relatedServices.map((service) => (
             <Link
-              key={service.name}
-              href="/services"
+              key={service.slug}
+              href={`/services/${service.slug}`}
               data-reveal-item
-              aria-label={`${service.name} — ${service.description}`}
+              aria-label={`${service.name} — ${service.oneLiner}`}
               className="group flex min-h-[160px] flex-col justify-between rounded-sm border border-slate-deep p-6 transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               <h3 className="font-display text-lg font-normal leading-tight">{service.name}</h3>
-              <p className="mt-3 font-sans text-sm text-slate">{service.description}</p>
+              <p className="mt-3 font-sans text-sm text-slate">{service.oneLiner}</p>
               <span
                 aria-hidden="true"
                 className="mt-4 inline-block w-fit font-sans text-sm text-ivory opacity-0 transition-all duration-200 ease-out group-hover:translate-x-1 group-hover:opacity-100"
