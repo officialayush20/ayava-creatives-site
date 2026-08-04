@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { HairlineRowList } from "@/components/ui/HairlineRowList";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const principles = [
   {
@@ -30,8 +33,10 @@ const principles = [
  * hairline-row list pattern rather than an icon/card grid.
  */
 export function ValuesPrinciples() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="values-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="values-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="How I Work"

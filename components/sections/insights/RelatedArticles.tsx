@@ -1,8 +1,11 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ArticleCard } from "@/components/sections/insights/ArticleCard";
 import { publishedArticles } from "@/lib/insights-data";
 import type { Article } from "@/lib/insights-data";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 type RelatedArticlesProps = {
   current: Article;
@@ -16,13 +19,15 @@ type RelatedArticlesProps = {
  */
 export function RelatedArticles({ current }: RelatedArticlesProps) {
   const others = publishedArticles.filter((a) => a.slug !== current.slug);
+  const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
+
   if (others.length < 2) return null;
 
   const sameCategory = others.filter((a) => a.category === current.category);
   const related = (sameCategory.length >= 3 ? sameCategory : others).slice(0, 3);
 
   return (
-    <section aria-labelledby="related-articles-heading" className="bg-ink py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="related-articles-heading" className="bg-ink py-16 md:py-24">
       <Container>
         <SectionHeader
           eyebrow="Keep Reading"

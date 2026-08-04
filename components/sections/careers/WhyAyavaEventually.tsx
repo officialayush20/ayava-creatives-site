@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NarrativeColumn } from "@/components/ui/NarrativeColumn";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 /**
  * "Why Ayava (Eventually)" (careers-page-layout-spec.md §2) — brief,
@@ -8,8 +11,10 @@ import { NarrativeColumn } from "@/components/ui/NarrativeColumn";
  * card grid. Shorter section padding than the standard rhythm per spec.
  */
 export function WhyAyavaEventually() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="why-eventually-heading" className="bg-ink py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="why-eventually-heading" className="bg-ink py-16 md:py-24">
       <Container>
         <SectionHeader
           eyebrow="Why People Might Want to Work Here"
@@ -18,6 +23,7 @@ export function WhyAyavaEventually() {
           tone="on-ink"
           className="mb-10 md:mb-12"
         />
+        <div data-reveal-item>
         <NarrativeColumn tone="on-ink">
           <p>
             Right now, Ayava is me — which means whoever joins next won&apos;t be the fifth hire in
@@ -43,6 +49,7 @@ export function WhyAyavaEventually() {
             and start from a cold list.
           </p>
         </NarrativeColumn>
+        </div>
       </Container>
     </section>
   );

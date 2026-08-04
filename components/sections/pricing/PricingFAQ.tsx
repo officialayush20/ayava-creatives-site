@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FAQAccordion, type FAQItemData } from "@/components/ui/FAQAccordion";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const faqItems: FAQItemData[] = [
   {
@@ -35,8 +38,11 @@ const faqItems: FAQItemData[] = [
  * confirmation before publishing a number, per pricing-page-copy.md §6.
  */
 export function PricingFAQ() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
     <section
+      ref={revealRef}
       aria-labelledby="pricing-faq-heading"
       className="bg-ink py-16 md:py-40"
     >
@@ -49,7 +55,7 @@ export function PricingFAQ() {
           tone="on-ink"
           className="mb-12 md:mb-16"
         />
-        <div className="max-w-[65ch] md:max-w-3xl">
+        <div data-reveal-item className="max-w-[65ch] md:max-w-3xl">
           <FAQAccordion items={faqItems} tone="on-ink" idPrefix="pricing-faq" />
         </div>
       </Container>

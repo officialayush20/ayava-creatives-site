@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Lightweight hero for the /services index page. `ServiceHero` (used on
@@ -13,8 +17,34 @@ import { Container } from "@/components/ui/Container";
  * ink background, breadcrumb + centered short copy, no visual slot, no CTA.
  */
 export function ServicesHubHero() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return; // fallback: heading/copy render in final state instantly
+
+    const root = rootRef.current;
+    if (!root) return;
+
+    const targets = root.querySelectorAll<HTMLElement>("[data-hero-item]");
+    if (targets.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(targets, { opacity: 0, y: 24 });
+      gsap.to(targets, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: EASE,
+        stagger: 0.12,
+        delay: 0.15,
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-ink py-16 md:py-24">
+    <section ref={rootRef} className="bg-ink py-16 md:py-24">
       <Container>
         <nav aria-label="Breadcrumb" className="mb-10 md:mb-14">
           <ol className="flex items-center gap-2 font-sans text-sm text-slate">
@@ -33,13 +63,13 @@ export function ServicesHubHero() {
           </ol>
         </nav>
         <div className="max-w-3xl md:col-span-8">
-          <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
             Services
           </p>
-          <h1 className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-ivory">
+          <h1 data-hero-item className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-ivory">
             Fifteen services. Pick your starting point.
           </h1>
-          <p className="mt-4 max-w-xl font-sans text-base text-slate md:text-lg">
+          <p data-hero-item className="mt-4 max-w-xl font-sans text-base text-slate md:text-lg">
             Grouped by what you&apos;re trying to fix first.
           </p>
         </div>

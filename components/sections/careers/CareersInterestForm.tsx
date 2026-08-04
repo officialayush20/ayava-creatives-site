@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FormField, fieldDescribedBy } from "@/components/sections/contact/FormField";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const areaOptions = ["Design", "Development", "Marketing/Growth", "Strategy/Account", "Other"];
 
@@ -77,6 +78,10 @@ function inputBorder(hasError?: boolean) {
  * implementation patterns for consistency without the step complexity.
  */
 export function CareersInterestForm() {
+  // Reveal is scoped to the heading only (data-reveal-item below) — the
+  // form card itself is intentionally excluded from scroll-triggered
+  // motion so input fields never fade/animate in.
+  const revealRef = useScrollReveal<HTMLElement>();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<SubmitStatus>("idle");
@@ -130,15 +135,22 @@ export function CareersInterestForm() {
   }
 
   return (
-    <section id="interest-form" aria-labelledby="interest-form-heading" className="bg-ivory py-16 md:py-24">
+    <section
+      ref={revealRef}
+      id="interest-form"
+      aria-labelledby="interest-form-heading"
+      className="bg-ivory py-16 md:py-24"
+    >
       <Container>
-        <SectionHeader
-          eyebrow="Stay on Our Radar"
-          title="Tell us a little about yourself."
-          headingId="interest-form-heading"
-          tone="on-ivory"
-          className="mb-10 md:mb-12"
-        />
+        <div data-reveal-item>
+          <SectionHeader
+            eyebrow="Stay on Our Radar"
+            title="Tell us a little about yourself."
+            headingId="interest-form-heading"
+            tone="on-ivory"
+            className="mb-10 md:mb-12"
+          />
+        </div>
 
         <div className="mx-auto max-w-2xl rounded-sm border border-slate-deep bg-ivory p-6 md:p-12">
           {status === "success" ? (

@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { HairlineRowList } from "@/components/ui/HairlineRowList";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const commitments = [
   {
@@ -23,8 +26,10 @@ const commitments = [
  * EngagementModels — no card grid, no gold fill.
  */
 export function WhatThisIsnt() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="what-this-isnt-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="what-this-isnt-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="What This Isn't"

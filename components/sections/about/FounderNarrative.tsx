@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { NarrativeColumn } from "@/components/ui/NarrativeColumn";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const credentials = [
   { label: "Education", value: "BCA — Himgiri Zee University (2023–2026)" },
@@ -20,8 +23,10 @@ const featuredProjects = ["NextepSolution", "Nextep Ventures", "Dreamzcraft", "F
  * founder sign-off before publishing — company/role nature only is shown.
  */
 export function FounderNarrative() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="founder-narrative-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="founder-narrative-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="The Story"
@@ -31,7 +36,7 @@ export function FounderNarrative() {
           className="mb-12 md:mb-16"
         />
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-7">
+          <div className="md:col-span-7" data-reveal-item>
             <NarrativeColumn tone="on-ivory">
               <p>I didn&apos;t start as a marketer. I started as a developer.</p>
               <p>
@@ -75,7 +80,7 @@ export function FounderNarrative() {
               </p>
             </NarrativeColumn>
           </div>
-          <div className="md:col-span-4 md:col-start-9">
+          <div className="md:col-span-4 md:col-start-9" data-reveal-item>
             <div className="md:sticky md:top-32">
               <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
                 At a Glance

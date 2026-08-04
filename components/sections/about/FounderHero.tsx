@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { MediaFrame } from "@/components/ui/MediaFrame";
+import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 
 /**
  * Founder-led hero — not the homepage's full-viewport cinematic treatment
@@ -9,14 +13,41 @@ import { MediaFrame } from "@/components/ui/MediaFrame";
  * fallback instruction.
  */
 export function FounderHero() {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return; // fallback: headline/subhead/portrait render in final state instantly
+
+    const root = rootRef.current;
+    if (!root) return;
+
+    const targets = root.querySelectorAll<HTMLElement>("[data-hero-item]");
+    if (targets.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(targets, { opacity: 0, y: 24 });
+      gsap.to(targets, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: EASE,
+        stagger: 0.12,
+        delay: 0.15,
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={rootRef}
       aria-labelledby="about-hero-heading"
       className="flex min-h-[60vh] items-center bg-ink py-16 md:py-24"
     >
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:items-center md:gap-8">
-          <div className="md:col-span-7">
+          <div className="md:col-span-7" data-hero-item>
             <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
               About Ayava
             </p>
@@ -29,7 +60,7 @@ export function FounderHero() {
               to someone else.
             </p>
           </div>
-          <div className="md:col-span-5">
+          <div className="md:col-span-5" data-hero-item>
             <MediaFrame
               alt="Portrait of Ayush Saini — photo pending"
               aspect="4/5"

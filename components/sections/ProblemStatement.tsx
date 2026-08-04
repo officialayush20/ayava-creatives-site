@@ -1,5 +1,8 @@
+"use client";
+
 import { ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 type ProblemStatementProps = {
   headingId: string;
@@ -26,12 +29,13 @@ export function ProblemStatement({
 }: ProblemStatementProps) {
   const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
   const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
+  const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section aria-labelledby={headingId} className={`${bg} py-16 md:py-24 ${className}`}>
+    <section ref={revealRef} aria-labelledby={headingId} className={`${bg} py-16 md:py-24 ${className}`}>
       <Container>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-4">
+          <div className="md:col-span-4" data-reveal-item>
             <h2
               id={headingId}
               className={`font-display text-[clamp(28px,4vw,44px)] font-normal leading-[1.05] md:sticky md:top-32 ${headingColor}`}
@@ -39,7 +43,9 @@ export function ProblemStatement({
               {statement}
             </h2>
           </div>
-          <div className="md:col-span-8">{children}</div>
+          <div className="md:col-span-8" data-reveal-item>
+            {children}
+          </div>
         </div>
       </Container>
     </section>

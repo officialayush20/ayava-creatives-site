@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { HairlineRowList } from "@/components/ui/HairlineRowList";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const accessRows = [
   {
@@ -24,8 +27,10 @@ const accessRows = [
  * than a third bespoke component.
  */
 export function LeanTeamFeature() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="lean-team-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="lean-team-heading" className="bg-ivory py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Why Founder-Led"
@@ -35,7 +40,7 @@ export function LeanTeamFeature() {
           className="mb-12 md:mb-16"
         />
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-6">
+          <div className="md:col-span-6" data-reveal-item>
             <p className="max-w-[52ch] font-sans text-base leading-relaxed text-ink/80 md:text-lg">
               Ayava is run by one person right now — me. That&apos;s not a stage I&apos;m
               apologizing for or a fact I&apos;m hiding until it changes. It&apos;s the reason the

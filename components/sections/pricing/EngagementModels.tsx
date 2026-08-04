@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { HairlineRowList } from "@/components/ui/HairlineRowList";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 const models = [
   {
@@ -28,8 +31,10 @@ const models = [
  * review flagged on the Meta Ads page, so it's locked structurally as rows.
  */
 export function EngagementModels() {
+  const revealRef = useScrollReveal<HTMLElement>();
+
   return (
-    <section aria-labelledby="engagement-models-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="engagement-models-heading" className="bg-ink py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="How Engagements Are Structured"

@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { publishedArticles } from "@/lib/insights-data";
 import type { Article } from "@/lib/insights-data";
+import { useScrollReveal } from "@/lib/useScrollReveal";
 
 type ArticleComingSoonBodyProps = {
   article: Article;
@@ -15,9 +18,10 @@ type ArticleComingSoonBodyProps = {
  */
 export function ArticleComingSoonBody({ article }: ArticleComingSoonBodyProps) {
   const hasPublishedArticles = publishedArticles.length > 0;
+  const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section aria-labelledby="coming-soon-heading" className="bg-ivory py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="coming-soon-heading" className="bg-ivory py-16 md:py-24">
       <Container>
         <div className="flex flex-col gap-8">
           <h2 id="coming-soon-heading" className="sr-only">
