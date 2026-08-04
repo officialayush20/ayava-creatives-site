@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/*
+ * Ayava Creatives design tokens.
+ * Tailwind v4 uses CSS-first theme configuration (no tailwind.config.js).
+ * These custom properties become Tailwind utilities automatically, e.g.
+ * bg-ink, text-ivory, text-gold, border-bronze, font-display, font-sans.
+ */
+@theme {
+  /* Brand colors */
+  --color-ink: #0b0a08;
+  --color-ivory: #f8f1e2;
+  --color-gold: #cba135;
+  --color-bronze: #6b5a2e;
+
+  /* Standard grayscale for UI (neutral, slightly warm to sit with ink/ivory) */
+  --color-gray-50: #f7f7f6;
+  --color-gray-100: #e9e8e5;
+  --color-gray-200: #d3d1cb;
+  --color-gray-300: #b3b0a6;
+  --color-gray-400: #8c887c;
+  --color-gray-500: #6c685d;
+  --color-gray-600: #524f47;
+  --color-gray-700: #3c3a34;
+  --color-gray-800: #262521;
+  --color-gray-900: #171612;
+
+  /* Font families */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}
