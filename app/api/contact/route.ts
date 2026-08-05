@@ -41,6 +41,77 @@ function escapeHtml(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+// Best-effort HubSpot CRM sync. This must never block or fail the contact
+// form's primary job (sending the founder an email via Resend). Any error
+// here — missing config, bad key, network failure, HubSpot API error — is
+// logged server-side and swallowed. Uses HubSpot's batch "upsert" endpoint
+// (idProperty: "email") so re-submitting the same email updates the
+// existing contact instead of erroring on a duplicate.
+async function syncContactToHubSpot(payload: ContactFormPayload): Promise<void> {
+  const hubspotKey = process.env.HUBSPOT_API_KEY;
+  if (!hubspotKey) {
+    console.error("[api/contact] HUBSPOT_API_KEY is not set — skipping CRM sync.");
+    return;
+  }
+
+  const nameParts = payload.fullName.trim().split(/\s+/);
+  const firstname = nameParts[0] ?? "";
+  const lastname = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+
+  const notesLines = [
+    `Primary goal: ${payload.primaryGoal}`,
+    payload.goalNotes ? `Goal notes: ${payload.goalNotes}` : null,
+    `Budget range: ${payload.budgetRange}`,
+    `Services needed: ${payload.servicesNeeded.join(", ")}`,
+    payload.additionalNotes ? `Additional notes: ${payload.additionalNotes}` : null,
+    payload.role ? `Role: ${payload.role}` : null,
+    `Submitted at: ${payload.submittedAt}`,
+    `Source: Ayava Creatives website contact form`,
+  ].filter((line): line is string => line !== null);
+
+  const properties: Record<string, string> = {
+    email: payload.email,
+    firstname,
+    message: notesLines.join("\n"),
+  };
+  if (lastname) properties.lastname = lastname;
+  if (payload.company) properties.company = payload.company;
+  if (payload.phone) properties.phone = payload.phone;
+  if (payload.website) properties.website = payload.website;
+
+  try {
+    const response = await fetch(
+      "https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${hubspotKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: [
+            {
+              idProperty: "email",
+              id: payload.email,
+              properties,
+            },
+          ],
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      const errorBody = await response.text().catch(() => "");
+      console.error(
+        `[api/contact] HubSpot contact upsert failed (${response.status}):`,
+        errorBody,
+      );
+    }
+  } catch (error) {
+    console.error("[api/contact] HubSpot contact upsert threw an error:", error);
+  }
+}
+
 export async function POST(request: Request) {
   const clientKey = getClientKey(request);
   if (!checkRateLimit(`contact:${clientKey}`, MAX_REQUESTS_PER_MINUTE)) {
@@ -143,6 +214,11 @@ export async function POST(request: Request) {
       { status: 502 },
     );
   }
+
+  // Best-effort CRM sync — never awaited in a way that blocks the response
+  // or fails the request. Email delivery above is the required/primary
+  // channel; HubSpot is a secondary enhancement.
+  await syncContactToHubSpot(payload);
 
   return NextResponse.json({ ok: true });
 }
