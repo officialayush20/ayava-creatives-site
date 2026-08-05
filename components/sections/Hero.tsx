@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { StatCounter } from "@/components/ui/StatCounter";
+import { HeroCanvas } from "@/components/three/HeroCanvas";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 
 const stats = [
@@ -13,8 +14,11 @@ const stats = [
 ];
 
 /**
- * HeroCanvasSlot: empty layout slot reserved for the webgl-3d-artist's
- * canvas (cols 8-12 on desktop). Static/CSS-only placeholder for now.
+ * HeroCanvasSlot: layout slot for the signature 3D visual (cols 8-12 on
+ * desktop). Hosts HeroCanvas, which lazy-loads the Three.js/R3F bundle
+ * client-side and gates it behind reduced-motion + WebGL support checks,
+ * falling back to a static themed graphic otherwise (see
+ * components/three/HeroCanvas.tsx).
  */
 function HeroCanvasSlot() {
   return (
@@ -23,6 +27,7 @@ function HeroCanvasSlot() {
       className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] lg:block"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,var(--color-ink-raise)_0%,transparent_60%)]" />
+      <HeroCanvas />
       <div className="absolute right-[10%] top-1/2 h-[60%] w-px -translate-y-1/2 bg-hairline" />
     </div>
   );
