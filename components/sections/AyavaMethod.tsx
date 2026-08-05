@@ -82,12 +82,12 @@ export function AyavaMethod({ tone = "on-ink", introLine }: AyavaMethodProps = {
     return () => ctx.revert();
   }, []);
 
-  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
-  const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
-  const numeralColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const descColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const railColor = tone === "on-ink" ? "bg-gold/50" : "bg-gold/60";
-  const mobileBorderColor = tone === "on-ink" ? "border-slate-deep" : "border-slate-deep/60";
+  const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
+  const headingColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
+  const numeralColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const descColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const railColor = tone === "on-ink" ? "bg-accent/50" : "bg-accent/60";
+  const mobileBorderColor = tone === "on-ink" ? "border-hairline" : "border-hairline/60";
 
   return (
     <section ref={sectionRef} aria-labelledby="method-heading" className={`${bg} py-16 md:py-40`}>

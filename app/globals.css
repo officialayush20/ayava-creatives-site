@@ -64,6 +64,25 @@
   --color-rust: #9a3b2a; /* ivory/light surfaces */
   --color-rust-raise: #c97b63; /* ink/dark surfaces */
 
+  /*
+   * Atelier Light — parallel theme literals (namespaced, no collision with
+   * the dark literals above). See docs/light-gradient-theme-spec.md §1/§6.
+   * These are never consumed directly by components; components consume the
+   * semantic role tokens below, which resolve to these under
+   * [data-theme="light"].
+   */
+  --color-porcelain: #f7f5f2;
+  --color-porcelain-raise: #fcfbf9;
+  --color-porcelain-sink: #efece7;
+  --color-graphite: #14161b;
+  --color-graphite-body: #3a3f47;
+  --color-graphite-muted: #666c76;
+  --color-rule: #dcd8d1;
+  --color-rule-strong: #b9b3a9;
+  --color-verdigris: #0e6e6b;
+  --color-verdigris-raise: #6fd3c6;
+  --color-rust-light: #a33826;
+
   /* Font families.
      display: "GT Sectra Display", Canela, and Instrument Serif are the three
      candidates under consideration pending a licensing decision. Instrument
@@ -82,10 +101,158 @@
     system-ui, sans-serif;
 }
 
+/*
+ * Semantic role tokens — what theme-variant components consume instead of
+ * brand literals (bg-ink/text-ivory/etc). See spec §6.
+ *
+ * IMPORTANT — two-layer indirection, both layers required:
+ *
+ * 1. `--role-surface` etc are PLAIN custom properties, deliberately declared
+ *    OUTSIDE any `@theme`/`@theme inline` block, in ordinary `:root` /
+ *    `[data-theme="light"]` rules further down. Tailwind's theme system
+ *    never touches these, so they always stay genuine runtime CSS custom
+ *    properties that the cascade re-resolves on every paint.
+ * 2. `@theme inline` below maps the Tailwind-facing token
+ *    (`--color-surface`) to that plain variable (`var(--role-surface)`).
+ *
+ * Why not skip layer 1 and write `--color-surface: var(--color-ink)`
+ * directly in `@theme inline`? Verified live in the browser: Tailwind v4
+ * substitutes ONE level of var() reference to another @theme-registered
+ * token when compiling `@theme inline`, so `.bg-surface` compiled to
+ * `background-color: var(--color-ink)` — bypassing `--color-surface`
+ * entirely. A later `[data-theme="light"] { --color-surface: ... }`
+ * override then had nothing to attach to, since the compiled utility never
+ * reads that property at all. Toggling the theme updated the DOM attribute
+ * and localStorage correctly but the page never repainted until a full
+ * navigation re-ran the build-time-resolved cascade. Routing through a
+ * plain, non-@theme intermediate variable avoids the flattening because
+ * Tailwind has no theme-token registration for `--role-surface` to resolve
+ * — it passes the var() reference through untouched.
+ */
+@theme inline {
+  --color-surface: var(--role-surface);
+  --color-surface-raise: var(--role-surface-raise);
+  --color-surface-sink: var(--role-surface-sink);
+  --color-content: var(--role-content);
+  --color-content-body: var(--role-content-body);
+  --color-content-muted: var(--role-content-muted);
+  --color-hairline: var(--role-hairline);
+  --color-hairline-strong: var(--role-hairline-strong);
+  --color-accent: var(--role-accent);
+  --color-accent-raise: var(--role-accent-raise);
+  --color-inverse-surface: var(--role-inverse-surface);
+  --color-inverse-content: var(--role-inverse-content);
+  --color-danger: var(--role-danger);
+}
+
+/*
+ * Plain runtime variables (layer 1, see note above). Dark defaults here —
+ * dark theme is unaffected until [data-theme="light"] overrides them.
+ */
+:root {
+  --role-surface: var(--color-ink);
+  --role-surface-raise: var(--color-ink-raise);
+  --role-surface-sink: var(--color-ink-raise);
+  --role-content: var(--color-ivory);
+  --role-content-body: var(--color-slate);
+  --role-content-muted: var(--color-slate);
+  --role-hairline: var(--color-slate-deep);
+  --role-hairline-strong: var(--color-slate);
+  --role-accent: var(--color-gold);
+  --role-accent-raise: var(--color-gold);
+  --role-inverse-surface: var(--color-ivory);
+  --role-inverse-content: var(--color-ink);
+  --role-danger: var(--color-rust-raise);
+}
+
+/*
+ * Atelier Light — theme override. Remaps the plain role variables above to
+ * the light literals, and defines the three gradient tokens (scoped to
+ * light only — the dark theme has no gradients). See
+ * docs/light-gradient-theme-spec.md §6.
+ */
+[data-theme="light"] {
+  --role-surface: var(--color-porcelain);
+  --role-surface-raise: var(--color-porcelain-raise);
+  --role-surface-sink: var(--color-porcelain-sink);
+  --role-content: var(--color-graphite);
+  --role-content-body: var(--color-graphite-body);
+  --role-content-muted: var(--color-graphite-muted);
+  --role-hairline: var(--color-rule);
+  --role-hairline-strong: var(--color-rule-strong);
+  --role-accent: var(--color-verdigris);
+  --role-accent-raise: var(--color-verdigris-raise);
+  /*
+   * Engineering note (deviation from spec §6's literal code sample, which
+   * hardcodes inverse-surface to #0f1114): the codebase's existing
+   * bg-ink/bg-ivory alternation pattern (used across most section
+   * components, not just the 5 tone-aware UI atoms) relies on
+   * --color-inverse-surface/--color-inverse-content as the general "flip"
+   * pair for ordinary alternating bands. Spec §1 explicitly replaces that
+   * ink/ivory alternation with "canvas -> canvas-sink -> canvas -> gradient
+   * slab" in the light theme, so the general flip token must resolve to a
+   * light canvas-sink register here, not a hardcoded dark slab — otherwise
+   * every ordinary alternating "ivory" section would render as a near-black
+   * band in light theme. The rare true dark-slab treatment spec's #0f1114
+   * describes (CaseStudySpotlight state B, IndustryCaseStudy state B) is
+   * applied directly as a literal `bg-ink` class on those two components
+   * instead of through this token, so both needs are satisfied without
+   * conflict. Dark theme is unaffected either way (defaults unchanged).
+   */
+  --role-inverse-surface: var(--color-porcelain-sink);
+  --role-inverse-content: var(--color-graphite);
+  --role-danger: var(--color-rust-light);
+
+  --gradient-dawn-mesh:
+    radial-gradient(80% 70% at 12% 8%,  #d9e6e4 0%, rgba(217,230,228,0) 62%),
+    radial-gradient(70% 60% at 88% 18%, #dde3ee 0%, rgba(221,227,238,0) 58%),
+    radial-gradient(90% 80% at 62% 96%, #ede5d6 0%, rgba(237,229,214,0) 66%);
+  --gradient-verdigris-deep:
+    linear-gradient(152deg, #06201f 0%, #0e4b47 46%, #10365c 100%);
+  --gradient-accent-rule:
+    linear-gradient(90deg, #0e6e6b 0%, #2e6fa8 100%);
+
+}
+
+/*
+ * Gradient-band text override. Applied (via the plain `.gradient-band`
+ * class, on the same element carrying a `gradient` prop's backgroundImage)
+ * by every component that hosts a Verdigris Deep slab. Scoped under
+ * [data-theme="light"] only — in dark theme this never fires, so the
+ * existing tone-driven text colors are completely untouched there
+ * (preserving exact dark-theme parity even though the same JSX renders in
+ * both themes). Custom properties inherit by default, so setting these on
+ * the section is enough to correctly re-color every descendant that
+ * consumes --color-content/--color-inverse-content/--color-hairline*
+ * (SectionHeader, ArrowLink, Button, raw text), with no per-component
+ * special-casing needed inside the gradient band's own children.
+ */
+[data-theme="light"] .gradient-band {
+  --role-content: var(--color-porcelain);
+  --role-inverse-content: var(--color-porcelain);
+  --role-content-body: var(--color-porcelain);
+  --role-content-muted: var(--color-rule-strong);
+  --role-hairline: var(--color-rule-strong);
+  --role-hairline-strong: var(--color-porcelain);
+  --role-surface: #06201f;
+  --role-inverse-surface: #06201f;
+}
+
 body {
-  background-color: var(--color-ink);
-  color: var(--color-ivory);
   font-family: var(--font-sans);
+  /*
+   * No background-color/color transition here (deliberately removed).
+   * Verified live: transitioning a property whose value derives from a
+   * custom property that changes via an ANCESTOR's attribute (the theme
+   * toggle sets data-theme on <html>, body reads --role-surface through the
+   * cascade) gets stuck at the pre-toggle color in this environment — the
+   * transition never completes, so the page silently fails to re-theme
+   * until a full navigation. Confirmed by direct A/B test: setting
+   * `body.style.transition = 'none'` made the correct color apply
+   * instantly; leaving the transition in place left it frozen. An instant
+   * switch is also the better call here regardless — matches the project's
+   * existing "no unnecessary motion" discipline for state changes.
+   */
 }
 
 /*

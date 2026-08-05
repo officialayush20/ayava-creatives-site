@@ -27,8 +27,8 @@ export function ProblemStatement({
   tone = "on-ink",
   className = "",
 }: ProblemStatementProps) {
-  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
-  const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
+  const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
+  const headingColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (

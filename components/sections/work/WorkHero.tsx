@@ -38,22 +38,24 @@ export function WorkHero() {
   }, []);
 
   return (
-    <section ref={rootRef} aria-labelledby="work-hero-heading" className="bg-ink pt-16 pb-12 md:pb-24 md:pt-40">
+    <section ref={rootRef} aria-labelledby="work-hero-heading" className="bg-surface pt-16 pb-12 md:pb-24 md:pt-40">
       <Container>
-        <div className="max-w-[52ch] md:max-w-none md:[&>*]:max-w-[62ch]">
-          <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+        {/* Dawn Mesh (light theme only — no-op in dark). See
+            docs/light-theme-application-map.md, Work Hub mapping. */}
+        <div className="max-w-[52ch] bg-[image:var(--gradient-dawn-mesh)] bg-cover md:max-w-none md:[&>*]:max-w-[62ch]">
+          <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-content-body">
             Our Work
           </p>
           <h1
             id="work-hero-heading"
             data-hero-item
-            className="max-w-[16ch] font-display text-[clamp(30px,8vw,72px)] font-normal leading-[1.05] text-ivory md:max-w-[12ch]"
+            className="max-w-[16ch] font-display text-[clamp(30px,8vw,72px)] font-normal leading-[1.05] text-content md:max-w-[12ch]"
           >
             Eight projects, eight industries, one founder-led process.
           </h1>
           <p
             data-hero-item
-            className="mt-6 max-w-[38ch] font-sans text-base text-slate md:max-w-[52ch] md:text-lg"
+            className="mt-6 max-w-[38ch] font-sans text-base text-content-body md:max-w-[52ch] md:text-lg"
           >
             Every build on this page was designed, architected, and executed under one operator&rsquo;s direct
             involvement — not handed off across five subcontractors. Fewer projects, more scrutiny on each.

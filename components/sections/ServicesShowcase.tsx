@@ -38,7 +38,7 @@ export function ServicesShowcase() {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
 
   return (
-    <section ref={revealRef} aria-labelledby="services-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="services-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="What we run"

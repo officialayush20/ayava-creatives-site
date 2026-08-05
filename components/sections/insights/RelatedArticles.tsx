@@ -27,7 +27,7 @@ export function RelatedArticles({ current }: RelatedArticlesProps) {
   const related = (sameCategory.length >= 3 ? sameCategory : others).slice(0, 3);
 
   return (
-    <section ref={revealRef} aria-labelledby="related-articles-heading" className="bg-ink py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="related-articles-heading" className="bg-surface py-16 md:py-24">
       <Container>
         <SectionHeader
           eyebrow="Keep Reading"

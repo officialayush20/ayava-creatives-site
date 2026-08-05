@@ -12,7 +12,7 @@ export function WhyAyavaExists() {
       statement="Most agency relationships have a translation problem."
       tone="on-ink"
     >
-      <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-slate md:text-lg">
+      <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-hairline-strong md:text-lg">
         <p>
           By the time I started taking on marketing work directly, I&apos;d already sat in enough
           client meetings — as the developer, not the marketer — to see the same pattern repeat:

@@ -17,21 +17,21 @@ export function OfficeCard() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="office-heading" className="bg-ivory pb-16 pt-6 md:pb-40 md:pt-6">
+    <section ref={revealRef} aria-labelledby="office-heading" className="bg-inverse-surface pb-16 pt-6 md:pb-40 md:pt-6">
       <Container>
-        <div data-reveal-item className="border-t border-slate-deep/30 pt-12 md:pt-16">
+        <div data-reveal-item className="border-t border-hairline/30 pt-12 md:pt-16">
           <div className="mx-auto max-w-xl text-center">
-            <h2 id="office-heading" className="font-display text-2xl font-normal text-ink">
+            <h2 id="office-heading" className="font-display text-2xl font-normal text-inverse-content">
               Visit the Studio
             </h2>
-            <p className="mt-4 font-sans text-base text-ink/70">
+            <p className="mt-4 font-sans text-base text-inverse-content/70">
               Ayava Creatives
               <br />
               ISBT, Haridwar Road, Kargi Chowk
               <br />
               Dehradun, India
             </p>
-            <p className="mt-4 font-sans text-sm text-ink/60">
+            <p className="mt-4 font-sans text-sm text-inverse-content/60">
               Based in Dehradun. Working with clients wherever they are.
             </p>
             <div className="mt-6">

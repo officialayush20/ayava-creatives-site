@@ -29,7 +29,7 @@ export function WhatThisIsnt() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="what-this-isnt-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="what-this-isnt-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="What This Isn't"

@@ -42,16 +42,16 @@ export function CareersHero() {
     <section
       ref={rootRef}
       aria-labelledby="careers-hero-heading"
-      className="flex min-h-[50vh] items-center bg-ivory py-16 md:py-24"
+      className="flex min-h-[50vh] items-center bg-inverse-surface bg-[image:var(--gradient-dawn-mesh)] bg-cover py-16 md:py-24"
     >
       <Container className="flex max-w-3xl flex-col">
-        <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+        <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline">
           Careers
         </p>
-        <h1 data-hero-item className="font-display text-[clamp(32px,4.5vw,60px)] font-normal leading-[1.05] text-ink">
+        <h1 data-hero-item className="font-display text-[clamp(32px,4.5vw,60px)] font-normal leading-[1.05] text-inverse-content">
           We&apos;re not hiring right now — but we&apos;d still like to hear from you.
         </h1>
-        <p data-hero-item className="mt-5 max-w-[52ch] font-sans text-base text-ink/70 md:text-lg">
+        <p data-hero-item className="mt-5 max-w-[52ch] font-sans text-base text-inverse-content/70 md:text-lg">
           Ayava is a lean, founder-led studio today. When that changes, I&apos;d rather already
           know who&apos;s interested than start from zero. Tell me a bit about yourself below.
         </p>

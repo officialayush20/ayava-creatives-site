@@ -31,7 +31,7 @@ export function ServiceCategorySection({
   columnSpan,
 }: ServiceCategorySectionProps) {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
-  const bg = tone === "on-ivory" ? "bg-ivory" : "bg-ink";
+  const bg = tone === "on-ivory" ? "bg-inverse-surface" : "bg-surface";
 
   return (
     <section ref={revealRef} aria-labelledby={headingId} className={`${bg} py-16 md:py-32`}>

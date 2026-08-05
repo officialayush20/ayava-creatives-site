@@ -57,8 +57,10 @@ export function StatCounter({ value, display, label, tone = "on-ink", className 
     return () => observer.disconnect();
   }, [value, display]);
 
-  const numberColor = tone === "on-ink" ? "text-gold" : "text-ink";
-  const labelColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  // `tone` prop names kept for call-site stability; internally resolved
+  // through semantic role tokens. See docs/light-gradient-theme-spec.md §6.
+  const numberColor = tone === "on-ink" ? "text-accent" : "text-inverse-content";
+  const labelColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
 
   return (
     <div className={className}>

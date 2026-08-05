@@ -14,7 +14,7 @@ export function WhyAyavaEventually() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="why-eventually-heading" className="bg-ink py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="why-eventually-heading" className="bg-surface py-16 md:py-24">
       <Container>
         <SectionHeader
           eyebrow="Why People Might Want to Work Here"
@@ -36,7 +36,7 @@ export function WhyAyavaEventually() {
             e-commerce, EdTech, B2B SaaS, and more — the same range covered on the{" "}
             <a
               href="/about"
-              className="text-ivory underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              className="text-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             >
               About
             </a>{" "}

@@ -15,11 +15,11 @@ export function RedirectBand() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="redirect-band-heading" className="bg-ink py-12 md:py-16">
+    <section ref={revealRef} aria-labelledby="redirect-band-heading" className="bg-surface py-12 md:py-16">
       <Container className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
-        <p id="redirect-band-heading" className="font-display text-xl font-normal text-ivory md:text-2xl">
-          Looking to work <em className="not-italic font-normal text-slate">with</em> Ayava rather
-          than <em className="not-italic font-normal text-slate">at</em> Ayava?
+        <p id="redirect-band-heading" className="font-display text-xl font-normal text-content md:text-2xl">
+          Looking to work <em className="not-italic font-normal text-hairline-strong">with</em> Ayava rather
+          than <em className="not-italic font-normal text-hairline-strong">at</em> Ayava?
         </p>
         <Button href="/contact" variant="secondary" tone="on-ink">
           Get in Touch About a Project

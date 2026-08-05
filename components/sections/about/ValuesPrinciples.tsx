@@ -36,7 +36,7 @@ export function ValuesPrinciples() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="values-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="values-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="How I Work"

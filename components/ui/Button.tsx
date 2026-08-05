@@ -35,8 +35,8 @@ type ButtonProps = ButtonAsLink | ButtonAsButton;
  * of a gold fill. Flagged in the handoff notes.
  *
  * `tone` controls which surface the button sits on so fills/focus rings
- * stay legible: "on-ink" (default) is for use on bg-ink sections, "on-ivory"
- * is for use on bg-ivory sections.
+ * stay legible: "on-ink" (default) is for use on bg-surface sections, "on-ivory"
+ * is for use on bg-inverse-surface sections.
  */
 export function Button({
   children,
@@ -50,9 +50,18 @@ export function Button({
   type = "button",
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-sans font-medium tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
+    "inline-flex items-center justify-center gap-2 font-sans font-medium tracking-tight transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
 
-  const ringOffset = tone === "on-ink" ? "focus-visible:ring-offset-2 focus-visible:ring-offset-ink" : "focus-visible:ring-offset-2 focus-visible:ring-offset-ivory";
+  // `tone` names ("on-ink" / "on-ivory") are kept as the external prop
+  // contract to avoid touching every call site, but internally both now
+  // resolve through the semantic role tokens (--color-surface/--color-content/
+  // --color-inverse-*) so the same markup re-themes correctly under
+  // [data-theme="light"] with no per-component light fork. See
+  // docs/light-gradient-theme-spec.md §6.
+  const ringOffset =
+    tone === "on-ink"
+      ? "focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+      : "focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface";
 
   const sizes = {
     default: "px-6 py-3 text-sm",
@@ -61,16 +70,18 @@ export function Button({
 
   const variants = {
     "on-ink": {
-      primary: "bg-ivory text-ink hover:shadow-[0_0_0_1px_var(--color-gold)] rounded-full",
+      primary:
+        "bg-content text-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
       secondary:
-        "bg-transparent text-ivory border border-slate hover:border-gold hover:text-ivory rounded-full",
-      ghost: "bg-transparent text-ivory underline-offset-4 hover:underline px-0 py-1",
+        "bg-transparent text-content border border-hairline-strong hover:border-accent hover:text-content rounded-full",
+      ghost: "bg-transparent text-content underline-offset-4 hover:underline px-0 py-1",
     },
     "on-ivory": {
-      primary: "bg-ink text-ivory hover:shadow-[0_0_0_1px_var(--color-gold)] rounded-full",
+      primary:
+        "bg-inverse-content text-inverse-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
       secondary:
-        "bg-transparent text-ink border border-slate-deep hover:border-gold hover:text-ink rounded-full",
-      ghost: "bg-transparent text-ink underline-offset-4 hover:underline px-0 py-1",
+        "bg-transparent text-inverse-content border border-hairline hover:border-accent hover:text-inverse-content rounded-full",
+      ghost: "bg-transparent text-inverse-content underline-offset-4 hover:underline px-0 py-1",
     },
   };
 

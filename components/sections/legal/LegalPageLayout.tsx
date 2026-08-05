@@ -23,19 +23,19 @@ export function LegalPageLayout({ doc }: LegalPageLayoutProps) {
     <>
       <SiteHeader />
       <main>
-        <section aria-labelledby="legal-hero-heading" className="bg-ink py-12 md:py-24">
+        <section aria-labelledby="legal-hero-heading" className="bg-surface py-12 md:py-24">
           <Container>
             <div className="max-w-2xl">
-              <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+              <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
                 Legal
               </p>
               <h1
                 id="legal-hero-heading"
-                className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05] text-ivory"
+                className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05] text-content"
               >
                 {doc.title}
               </h1>
-              <p className="mt-4 font-sans text-sm text-slate">
+              <p className="mt-4 font-sans text-sm text-hairline-strong">
                 {doc.draftStatus === "draft"
                   ? "Draft — not yet published"
                   : `Last updated: ${doc.lastUpdated}`}
@@ -46,7 +46,7 @@ export function LegalPageLayout({ doc }: LegalPageLayoutProps) {
 
         <DraftNotice />
 
-        <section aria-label={`${doc.title} content`} className="bg-ivory py-16 md:py-24">
+        <section aria-label={`${doc.title} content`} className="bg-inverse-surface py-16 md:py-24">
           <Container>
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
               {showToc ? (

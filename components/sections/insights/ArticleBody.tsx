@@ -21,7 +21,7 @@ export function ArticleBody({ article }: ArticleBodyProps) {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-label="Article body" className="bg-ivory py-16 md:py-24">
+    <section ref={revealRef} aria-label="Article body" className="bg-inverse-surface py-16 md:py-24">
       <Container>
         <article>
           <RichContentRenderer

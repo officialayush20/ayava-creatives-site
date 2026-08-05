@@ -11,7 +11,7 @@ export function HowWePrice() {
       statement="A fixed package is a guess about your account before we've looked at it."
       tone="on-ink"
     >
-      <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-slate md:text-lg">
+      <div className="flex flex-col gap-6 font-sans text-base leading-relaxed text-hairline-strong md:text-lg">
         <p>
           Fixed pricing tiers work when every customer needs roughly the same thing. Marketing
           doesn&apos;t work that way. A single-location business running one paid channel and a

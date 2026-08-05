@@ -27,7 +27,7 @@ export function WhyAyava() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="why-ayava-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="why-ayava-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-4" data-reveal-item>
@@ -45,15 +45,15 @@ export function WhyAyava() {
                   key={item.title}
                   data-reveal-item
                   className={`flex items-start gap-4 py-8 ${
-                    index === 0 ? "border-t border-slate-deep" : ""
-                  } border-b border-slate-deep`}
+                    index === 0 ? "border-t border-hairline" : ""
+                  } border-b border-hairline`}
                 >
-                  <span className="font-display text-xl text-slate">
+                  <span className="font-display text-xl text-hairline-strong">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
                     <h3 className="font-display text-lg font-normal md:text-xl">{item.title}</h3>
-                    <p className="mt-2 font-sans text-sm text-slate">{item.description}</p>
+                    <p className="mt-2 font-sans text-sm text-hairline-strong">{item.description}</p>
                   </div>
                 </li>
               ))}

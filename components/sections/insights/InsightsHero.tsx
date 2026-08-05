@@ -38,20 +38,22 @@ export function InsightsHero() {
   }, []);
 
   return (
-    <section ref={rootRef} aria-labelledby="insights-hero-heading" className="bg-ink py-16 md:py-32">
+    <section ref={rootRef} aria-labelledby="insights-hero-heading" className="bg-surface py-16 md:py-32">
       <Container>
-        <div className="max-w-2xl">
-          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+        {/* Dawn Mesh (light theme only — no-op in dark). See
+            docs/light-theme-application-map.md, Insights mapping. */}
+        <div className="max-w-2xl bg-[image:var(--gradient-dawn-mesh)] bg-cover">
+          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-content-body">
             Field Notes
           </p>
           <h1
             id="insights-hero-heading"
             data-hero-item
-            className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05] text-ivory"
+            className="font-display text-[length:var(--type-display-hero)] font-normal leading-[1.05] text-content"
           >
             Field Notes, Not Filler
           </h1>
-          <p data-hero-item className="mt-6 max-w-[50ch] font-sans text-base text-slate md:text-lg">
+          <p data-hero-item className="mt-6 max-w-[50ch] font-sans text-base text-content-body md:text-lg">
             A working library, not a content calendar. Some pieces are live. Others are announced
             ahead of publication. All of it comes out of work we&apos;ve actually shipped for
             clients — not generic marketing-blog filler.

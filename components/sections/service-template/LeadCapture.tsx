@@ -39,18 +39,18 @@ function CalculatorLeadCapture({ config }: { config: Extract<LeadCaptureConfig, 
   const estimate = useMemo(() => config.computeEstimate(values), [config, values]);
 
   return (
-    <section aria-labelledby="lead-capture-heading" className="bg-ink py-16 md:py-40">
+    <section aria-labelledby="lead-capture-heading" className="bg-surface py-16 md:py-40">
       <Container>
-        <div className="mx-auto max-w-3xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
+        <div className="mx-auto max-w-3xl rounded-sm border border-hairline-strong bg-surface-raise p-6 md:p-12">
           <h2 id="lead-capture-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
             {config.headline}
           </h2>
-          <p className="mt-3 font-sans text-sm text-slate">{config.helperText}</p>
+          <p className="mt-3 font-sans text-sm text-hairline-strong">{config.helperText}</p>
 
           <div className="mt-8 flex flex-col gap-6">
             {config.fields.map((field) => (
               <fieldset key={field.key}>
-                <legend className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.14em] text-slate">
+                <legend className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.14em] text-hairline-strong">
                   {field.legend}
                 </legend>
                 <div className="flex flex-wrap gap-2">
@@ -60,10 +60,10 @@ function CalculatorLeadCapture({ config }: { config: Extract<LeadCaptureConfig, 
                       type="button"
                       aria-pressed={values[field.key] === option}
                       onClick={() => setValues((prev) => ({ ...prev, [field.key]: option }))}
-                      className={`rounded-full border px-4 py-2 font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
+                      className={`rounded-full border px-4 py-2 font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
                         values[field.key] === option
-                          ? "border-ivory bg-ivory/10 text-ivory"
-                          : "border-slate text-slate hover:border-ivory hover:text-ivory"
+                          ? "border-content bg-inverse-surface/10 text-content"
+                          : "border-hairline-strong text-hairline-strong hover:border-content hover:text-content"
                       }`}
                     >
                       {option}
@@ -76,7 +76,7 @@ function CalculatorLeadCapture({ config }: { config: Extract<LeadCaptureConfig, 
 
           <div
             aria-live="polite"
-            className="mt-8 rounded-sm border border-slate-deep bg-ink p-6 font-sans text-sm text-slate"
+            className="mt-8 rounded-sm border border-hairline bg-surface p-6 font-sans text-sm text-hairline-strong"
           >
             {estimate ?? config.emptyStateText}
           </div>
@@ -112,9 +112,9 @@ function FormLeadCapture({ config }: { config: Extract<LeadCaptureConfig, { vari
   }
 
   return (
-    <section aria-labelledby="lead-capture-heading" className="bg-ink py-16 md:py-40">
+    <section aria-labelledby="lead-capture-heading" className="bg-surface py-16 md:py-40">
       <Container>
-        <div className="mx-auto max-w-2xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
+        <div className="mx-auto max-w-2xl rounded-sm border border-hairline-strong bg-surface-raise p-6 md:p-12">
           {status === "success" ? (
             <div aria-live="polite">
               <h2 id="lead-capture-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
@@ -142,7 +142,7 @@ function FormLeadCapture({ config }: { config: Extract<LeadCaptureConfig, { vari
                 <FormField id="lc-company" label="Company (optional)" value={company} onChange={setCompany} disabled={status === "submitting"} />
 
                 <div>
-                  <label htmlFor="lc-stage" className="mb-2 block font-sans text-xs font-medium uppercase tracking-[0.14em] text-slate">
+                  <label htmlFor="lc-stage" className="mb-2 block font-sans text-xs font-medium uppercase tracking-[0.14em] text-hairline-strong">
                     Project stage
                   </label>
                   <select
@@ -150,7 +150,7 @@ function FormLeadCapture({ config }: { config: Extract<LeadCaptureConfig, { vari
                     value={stage}
                     onChange={(e) => setStage(e.target.value)}
                     disabled={status === "submitting"}
-                    className="w-full rounded-sm border border-slate bg-ink px-4 py-3 font-sans text-sm text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
+                    className="w-full rounded-sm border border-hairline-strong bg-surface px-4 py-3 font-sans text-sm text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
                   >
                     <option value="">Select an option</option>
                     <option value="exploring">Just exploring</option>
@@ -190,7 +190,7 @@ function FormField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block font-sans text-xs font-medium uppercase tracking-[0.14em] text-slate">
+      <label htmlFor={id} className="mb-2 block font-sans text-xs font-medium uppercase tracking-[0.14em] text-hairline-strong">
         {label}
       </label>
       <input
@@ -200,7 +200,7 @@ function FormField({
         onChange={(e) => onChange(e.target.value)}
         required={required}
         disabled={disabled}
-        className="w-full rounded-sm border border-slate bg-ink px-4 py-3 font-sans text-sm text-ivory placeholder:text-slate/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold disabled:opacity-50"
+        className="w-full rounded-sm border border-hairline-strong bg-surface px-4 py-3 font-sans text-sm text-content placeholder:text-hairline-strong/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50"
       />
     </div>
   );

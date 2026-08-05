@@ -12,11 +12,11 @@ function MapPlaceholder() {
   return (
     <div
       aria-hidden="true"
-      className="relative mx-auto flex aspect-[2/1] w-full max-w-4xl items-center justify-center overflow-hidden rounded-sm border border-slate-deep bg-ink-raise"
+      className="relative mx-auto flex aspect-[2/1] w-full max-w-4xl items-center justify-center overflow-hidden rounded-sm border border-hairline bg-surface-raise"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,var(--color-slate-deep)_0%,transparent_55%)]" />
       <span className="relative h-2 w-2 rounded-full border border-viridian/60 bg-viridian" />
-      <span className="absolute font-sans text-xs uppercase tracking-[0.2em] text-slate">
+      <span className="absolute font-sans text-xs uppercase tracking-[0.2em] text-hairline-strong">
         Map graphic pending
       </span>
     </div>
@@ -27,7 +27,7 @@ export function GlobalPresence() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="global-presence-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="global-presence-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <h2
           id="global-presence-heading"
@@ -36,7 +36,7 @@ export function GlobalPresence() {
         >
           Based in Dehradun. Built for anywhere.
         </h2>
-        <p data-reveal-item className="mt-6 max-w-xl font-sans text-sm text-slate">
+        <p data-reveal-item className="mt-6 max-w-xl font-sans text-sm text-hairline-strong">
           Ayava Creatives operates from Dehradun, India, serving clients across a growing set of
           regions with the same operating system: audit, architect, build, measure, scale.
         </p>
@@ -46,11 +46,11 @@ export function GlobalPresence() {
         </div>
 
         <div className="mt-12" data-reveal-item>
-          <h3 className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <h3 className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
             Locations
           </h3>
           <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-3">
-            <li className="font-sans text-sm text-ivory">Dehradun, India &mdash; Headquarters</li>
+            <li className="font-sans text-sm text-content">Dehradun, India &mdash; Headquarters</li>
           </ul>
         </div>
       </Container>

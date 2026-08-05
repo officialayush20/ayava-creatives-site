@@ -16,7 +16,7 @@ type IndustryFAQProps = {
 /** FAQ — vertical-specific buyer objections, per industry-page-layout-spec §5. */
 export function IndustryFAQ({ industryName, slug, items, tone }: IndustryFAQProps) {
   const revealRef = useScrollReveal<HTMLElement>();
-  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
+  const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
 
   const faqJsonLd = {
     "@context": "https://schema.org",

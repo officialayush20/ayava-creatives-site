@@ -16,7 +16,7 @@ export function LegalSection({ section }: LegalSectionProps) {
     <div className="mx-auto max-w-[72ch]">
       <h2
         id={section.id}
-        className="scroll-mt-24 font-display text-2xl font-normal leading-[1.15] text-ink first:mt-0 md:text-3xl"
+        className="scroll-mt-24 font-display text-2xl font-normal leading-[1.15] text-inverse-content first:mt-0 md:text-3xl"
       >
         {section.heading}
       </h2>
@@ -27,7 +27,7 @@ export function LegalSection({ section }: LegalSectionProps) {
       ) : null}
       {section.subsections?.map((subsection) => (
         <div key={subsection.heading} className="mt-10">
-          <h3 className="font-sans text-lg font-bold leading-[1.2] text-ink">
+          <h3 className="font-sans text-lg font-bold leading-[1.2] text-inverse-content">
             {subsection.heading}
           </h3>
           <div className="mt-4">

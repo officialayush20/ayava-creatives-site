@@ -129,7 +129,7 @@ function StepIndicator({ current, name }: { current: number; name: string }) {
   const percent = (current / TOTAL_STEPS) * 100;
   return (
     <div className="mb-8">
-      <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.14em] text-ivory">
+      <p className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.14em] text-content">
         Step {current} of {TOTAL_STEPS} — {name}
       </p>
       <div
@@ -138,10 +138,10 @@ function StepIndicator({ current, name }: { current: number; name: string }) {
         aria-valuemin={1}
         aria-valuemax={TOTAL_STEPS}
         aria-valuetext={`Step ${current} of ${TOTAL_STEPS}, ${name}`}
-        className="h-1 w-full overflow-hidden rounded-full bg-slate-deep"
+        className="h-1 w-full overflow-hidden rounded-full bg-hairline"
       >
         <div
-          className="h-full rounded-full bg-ivory transition-[width] duration-300 ease-out motion-reduce:transition-none"
+          className="h-full rounded-full bg-inverse-surface transition-[width] duration-300 ease-out motion-reduce:transition-none"
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -302,7 +302,7 @@ export function IntakeForm() {
   const currentStepName = stepNames[step - 1];
 
   return (
-    <section id="intake-form" aria-labelledby="intake-form-heading" className="bg-ink py-16 pb-12 md:py-40 md:pb-24">
+    <section id="intake-form" aria-labelledby="intake-form-heading" className="bg-surface py-16 pb-12 md:py-40 md:pb-24">
       <Container>
         <h2 id="intake-form-heading" className="sr-only">
           Let&apos;s Scope Your Project
@@ -312,7 +312,7 @@ export function IntakeForm() {
             from the focused heading, per contact-page-layout-spec §2.8. */}
         <div ref={liveRegionRef} aria-live="polite" className="sr-only" />
 
-        <div className="mx-auto max-w-3xl rounded-sm border border-slate bg-ink-raise p-6 md:p-12">
+        <div className="mx-auto max-w-3xl rounded-sm border border-hairline-strong bg-surface-raise p-6 md:p-12">
           {/* The rust-error state (stepError/submitError, above) and this
               viridian success state must remain mutually exclusive — never
               rendered in the same viewport. That's currently guaranteed
@@ -336,7 +336,7 @@ export function IntakeForm() {
                 </svg>
               </span>
               <h3 className="font-display text-2xl font-normal">Got It.</h3>
-              <p className="max-w-[48ch] font-sans text-sm text-slate">
+              <p className="max-w-[48ch] font-sans text-sm text-hairline-strong">
                 Your project details are in front of us now, not a queue. We&apos;ll review what
                 you shared and follow up at the email or number you gave us.
               </p>
@@ -456,7 +456,7 @@ export function IntakeForm() {
                     Goals &amp; Budget
                   </h3>
                   <fieldset>
-                    <legend className="mb-3 font-sans text-sm font-medium text-ivory">
+                    <legend className="mb-3 font-sans text-sm font-medium text-content">
                       Primary goal — pick the closest one, we&apos;ll refine it together.
                     </legend>
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -472,10 +472,10 @@ export function IntakeForm() {
                               update("primaryGoal", option);
                               setStepError(null);
                             }}
-                            className={`rounded-sm border px-4 py-3 text-left font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-raise disabled:opacity-50 ${
+                            className={`rounded-sm border px-4 py-3 text-left font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raise disabled:opacity-50 ${
                               selected
-                                ? "border-ivory bg-ivory/10 text-ivory"
-                                : "border-slate text-slate hover:border-ivory hover:text-ivory"
+                                ? "border-content bg-inverse-surface/10 text-content"
+                                : "border-hairline-strong text-hairline-strong hover:border-content hover:text-content"
                             }`}
                           >
                             {option}
@@ -496,12 +496,12 @@ export function IntakeForm() {
                       aria-describedby="goalNotes-counter"
                       className={`${inputBaseClass} ${inputBorderClass(false)} resize-none`}
                     />
-                    <p id="goalNotes-counter" className="mt-2 text-right font-sans text-xs text-slate">
+                    <p id="goalNotes-counter" className="mt-2 text-right font-sans text-xs text-hairline-strong">
                       {form.goalNotes.length}/500
                     </p>
                   </FormField>
                   <fieldset>
-                    <legend className="mb-3 font-sans text-sm text-slate">
+                    <legend className="mb-3 font-sans text-sm text-hairline-strong">
                       Monthly marketing budget — this helps us recommend the right scope, not
                       oversell or undersell you.
                     </legend>
@@ -518,10 +518,10 @@ export function IntakeForm() {
                               update("budgetRange", option);
                               setStepError(null);
                             }}
-                            className={`flex items-center justify-between rounded-sm border px-4 py-4 text-left font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-raise disabled:opacity-50 ${
+                            className={`flex items-center justify-between rounded-sm border px-4 py-4 text-left font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raise disabled:opacity-50 ${
                               selected
-                                ? "border-ivory bg-ivory/10 text-ivory"
-                                : "border-slate text-slate hover:border-ivory hover:text-ivory"
+                                ? "border-content bg-inverse-surface/10 text-content"
+                                : "border-hairline-strong text-hairline-strong hover:border-content hover:text-content"
                             }`}
                           >
                             <span>{option}</span>
@@ -548,7 +548,7 @@ export function IntakeForm() {
                   >
                     Scope &amp; Brief
                   </h3>
-                  <p id="services-helper" className="font-sans text-sm text-slate">
+                  <p id="services-helper" className="font-sans text-sm text-hairline-strong">
                     Select as many as apply. Not sure? Select &ldquo;Not sure yet&rdquo; below and
                     we&apos;ll help you figure it out.
                   </p>
@@ -562,10 +562,10 @@ export function IntakeForm() {
                           aria-pressed={selected}
                           disabled={status === "loading"}
                           onClick={() => toggleService(service)}
-                          className={`flex min-h-[56px] items-center justify-between gap-3 rounded-sm border px-4 py-3 text-left font-sans text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-raise disabled:opacity-50 ${
+                          className={`flex min-h-[56px] items-center justify-between gap-3 rounded-sm border px-4 py-3 text-left font-sans text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raise disabled:opacity-50 ${
                             selected
-                              ? "border-ivory bg-ivory/10 text-ivory"
-                              : "border-slate text-slate hover:border-ivory hover:text-ivory"
+                              ? "border-content bg-inverse-surface/10 text-content"
+                              : "border-hairline-strong text-hairline-strong hover:border-content hover:text-content"
                           }`}
                         >
                           <span>{service}</span>
@@ -582,10 +582,10 @@ export function IntakeForm() {
                       aria-pressed={form.servicesNeeded.includes(NOT_SURE_OPTION)}
                       disabled={status === "loading"}
                       onClick={() => toggleService(NOT_SURE_OPTION)}
-                      className={`flex min-h-[56px] items-center justify-between gap-3 rounded-sm border px-4 py-3 text-left font-sans text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-raise disabled:opacity-50 md:col-span-2 xl:col-span-3 ${
+                      className={`flex min-h-[56px] items-center justify-between gap-3 rounded-sm border px-4 py-3 text-left font-sans text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raise disabled:opacity-50 md:col-span-2 xl:col-span-3 ${
                         form.servicesNeeded.includes(NOT_SURE_OPTION)
-                          ? "border-ivory bg-ivory/10 text-ivory"
-                          : "border-slate text-slate hover:border-ivory hover:text-ivory"
+                          ? "border-content bg-inverse-surface/10 text-content"
+                          : "border-hairline-strong text-hairline-strong hover:border-content hover:text-content"
                       }`}
                     >
                       <span>{NOT_SURE_OPTION}</span>
@@ -610,31 +610,31 @@ export function IntakeForm() {
                   </FormField>
 
                   <div>
-                    <label className="mb-2 block font-sans text-sm font-medium text-ivory">
+                    <label className="mb-2 block font-sans text-sm font-medium text-content">
                       Upload a brief or reference file (optional)
                     </label>
-                    <p className="mb-3 font-sans text-xs text-slate">
+                    <p className="mb-3 font-sans text-xs text-hairline-strong">
                       PDF, DOC, or slide deck — brand guidelines, RFP, whatever you&apos;ve
                       already got. Under 20MB.
                     </p>
                     {file ? (
-                      <div className="flex items-center justify-between rounded-sm border border-slate px-4 py-3">
-                        <span className="font-sans text-sm text-ivory">
-                          {file.name} <span className="text-slate">({Math.round(file.size / 1024)} KB)</span>
+                      <div className="flex items-center justify-between rounded-sm border border-hairline-strong px-4 py-3">
+                        <span className="font-sans text-sm text-content">
+                          {file.name} <span className="text-hairline-strong">({Math.round(file.size / 1024)} KB)</span>
                         </span>
                         <button
                           type="button"
                           onClick={() => handleFileChange(null)}
                           disabled={status === "loading"}
-                          className="font-sans text-xs text-slate underline-offset-4 hover:text-ivory hover:underline disabled:opacity-50"
+                          className="font-sans text-xs text-hairline-strong underline-offset-4 hover:text-content hover:underline disabled:opacity-50"
                         >
                           Remove
                         </button>
                       </div>
                     ) : (
-                      <div className="flex min-h-[120px] flex-col items-center justify-center gap-3 rounded-sm border border-dashed border-slate px-4 py-6 text-center">
-                        <p className="font-sans text-xs text-slate">Drag a file here, or</p>
-                        <label className="cursor-pointer rounded-full border border-slate px-5 py-2 font-sans text-sm text-ivory transition-colors duration-200 ease-out hover:border-ivory focus-within:outline-none focus-within:ring-2 focus-within:ring-gold focus-within:ring-offset-2 focus-within:ring-offset-ink-raise">
+                      <div className="flex min-h-[120px] flex-col items-center justify-center gap-3 rounded-sm border border-dashed border-hairline-strong px-4 py-6 text-center">
+                        <p className="font-sans text-xs text-hairline-strong">Drag a file here, or</p>
+                        <label className="cursor-pointer rounded-full border border-hairline-strong px-5 py-2 font-sans text-sm text-content transition-colors duration-200 ease-out hover:border-content focus-within:outline-none focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2 focus-within:ring-offset-surface-raise">
                           Browse files
                           <input
                             type="file"
@@ -653,11 +653,11 @@ export function IntakeForm() {
                     ) : null}
                   </div>
 
-                  <div className="border-t border-slate-deep pt-6">
-                    <h4 className="mb-4 font-sans text-sm font-medium uppercase tracking-[0.14em] text-slate">
+                  <div className="border-t border-hairline pt-6">
+                    <h4 className="mb-4 font-sans text-sm font-medium uppercase tracking-[0.14em] text-hairline-strong">
                       Review
                     </h4>
-                    <dl className="flex flex-col divide-y divide-slate-deep">
+                    <dl className="flex flex-col divide-y divide-hairline">
                       {[
                         { label: "Name", value: form.fullName || "—", step: 1 },
                         { label: "Email", value: form.email || "—", step: 1 },
@@ -672,14 +672,14 @@ export function IntakeForm() {
                       ].map((row) => (
                         <div key={row.label} className="flex items-start justify-between gap-4 py-3">
                           <div>
-                            <dt className="font-sans text-xs uppercase tracking-[0.1em] text-slate">{row.label}</dt>
-                            <dd className="mt-1 font-sans text-sm text-ivory">{row.value}</dd>
+                            <dt className="font-sans text-xs uppercase tracking-[0.1em] text-hairline-strong">{row.label}</dt>
+                            <dd className="mt-1 font-sans text-sm text-content">{row.value}</dd>
                           </div>
                           <button
                             type="button"
                             onClick={() => jumpToStep(row.step)}
                             disabled={status === "loading"}
-                            className="shrink-0 font-sans text-xs text-slate underline-offset-4 hover:text-ivory hover:underline disabled:opacity-50"
+                            className="shrink-0 font-sans text-xs text-hairline-strong underline-offset-4 hover:text-content hover:underline disabled:opacity-50"
                           >
                             Edit
                           </button>
@@ -688,7 +688,7 @@ export function IntakeForm() {
                     </dl>
                   </div>
 
-                  <p className="font-sans text-xs text-slate">
+                  <p className="font-sans text-xs text-hairline-strong">
                     We personally read every inquiry — no auto-triage, no ticket queue. We&apos;ll
                     get back to you as soon as we&apos;ve actually looked at what you sent, not on
                     a countdown timer.
@@ -701,7 +701,7 @@ export function IntakeForm() {
                   type="button"
                   onClick={goBack}
                   disabled={step === 1 || status === "loading"}
-                  className="font-sans text-sm text-slate underline-offset-4 hover:text-ivory hover:underline disabled:pointer-events-none disabled:opacity-30"
+                  className="font-sans text-sm text-hairline-strong underline-offset-4 hover:text-content hover:underline disabled:pointer-events-none disabled:opacity-30"
                 >
                   Back
                 </button>

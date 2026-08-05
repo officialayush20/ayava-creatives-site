@@ -58,7 +58,12 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
         />
         <IndustryNarrative industryName={industry.name} themes={content.narrativeThemes} />
         <RelevantServices industryName={industry.name} serviceSlugs={content.relevantServiceSlugs} />
-        <IndustryCaseStudy industryName={industry.name} caseStudy={content.caseStudy} tone="on-ivory" />
+        <IndustryCaseStudy
+          industryName={industry.name}
+          caseStudy={content.caseStudy}
+          tone="on-ivory"
+          gradient="verdigris-deep"
+        />
         <IndustryFAQ
           industryName={industry.name}
           slug={industry.slug}

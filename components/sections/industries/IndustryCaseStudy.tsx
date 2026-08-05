@@ -14,6 +14,14 @@ type IndustryCaseStudyProps = {
   /** Which background this section renders on — verified against the
    * per-page rhythm table in the page component, not hardcoded here. */
   tone: "on-ink" | "on-ivory";
+  /**
+   * Optional Verdigris Deep treatment — light theme only, no-op in dark
+   * (the underlying custom property is unset there so the section keeps its
+   * normal `tone`-driven flat background). Only pass on state-A (real,
+   * matched-project) case studies per the application map — never on the
+   * empty state.
+   */
+  gradient?: "verdigris-deep";
 };
 
 /**
@@ -22,9 +30,14 @@ type IndustryCaseStudyProps = {
  * §3. State A (matched project) uses `CaseStudySpread`-equivalent media/text
  * split; State B reuses the shared `CaseStudyEmptyState` primitive.
  */
-export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCaseStudyProps) {
+export function IndustryCaseStudy({ industryName, caseStudy, tone, gradient }: IndustryCaseStudyProps) {
   const revealRef = useScrollReveal<HTMLElement>();
-  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
+  const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
+  const gradientStyle =
+    gradient === "verdigris-deep" && caseStudy.state === "A"
+      ? { backgroundImage: "var(--gradient-verdigris-deep)" }
+      : undefined;
+  const gradientClass = gradientStyle ? "gradient-band" : "";
 
   if (caseStudy.state === "B") {
     return (
@@ -41,10 +54,15 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCas
     );
   }
 
-  const bodyColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const bodyColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
 
   return (
-    <section ref={revealRef} aria-labelledby="case-study-heading" className={`${bg} py-16 md:py-40`}>
+    <section
+      ref={revealRef}
+      aria-labelledby="case-study-heading"
+      className={`${bg} py-16 md:py-40 ${gradientClass}`}
+      style={gradientStyle}
+    >
       <Container>
         <SectionHeader
           eyebrow="Case Study Spotlight"
@@ -57,7 +75,7 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCas
           href={caseStudy.href}
           aria-label={`${caseStudy.title} — view case study`}
           data-reveal-item
-          className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 md:grid-cols-12 md:gap-10"
+          className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 md:grid-cols-12 md:gap-10"
         >
           <div className="md:col-span-7">
             <MediaFrame alt={`${caseStudy.title} project preview`} aspect="16/9" />
@@ -65,7 +83,7 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone }: IndustryCas
           <div className="flex flex-col justify-center md:col-span-5">
             <h3
               className={`font-display text-2xl font-normal leading-tight md:text-3xl ${
-                tone === "on-ink" ? "text-ivory" : "text-ink"
+                tone === "on-ink" ? "text-content" : "text-inverse-content"
               }`}
             >
               {caseStudy.title}

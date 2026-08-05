@@ -37,7 +37,7 @@ export function ContactFAQ() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="contact-faq-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="contact-faq-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Questions"

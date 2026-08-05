@@ -14,9 +14,9 @@ type NarrativeThemeProps = NarrativeThemeData & {
 /** Title + body + hairline divider row — reusable across all 10 industry pages. */
 export function NarrativeTheme({ title, body, isFirst = false }: NarrativeThemeProps) {
   return (
-    <div data-reveal-item className={`${isFirst ? "" : "border-t border-slate-deep/40"} py-6 first:pt-0 md:py-8`}>
-      <h3 className="font-display text-xl font-normal leading-tight text-ink md:text-2xl">{title}</h3>
-      <p className="mt-3 max-w-[65ch] font-sans text-sm leading-relaxed text-slate-deep md:text-base">{body}</p>
+    <div data-reveal-item className={`${isFirst ? "" : "border-t border-hairline/40"} py-6 first:pt-0 md:py-8`}>
+      <h3 className="font-display text-xl font-normal leading-tight text-inverse-content md:text-2xl">{title}</h3>
+      <p className="mt-3 max-w-[65ch] font-sans text-sm leading-relaxed text-hairline md:text-base">{body}</p>
     </div>
   );
 }
@@ -39,7 +39,7 @@ export function IndustryNarrative({ industryName, themes }: IndustryNarrativePro
     <section
       ref={revealRef}
       aria-labelledby="industry-narrative-heading"
-      className="bg-ivory py-16 md:py-40"
+      className="bg-inverse-surface py-16 md:py-40"
     >
       <Container>
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">

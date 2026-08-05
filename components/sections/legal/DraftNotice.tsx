@@ -9,12 +9,12 @@ import { Container } from "@/components/ui/Container";
  */
 export function DraftNotice() {
   return (
-    <div className="border-y border-bronze bg-ink py-6">
+    <div className="border-y border-bronze bg-surface py-6">
       <Container>
-        <p className="font-sans text-sm font-bold uppercase tracking-[0.14em] text-ivory">
+        <p className="font-sans text-sm font-bold uppercase tracking-[0.14em] text-content">
           Draft &mdash; Pending Legal Review
         </p>
-        <p className="mt-2 max-w-[70ch] font-sans text-sm text-slate">
+        <p className="mt-2 max-w-[70ch] font-sans text-sm text-hairline-strong">
           This page is placeholder content for structural/design purposes only. It has not been
           reviewed by counsel and must not be treated as Ayava Creatives&apos; actual
           privacy/terms policy until replaced with reviewed copy.

@@ -52,7 +52,7 @@ function CaseStudySpread({
       href={`/work/${study.slug}`}
       aria-label={`View case study — ${study.name}`}
       data-reveal-item
-      className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-ivory md:grid-cols-12 md:items-center md:gap-x-10"
+      className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-4 focus-visible:ring-offset-inverse-surface md:grid-cols-12 md:items-center md:gap-x-10"
     >
       <div className={`md:col-span-7 ${reverse ? "md:order-2" : "md:order-1"}`}>
         <MediaFrame
@@ -66,10 +66,10 @@ function CaseStudySpread({
         <h3 className="mt-4 font-display text-2xl font-normal leading-tight md:text-3xl">
           {study.name}
         </h3>
-        <p className="mt-4 font-sans text-sm text-slate-deep">{study.challenge}</p>
-        <p className="mt-3 font-sans text-sm text-slate-deep">{study.strategy}</p>
-        <p className="mt-3 font-sans text-xs italic text-slate-deep/70">{study.results}</p>
-        <span className="mt-6 inline-flex items-center gap-2 font-sans text-sm font-medium text-ink underline-offset-4 group-hover:underline">
+        <p className="mt-4 font-sans text-sm text-hairline">{study.challenge}</p>
+        <p className="mt-3 font-sans text-sm text-hairline">{study.strategy}</p>
+        <p className="mt-3 font-sans text-xs italic text-hairline/70">{study.results}</p>
+        <span className="mt-6 inline-flex items-center gap-2 font-sans text-sm font-medium text-inverse-content underline-offset-4 group-hover:underline">
           View Case Study
           <span aria-hidden="true" className="transition-transform duration-200 ease-out group-hover:translate-x-1">
             &rarr;
@@ -87,7 +87,7 @@ export function FeaturedCaseStudies() {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.15, y: 32 });
 
   return (
-    <section ref={revealRef} aria-labelledby="case-studies-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="case-studies-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Selected work"

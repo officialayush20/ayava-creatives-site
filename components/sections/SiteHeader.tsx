@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -24,34 +25,36 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-deep bg-ink/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-surface/95 backdrop-blur">
       <Container>
         <div className="flex h-20 items-center justify-between">
           <Link
             href="/"
-            className="font-display text-lg font-normal text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="font-display text-lg font-normal text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           >
             Ayava Creatives
           </Link>
 
-          <nav aria-label="Primary" className="hidden md:block">
+          <nav aria-label="Primary" className="hidden md:flex md:items-center md:gap-6">
             <ul className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-sans text-sm text-slate transition-colors duration-200 ease-out hover:text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    className="font-sans text-sm text-hairline-strong transition-colors duration-200 ease-out hover:text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
+            <span aria-hidden="true" className="h-4 w-px bg-hairline" />
+            <ThemeToggle />
           </nav>
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-sm p-2 text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink md:hidden"
+            className="inline-flex items-center justify-center rounded-sm p-2 text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -78,7 +81,7 @@ export function SiteHeader() {
       </Container>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Primary" className="border-t border-slate-deep md:hidden">
+        <nav id="mobile-nav" aria-label="Primary" className="border-t border-hairline md:hidden">
           <Container>
             <ul className="flex flex-col gap-1 py-6">
               {navLinks.map((link) => (
@@ -86,13 +89,17 @@ export function SiteHeader() {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block py-3 font-sans text-base text-ivory focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    className="block py-3 font-sans text-base text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
+            <div className="flex items-center justify-between border-t border-hairline py-4">
+              <span className="font-sans text-sm text-hairline-strong">Theme</span>
+              <ThemeToggle />
+            </div>
           </Container>
         </nav>
       )}

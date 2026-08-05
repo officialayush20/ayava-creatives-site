@@ -32,7 +32,7 @@ export function RichContentRenderer({ blocks, coverImage, coverAlt }: RichConten
             return (
               <p
                 key={index}
-                className="mt-6 font-sans text-base leading-[1.7] text-ink first:mt-0"
+                className="mt-6 font-sans text-base leading-[1.7] text-inverse-content first:mt-0"
               >
                 {block.text}
               </p>
@@ -41,7 +41,7 @@ export function RichContentRenderer({ blocks, coverImage, coverAlt }: RichConten
             return (
               <h2
                 key={index}
-                className="mt-16 mb-6 font-display text-2xl font-normal leading-[1.15] text-ink md:mt-16 md:text-3xl"
+                className="mt-16 mb-6 font-display text-2xl font-normal leading-[1.15] text-inverse-content md:mt-16 md:text-3xl"
               >
                 {block.text}
               </h2>
@@ -50,7 +50,7 @@ export function RichContentRenderer({ blocks, coverImage, coverAlt }: RichConten
             return (
               <h3
                 key={index}
-                className="mt-10 mb-4 font-sans text-lg font-bold leading-[1.2] text-ink md:mt-10"
+                className="mt-10 mb-4 font-sans text-lg font-bold leading-[1.2] text-inverse-content md:mt-10"
               >
                 {block.text}
               </h3>
@@ -59,7 +59,7 @@ export function RichContentRenderer({ blocks, coverImage, coverAlt }: RichConten
             return (
               <blockquote
                 key={index}
-                className="mt-6 border-l-4 border-bronze pl-6 font-display text-lg italic leading-[1.5] text-slate-deep"
+                className="mt-6 border-l-4 border-bronze pl-6 font-display text-lg italic leading-[1.5] text-hairline"
               >
                 {block.text}
               </blockquote>
@@ -69,7 +69,7 @@ export function RichContentRenderer({ blocks, coverImage, coverAlt }: RichConten
             return (
               <ListTag
                 key={index}
-                className="mt-6 flex flex-col gap-2 pl-6 font-sans text-base leading-[1.7] text-ink marker:text-bronze"
+                className="mt-6 flex flex-col gap-2 pl-6 font-sans text-base leading-[1.7] text-inverse-content marker:text-bronze"
                 style={{ listStyleType: block.ordered ? "decimal" : "disc" }}
               >
                 {block.items.map((item, itemIndex) => (

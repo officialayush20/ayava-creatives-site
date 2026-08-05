@@ -24,11 +24,14 @@ export function SectionHeader({
   tone = "on-ink",
   className = "",
 }: SectionHeaderProps) {
-  const eyebrowColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  // `tone` prop names kept for call-site stability; internally resolved
+  // through semantic role tokens so this re-themes automatically under
+  // [data-theme="light"]. See docs/light-gradient-theme-spec.md §6.
+  const eyebrowColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
   // Explicit heading color per tone — the h2 has no ancestor color class,
-  // so without this it silently inherits body's `color: var(--color-ivory)`
-  // and renders invisible ivory-on-ivory on every tone="on-ivory" section.
-  const headingColor = tone === "on-ivory" ? "text-ink" : "text-ivory";
+  // so without this it silently inherits body's default text color and
+  // renders invisible on every tone="on-ivory" section.
+  const headingColor = tone === "on-ivory" ? "text-inverse-content" : "text-content";
 
   return (
     <div

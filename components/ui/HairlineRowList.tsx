@@ -29,11 +29,11 @@ export function HairlineRowList({
   numbered = true,
   className = "",
 }: HairlineRowListProps) {
-  const borderColor = "border-slate-deep";
-  const titleColor = tone === "on-ink" ? "text-ivory" : "text-ink";
-  const descColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const exampleColor = tone === "on-ink" ? "text-slate/80" : "text-slate-deep/80";
-  const numColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const borderColor = "border-hairline";
+  const titleColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
+  const descColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const exampleColor = tone === "on-ink" ? "text-hairline-strong/80" : "text-hairline/80";
+  const numColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
 
   return (
     <ul className={className}>

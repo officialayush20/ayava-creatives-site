@@ -39,10 +39,10 @@ export function CaseStudyEmptyState({
   ctaHref = "/contact",
   tone = "on-ink",
 }: CaseStudyEmptyStateProps) {
-  const bodyColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const metricLabelColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const metricValueColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
-  const hairline = tone === "on-ink" ? "border-slate-deep" : "border-slate-deep/40";
+  const bodyColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const metricLabelColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const metricValueColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const hairline = tone === "on-ink" ? "border-hairline" : "border-hairline/40";
 
   return (
     <Container>

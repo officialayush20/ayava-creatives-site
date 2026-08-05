@@ -34,7 +34,7 @@ export function EngagementModels() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="engagement-models-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="engagement-models-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="How Engagements Are Structured"

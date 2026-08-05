@@ -11,15 +11,15 @@ function IndustryTile({ slug, name, hook }: { slug: string; name: string; hook: 
       href={`/industries/${slug}`}
       aria-label={`${name} — ${hook}`}
       data-reveal-item
-      className="group relative flex aspect-square flex-col justify-end overflow-hidden rounded-sm border border-slate-deep bg-ink-raise p-4 transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+      className="group relative flex aspect-square flex-col justify-end overflow-hidden rounded-sm border border-hairline bg-surface-raise p-4 transition-colors duration-200 ease-out hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
     >
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(160deg,var(--color-ink-raise)_0%,var(--color-slate-deep)_100%)] opacity-70 transition-transform duration-300 ease-out group-hover:scale-105"
       />
       <div className="relative">
-        <h3 className="font-sans text-sm font-medium text-ivory md:text-base">{name}</h3>
-        <p className="mt-1 font-sans text-xs text-slate opacity-100 md:opacity-0 md:transition-opacity md:duration-200 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
+        <h3 className="font-sans text-sm font-medium text-content md:text-base">{name}</h3>
+        <p className="mt-1 font-sans text-xs text-hairline-strong opacity-100 md:opacity-0 md:transition-opacity md:duration-200 md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
           {hook}
         </p>
       </div>
@@ -38,7 +38,7 @@ export function IndustriesGrid() {
   const revealRef = useScrollReveal<HTMLElement>({ stagger: 0.05 });
 
   return (
-    <section ref={revealRef} aria-labelledby="industries-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="industries-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Where we work"

@@ -34,7 +34,7 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
 
   if (caseStudy.state === "B") {
     return (
-      <section ref={revealRef} id="case-study" aria-labelledby="case-study-heading" className="bg-ink py-16 md:py-40">
+      <section ref={revealRef} id="case-study" aria-labelledby="case-study-heading" className="bg-ink py-16 md:py-40 gradient-band">
         <CaseStudyEmptyState
           eyebrow={caseStudy.eyebrow}
           title={caseStudy.heading}
@@ -53,7 +53,13 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
   const href = project ? `/work/${project.slug}` : "/work";
 
   return (
-    <section ref={revealRef} id="case-study" aria-labelledby="case-study-heading" className="bg-ink py-16 md:py-40">
+    <section
+      ref={revealRef}
+      id="case-study"
+      aria-labelledby="case-study-heading"
+      className="bg-ink py-16 md:py-40 gradient-band"
+      style={{ backgroundImage: "var(--gradient-verdigris-deep)" }}
+    >
       <Container>
         <SectionHeader
           eyebrow="Case Study Spotlight"
@@ -67,14 +73,14 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
             <MediaFrame
               alt={`${project?.name ?? caseStudy.heading} project preview`}
               aspect="16/9"
-              className="border border-transparent transition-colors duration-200 ease-out group-hover:border-gold"
+              className="border border-transparent transition-colors duration-200 ease-out group-hover:border-accent"
             />
           </div>
           <div className={`flex flex-col justify-center md:col-span-5 ${imageLeft ? "md:order-2" : "md:order-1"}`}>
-            <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+            <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
               {project?.name}
             </p>
-            <p className="max-w-[50ch] font-sans text-sm leading-relaxed text-slate md:text-base">
+            <p className="max-w-[50ch] font-sans text-sm leading-relaxed text-hairline-strong md:text-base">
               {caseStudy.body}
             </p>
             {/* No `StatCounter` row rendered — no confirmed performance

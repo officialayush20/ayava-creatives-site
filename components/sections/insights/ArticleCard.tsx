@@ -36,23 +36,23 @@ export function ArticleCard({ article }: ArticleCardProps) {
         {article.category}
       </Tag>
       <h3
-        className={`mt-3 line-clamp-2 inline-block border-b border-transparent font-display text-lg font-normal leading-snug text-ink transition-colors duration-200 ease-out ${
-          isPublished ? "group-hover:border-gold" : ""
+        className={`mt-3 line-clamp-2 inline-block border-b border-transparent font-display text-lg font-normal leading-snug text-inverse-content transition-colors duration-200 ease-out ${
+          isPublished ? "group-hover:border-accent" : ""
         }`}
       >
         {article.title}
       </h3>
       {isPublished ? (
         <>
-          <p className="mt-2 line-clamp-1 font-sans text-sm text-slate-deep">{article.excerpt}</p>
-          <p className="mt-2 font-sans text-xs text-slate-deep/70">
+          <p className="mt-2 line-clamp-1 font-sans text-sm text-hairline">{article.excerpt}</p>
+          <p className="mt-2 font-sans text-xs text-hairline/70">
             {article.readTime} &middot; {article.publishDate}
           </p>
         </>
       ) : (
         <div className="mt-2 flex flex-wrap items-center gap-3">
-          <p className="font-sans text-xs text-slate-deep/70">{article.angle}</p>
-          <span className="inline-flex w-fit items-center rounded-full border border-slate-deep/30 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-slate-deep">
+          <p className="font-sans text-xs text-hairline/70">{article.angle}</p>
+          <span className="inline-flex w-fit items-center rounded-full border border-hairline/30 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-hairline">
             Coming soon
           </span>
         </div>

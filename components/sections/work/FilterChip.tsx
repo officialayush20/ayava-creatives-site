@@ -17,10 +17,10 @@ export function FilterChip({ label, active, onToggle }: FilterChipProps) {
       type="button"
       aria-pressed={active}
       onClick={onToggle}
-      className={`inline-flex items-center rounded-full border bg-transparent px-4 py-2 font-sans text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory ${
+      className={`inline-flex items-center rounded-full border bg-transparent px-4 py-2 font-sans text-xs font-medium uppercase tracking-[0.1em] transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface ${
         active
-          ? "border-slate-deep border-b-2 border-b-gold text-ink font-medium"
-          : "border-slate-deep text-ink"
+          ? "border-hairline border-b-2 border-b-gold text-inverse-content font-medium"
+          : "border-hairline text-inverse-content"
       }`}
     >
       {label}

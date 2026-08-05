@@ -57,12 +57,12 @@ export function StickyCTA({ serviceName }: StickyCTAProps) {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-slate-deep bg-ink/95 backdrop-blur transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/95 backdrop-blur transition-opacity duration-200 ease-out motion-reduce:transition-none ${
         visible ? "visible opacity-100" : "invisible opacity-0"
       }`}
     >
       <div className="mx-auto flex max-w-[1760px] items-center justify-between gap-4 px-4 py-3 md:px-10">
-        <p className="hidden font-sans text-sm text-slate sm:block">Ready to talk about {serviceName}?</p>
+        <p className="hidden font-sans text-sm text-hairline-strong sm:block">Ready to talk about {serviceName}?</p>
         <Button href="/contact" variant="primary" tone="on-ink" className="w-full sm:w-auto">
           Get a Quote
         </Button>

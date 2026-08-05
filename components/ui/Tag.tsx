@@ -8,10 +8,12 @@ type TagProps = {
 
 /** Small pill label used for industry tags, category labels, etc. */
 export function Tag({ children, tone = "on-ivory", className = "" }: TagProps) {
+  // `tone` prop names kept for call-site stability; internally resolved
+  // through semantic role tokens. See docs/light-gradient-theme-spec.md §6.
   const toneClasses =
     tone === "on-ivory"
-      ? "border-slate-deep/30 text-slate-deep bg-transparent"
-      : "border-slate/40 text-slate bg-transparent";
+      ? "border-hairline/30 text-hairline bg-transparent"
+      : "border-hairline-strong/40 text-hairline-strong bg-transparent";
 
   return (
     <span

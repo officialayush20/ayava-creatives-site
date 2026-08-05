@@ -47,14 +47,14 @@ export function WorkGridSection() {
     <section
       ref={revealRef}
       aria-labelledby="work-hero-heading"
-      className="bg-ivory pb-16 pt-12 md:pb-40 md:pt-12"
+      className="bg-inverse-surface pb-16 pt-12 md:pb-40 md:pt-12"
     >
       <Container>
         {/* Filter Bar */}
-        <div role="group" aria-label="Filter case studies" className="flex flex-col gap-4 border-b border-slate-deep/20 pb-8 md:flex-row md:items-start md:justify-between md:gap-8">
+        <div role="group" aria-label="Filter case studies" className="flex flex-col gap-4 border-b border-hairline/20 pb-8 md:flex-row md:items-start md:justify-between md:gap-8">
           <div className="flex flex-col gap-3">
             <div>
-              <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+              <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline">
                 Industry
               </p>
               <div className="flex flex-wrap gap-2">
@@ -69,7 +69,7 @@ export function WorkGridSection() {
               </div>
             </div>
             <div>
-              <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+              <p className="mb-2 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline">
                 Service
               </p>
               <div className="flex flex-wrap gap-2">
@@ -84,11 +84,11 @@ export function WorkGridSection() {
               </div>
             </div>
           </div>
-          <div className="flex shrink-0 items-center gap-3 font-sans text-sm text-slate-deep md:pt-6">
+          <div className="flex shrink-0 items-center gap-3 font-sans text-sm text-hairline md:pt-6">
             <p aria-live="polite">
               {hasActiveFilters ? (
                 <>
-                  Showing <span className="font-display text-slate-deep">{filtered.length}</span> of{" "}
+                  Showing <span className="font-display text-hairline">{filtered.length}</span> of{" "}
                   {caseStudies.length} projects
                 </>
               ) : (
@@ -99,7 +99,7 @@ export function WorkGridSection() {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="font-sans text-sm font-medium text-ink underline underline-offset-4 hover:text-ink hover:underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                className="font-sans text-sm font-medium text-inverse-content underline underline-offset-4 hover:text-inverse-content hover:underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
               >
                 Clear filters
               </button>
@@ -111,10 +111,10 @@ export function WorkGridSection() {
         <div className="pt-16 md:pt-16">
           {filtered.length === 0 ? (
             <div className="flex flex-col items-start gap-6 py-16">
-              <h3 className="font-display text-2xl font-normal text-ink md:text-3xl">
+              <h3 className="font-display text-2xl font-normal text-inverse-content md:text-3xl">
                 No projects match that combination yet
               </h3>
-              <p className="font-sans text-base text-slate-deep">
+              <p className="font-sans text-base text-hairline">
                 Try clearing a filter, or view all {caseStudies.length} projects.
               </p>
               <Button variant="secondary" tone="on-ivory" onClick={clearFilters}>

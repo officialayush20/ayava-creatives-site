@@ -10,12 +10,12 @@ import { Container } from "@/components/ui/Container";
  */
 export function ResponseTimeBand() {
   return (
-    <section aria-labelledby="response-time-heading" className="bg-ink py-12 md:py-24">
+    <section aria-labelledby="response-time-heading" className="bg-surface py-12 md:py-24">
       <Container className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <h2 id="response-time-heading" className="font-display text-[length:var(--type-display-card)] font-normal">
           We personally read every inquiry.
         </h2>
-        <p className="mt-4 font-sans text-base text-slate">
+        <p className="mt-4 font-sans text-base text-hairline-strong">
           No auto-triage, no ticket queue. We&apos;ll get back to you as soon as we&apos;ve
           actually looked at what you sent, not on a countdown timer.
         </p>

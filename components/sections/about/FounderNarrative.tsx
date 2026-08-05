@@ -26,7 +26,7 @@ export function FounderNarrative() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="founder-narrative-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="founder-narrative-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="The Story"
@@ -82,7 +82,7 @@ export function FounderNarrative() {
           </div>
           <div className="md:col-span-4 md:col-start-9" data-reveal-item>
             <div className="md:sticky md:top-32">
-              <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+              <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline">
                 At a Glance
               </p>
               <dl className="flex flex-col">
@@ -90,24 +90,24 @@ export function FounderNarrative() {
                   <div
                     key={item.label}
                     className={`flex flex-col gap-1 py-4 ${
-                      index === 0 ? "border-t border-slate-deep" : ""
-                    } border-b border-slate-deep`}
+                      index === 0 ? "border-t border-hairline" : ""
+                    } border-b border-hairline`}
                   >
-                    <dt className="font-sans text-xs uppercase tracking-[0.1em] text-slate-deep">
+                    <dt className="font-sans text-xs uppercase tracking-[0.1em] text-hairline">
                       {item.label}
                     </dt>
-                    <dd className="font-sans text-sm text-ink">{item.value}</dd>
+                    <dd className="font-sans text-sm text-inverse-content">{item.value}</dd>
                   </div>
                 ))}
-                <div className="flex flex-col gap-1 border-b border-slate-deep py-4">
-                  <dt className="font-sans text-xs uppercase tracking-[0.1em] text-slate-deep">
+                <div className="flex flex-col gap-1 border-b border-hairline py-4">
+                  <dt className="font-sans text-xs uppercase tracking-[0.1em] text-hairline">
                     Real Project Work
                   </dt>
-                  <dd className="font-sans text-sm text-ink">
+                  <dd className="font-sans text-sm text-inverse-content">
                     {featuredProjects.join(", ")}, and four more —{" "}
                     <Link
                       href="/work"
-                      className="underline underline-offset-4 hover:text-slate-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                      className="underline underline-offset-4 hover:text-hairline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
                     >
                       see Work
                     </Link>

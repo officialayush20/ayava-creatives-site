@@ -23,7 +23,7 @@ export function RelevantServices({ industryName, serviceSlugs }: RelevantService
       id="relevant-services"
       ref={revealRef}
       aria-labelledby="relevant-services-heading"
-      className="bg-ink py-16 md:py-32"
+      className="bg-surface py-16 md:py-32"
     >
       <Container>
         <SectionHeader

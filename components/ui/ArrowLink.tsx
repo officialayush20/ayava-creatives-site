@@ -9,13 +9,15 @@ type ArrowLinkProps = {
 
 /** Text link with a trailing arrow that nudges right on hover/focus. */
 export function ArrowLink({ href, children, tone = "on-ink", className = "" }: ArrowLinkProps) {
-  const color = tone === "on-ink" ? "text-ivory" : "text-ink";
+  // `tone` prop names kept for call-site stability; internally resolved
+  // through semantic role tokens. See docs/light-gradient-theme-spec.md §6.
+  const color = tone === "on-ink" ? "text-content" : "text-inverse-content";
 
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-2 font-sans text-sm font-medium ${color} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${
-        tone === "on-ink" ? "focus-visible:ring-offset-ink" : "focus-visible:ring-offset-ivory"
+      className={`group inline-flex items-center gap-2 font-sans text-sm font-medium ${color} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+        tone === "on-ink" ? "focus-visible:ring-offset-surface" : "focus-visible:ring-offset-inverse-surface"
       } ${className}`}
     >
       <span className="underline-offset-4 group-hover:underline">{children}</span>

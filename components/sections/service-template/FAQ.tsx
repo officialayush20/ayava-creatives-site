@@ -30,7 +30,7 @@ export function FAQ({ items, idPrefix }: FAQProps) {
   };
 
   return (
-    <section ref={revealRef} aria-labelledby="faq-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="faq-heading" className="bg-surface py-16 md:py-40">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}

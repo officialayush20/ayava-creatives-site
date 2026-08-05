@@ -15,28 +15,28 @@ export function NextCaseStudyPreview({ next }: { next: CaseStudy }) {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="next-case-study-heading" className="bg-ink py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="next-case-study-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <Link
           href={`/work/${next.slug}`}
           data-reveal-item
           className="group mx-auto flex max-w-3xl flex-col items-center gap-8 text-center focus-visible:outline-none"
         >
-          <p className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <p className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
             Next Case Study
           </p>
           <h2
             id="next-case-study-heading"
-            className="inline-block border-b border-transparent font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-ivory transition-colors duration-200 ease-out group-hover:border-gold"
+            className="inline-block border-b border-transparent font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] text-content transition-colors duration-200 ease-out group-hover:border-accent"
           >
             {next.name}
           </h2>
           <MediaFrame
             alt={`${next.name} — ${next.descriptor}`}
             aspect="16/9"
-            className="w-full max-w-xl transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:ring-2 group-focus-visible:ring-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-ink"
+            className="w-full max-w-xl transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-surface"
           />
-          <span className="inline-flex items-center gap-2 font-sans text-sm font-medium text-ivory">
+          <span className="inline-flex items-center gap-2 font-sans text-sm font-medium text-content">
             View Case Study
             <span
               aria-hidden="true"

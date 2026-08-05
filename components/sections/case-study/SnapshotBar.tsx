@@ -31,21 +31,21 @@ export function SnapshotBar({ study }: { study: CaseStudy }) {
   ];
 
   return (
-    <div ref={revealRef} role="group" aria-label="Project snapshot" className="border-t border-slate-deep bg-ink">
+    <div ref={revealRef} role="group" aria-label="Project snapshot" className="border-t border-hairline bg-surface">
       <Container>
-        <dl className="grid grid-cols-1 gap-6 py-8 sm:grid-cols-2 md:grid-cols-4 md:gap-0 md:divide-x md:divide-slate-deep md:py-12">
+        <dl className="grid grid-cols-1 gap-6 py-8 sm:grid-cols-2 md:grid-cols-4 md:gap-0 md:divide-x md:divide-hairline md:py-12">
           {items.map((item, index) => (
             <div
               key={item.label}
               data-reveal-item
-              className={`flex flex-col gap-2 border-b border-slate-deep pb-6 sm:pb-0 md:border-b-0 md:px-6 ${
+              className={`flex flex-col gap-2 border-b border-hairline pb-6 sm:pb-0 md:border-b-0 md:px-6 ${
                 index === 0 ? "md:pl-0" : ""
               }`}
             >
-              <dt className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+              <dt className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
                 {item.label}
               </dt>
-              <dd className="font-sans text-base text-ivory">{item.content}</dd>
+              <dd className="font-sans text-base text-content">{item.content}</dd>
             </div>
           ))}
         </dl>

@@ -44,7 +44,7 @@ export function PricingFAQ() {
     <section
       ref={revealRef}
       aria-labelledby="pricing-faq-heading"
-      className="bg-ink py-16 md:py-40"
+      className="bg-surface py-16 md:py-40"
     >
       <Container>
         <SectionHeader

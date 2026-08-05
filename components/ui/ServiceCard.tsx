@@ -17,7 +17,7 @@ type ServiceCardProps = {
 };
 
 /**
- * Shared service link card — border-hairline, `hover:border-gold`,
+ * Shared service link card — border-hairline, `hover:border-accent`,
  * name + one-line description, arrow reveal on hover/focus. Used by both
  * the homepage's `ServicesShowcase` (flat teaser grid) and the `/services`
  * hub page (grouped sections) so the two never drift into separate
@@ -40,26 +40,26 @@ export function ServiceCard({
 
   const isOnIvory = tone === "on-ivory";
   const ringOffset = isOnIvory
-    ? "focus-visible:ring-offset-ivory"
-    : "focus-visible:ring-offset-ink";
-  const headingColor = isOnIvory ? "text-ink" : "text-ivory";
-  const arrowColor = isOnIvory ? "text-ink" : "text-ivory";
+    ? "focus-visible:ring-offset-inverse-surface"
+    : "focus-visible:ring-offset-surface";
+  const headingColor = isOnIvory ? "text-inverse-content" : "text-content";
+  const arrowColor = isOnIvory ? "text-inverse-content" : "text-content";
 
   return (
     <Link
       href={`/services/${slug}`}
       aria-label={`${name} — ${description}`}
       data-reveal-item
-      className={`group flex flex-col justify-between rounded-sm border border-slate-deep transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${ringOffset} active:scale-[0.98] ${sizeClasses} ${spanClassName}`}
+      className={`group flex flex-col justify-between rounded-sm border border-hairline transition-colors duration-200 ease-out hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${ringOffset} active:scale-[0.98] ${sizeClasses} ${spanClassName}`}
     >
       {showNumber && number ? (
-        <span className="font-sans text-sm tracking-[0.1em] text-slate">{number}</span>
+        <span className="font-sans text-sm tracking-[0.1em] text-hairline-strong">{number}</span>
       ) : null}
       <div>
         <h3 className={`font-display text-xl font-normal leading-tight md:text-2xl ${headingColor}`}>
           {name}
         </h3>
-        <p className="mt-3 font-sans text-sm text-slate">{description}</p>
+        <p className="mt-3 font-sans text-sm text-hairline-strong">{description}</p>
       </div>
       <span
         aria-hidden="true"

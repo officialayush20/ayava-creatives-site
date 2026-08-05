@@ -43,38 +43,38 @@ export function IndustriesHubHero() {
     <section
       ref={rootRef}
       aria-labelledby="industries-hub-heading"
-      className="flex min-h-[32vh] items-center bg-ink py-16 md:min-h-[40vh] md:py-24"
+      className="flex min-h-[32vh] items-center bg-surface py-16 md:min-h-[40vh] md:py-24"
     >
       <Container>
         <nav aria-label="Breadcrumb" className="mb-10 md:mb-12">
-          <ol className="flex items-center gap-2 font-sans text-xs text-slate">
+          <ol className="flex items-center gap-2 font-sans text-xs text-hairline-strong">
             <li>
               <Link
                 href="/"
-                className="transition-colors duration-200 ease-out hover:text-ivory underline-offset-4 hover:underline"
+                className="transition-colors duration-200 ease-out hover:text-content underline-offset-4 hover:underline"
               >
                 Home
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-ivory">
+            <li aria-current="page" className="text-content">
               Industries
             </li>
           </ol>
         </nav>
 
         <div className="max-w-3xl md:col-span-8">
-          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
             Industries
           </p>
           <h1
             id="industries-hub-heading"
             data-hero-item
-            className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-ivory"
+            className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-content"
           >
             We don&apos;t run one playbook across ten verticals.
           </h1>
-          <p data-hero-item className="mt-6 max-w-[60ch] font-sans text-base text-slate md:text-lg">
+          <p data-hero-item className="mt-6 max-w-[60ch] font-sans text-base text-hairline-strong md:text-lg">
             Every industry buys differently, trusts differently, and converts on a different
             timeline. We build the specific strategy your vertical actually runs on — not a
             generic template with your logo swapped in.

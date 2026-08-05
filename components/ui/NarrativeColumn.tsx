@@ -14,7 +14,7 @@ type NarrativeColumnProps = {
  * reuse note.
  */
 export function NarrativeColumn({ children, tone = "on-ivory", className = "" }: NarrativeColumnProps) {
-  const textColor = tone === "on-ink" ? "text-ivory/90" : "text-ink/80";
+  const textColor = tone === "on-ink" ? "text-content/90" : "text-inverse-content/80";
 
   return (
     <div

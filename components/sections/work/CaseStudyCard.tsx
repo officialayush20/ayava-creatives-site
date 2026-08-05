@@ -26,15 +26,15 @@ export function CaseStudyCard({ study, variant = "standard" }: CaseStudyCardProp
       <MediaFrame
         alt={`${study.name} — ${study.descriptor}`}
         aspect={isFeatured ? "16/9" : "4/5"}
-        className="transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:ring-2 group-focus-visible:ring-gold group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-ivory"
+        className="transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-inverse-surface"
       />
       <div className="mt-5">
         <Tag tone="on-ivory">{study.industry}</Tag>
-        <h3 className="mt-3 inline-block border-b border-transparent font-display text-2xl font-normal text-ink transition-colors duration-200 ease-out group-hover:border-gold">
+        <h3 className="mt-3 inline-block border-b border-transparent font-display text-2xl font-normal text-inverse-content transition-colors duration-200 ease-out group-hover:border-accent">
           {study.name}
         </h3>
-        <p className="mt-2 max-w-[42ch] font-sans text-sm text-slate-deep">{study.cardSummary}</p>
-        <span className="mt-4 inline-flex items-center gap-2 font-sans text-sm font-medium text-ink">
+        <p className="mt-2 max-w-[42ch] font-sans text-sm text-hairline">{study.cardSummary}</p>
+        <span className="mt-4 inline-flex items-center gap-2 font-sans text-sm font-medium text-inverse-content">
           View Case Study
           <span
             aria-hidden="true"

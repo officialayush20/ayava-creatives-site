@@ -39,24 +39,24 @@ export function TrustBar() {
     <section
       ref={revealRef}
       aria-labelledby="trust-bar-heading"
-      className="bg-ivory py-12 md:py-24"
+      className="bg-inverse-surface py-12 md:py-24"
     >
       <Container>
         <h2
           id="trust-bar-heading"
           data-reveal-item
-          className="mb-8 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep"
+          className="mb-8 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline"
         >
           Platforms &amp; frameworks we operate on
         </h2>
         <ul
           data-reveal-item
-          className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-slate-deep/20 pb-10"
+          className="flex flex-wrap items-center gap-x-10 gap-y-4 border-b border-hairline/20 pb-10"
         >
           {platforms.map((platform) => (
             <li
               key={platform}
-              className="font-sans text-sm font-medium tracking-tight text-ink"
+              className="font-sans text-sm font-medium tracking-tight text-inverse-content"
             >
               {platform}
             </li>
@@ -65,7 +65,7 @@ export function TrustBar() {
 
         <p
           data-reveal-item
-          className="mb-6 mt-10 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep"
+          className="mb-6 mt-10 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline"
         >
           Real portfolio work
         </p>
@@ -73,7 +73,7 @@ export function TrustBar() {
           {portfolioNames.map((name) => (
             <li
               key={name}
-              className="font-display text-lg font-normal text-ink/70 sm:text-xl"
+              className="font-display text-lg font-normal text-inverse-content/70 sm:text-xl"
             >
               {name}
             </li>

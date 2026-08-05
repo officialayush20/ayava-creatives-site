@@ -42,15 +42,15 @@ export function NewsletterForm() {
           placeholder="you@company.com"
           aria-describedby={status === "error" ? "newsletter-error" : undefined}
           aria-invalid={status === "error"}
-          className="w-full border-b border-slate bg-transparent px-1 py-2 font-sans text-sm text-ivory placeholder:text-slate focus-visible:outline-none focus-visible:border-gold"
+          className="w-full border-b border-hairline-strong bg-transparent px-1 py-2 font-sans text-sm text-content placeholder:text-hairline-strong focus-visible:outline-none focus-visible:border-accent"
         />
         {status === "error" ? (
-          <p id="newsletter-error" role="alert" className="mt-2 font-sans text-xs text-ivory">
+          <p id="newsletter-error" role="alert" className="mt-2 font-sans text-xs text-content">
             {errorMessage}
           </p>
         ) : null}
         {status === "success" ? (
-          <p aria-live="polite" className="mt-2 font-sans text-xs text-slate">
+          <p aria-live="polite" className="mt-2 font-sans text-xs text-hairline-strong">
             You&apos;re on the list.
           </p>
         ) : null}
@@ -58,7 +58,7 @@ export function NewsletterForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="shrink-0 rounded-full border border-slate px-6 py-2 font-sans text-sm font-medium text-ivory transition-colors duration-200 ease-out hover:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink disabled:opacity-50"
+        className="shrink-0 rounded-full border border-hairline-strong px-6 py-2 font-sans text-sm font-medium text-content transition-colors duration-200 ease-out hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:opacity-50"
       >
         {status === "loading" ? "Sending…" : "Subscribe"}
       </button>

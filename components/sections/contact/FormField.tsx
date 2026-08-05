@@ -24,10 +24,10 @@ type FormFieldProps = {
 export function FormField({ id, label, error, helper, required, className = "", children }: FormFieldProps) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-2 block font-sans text-sm font-medium text-ivory">
+      <label htmlFor={id} className="mb-2 block font-sans text-sm font-medium text-content">
         {label}
         {required ? (
-          <span aria-hidden="true" className="ml-1 text-slate">
+          <span aria-hidden="true" className="ml-1 text-hairline-strong">
             *
           </span>
         ) : null}
@@ -35,7 +35,7 @@ export function FormField({ id, label, error, helper, required, className = "", 
       {children}
       <div aria-live="polite">
         {helper && !error ? (
-          <p id={`${id}-helper`} className="mt-2 font-sans text-xs text-slate">
+          <p id={`${id}-helper`} className="mt-2 font-sans text-xs text-hairline-strong">
             {helper}
           </p>
         ) : null}
@@ -56,10 +56,10 @@ export function fieldDescribedBy(id: string, helper?: string, error?: string) {
 }
 
 export const inputBaseClass =
-  "w-full rounded-sm border bg-transparent px-4 py-3 font-sans text-sm text-ivory placeholder:text-slate focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink-raise transition-colors duration-200 ease-out";
+  "w-full rounded-sm border bg-transparent px-4 py-3 font-sans text-sm text-content placeholder:text-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raise transition-colors duration-200 ease-out";
 
 export function inputBorderClass(hasError?: boolean) {
   return hasError
     ? "border-[color:var(--color-rust-raise)]"
-    : "border-slate hover:border-ivory focus-visible:border-ivory";
+    : "border-hairline-strong hover:border-content focus-visible:border-content";
 }

@@ -40,16 +40,16 @@ export function PhilosophyHero() {
     <section
       ref={rootRef}
       aria-labelledby="pricing-hero-heading"
-      className="flex min-h-[55vh] items-center bg-ivory py-16 md:py-24"
+      className="flex min-h-[55vh] items-center bg-inverse-surface bg-[image:var(--gradient-dawn-mesh)] bg-cover py-16 md:py-24"
     >
       <Container className="mx-auto flex max-w-3xl flex-col items-center text-center">
-        <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate-deep">
+        <p data-hero-item className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline">
           How We Price
         </p>
-        <h1 data-hero-item className="font-display text-[clamp(36px,5vw,72px)] font-normal leading-[1.05] text-ink">
+        <h1 data-hero-item className="font-display text-[clamp(36px,5vw,72px)] font-normal leading-[1.05] text-inverse-content">
           Every quote is built for the account it&apos;s for — not pulled off a shelf.
         </h1>
-        <p data-hero-item className="mt-5 max-w-[56ch] font-sans text-base text-ink/70 md:text-lg">
+        <p data-hero-item className="mt-5 max-w-[56ch] font-sans text-base text-inverse-content/70 md:text-lg">
           We don&apos;t sell fixed retainer tiers. Every engagement is scoped to your channels,
           budget, and goals before we name a number.
         </p>

@@ -62,12 +62,12 @@ async function submitCareersInterest(
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 const NOTE_MAX_LENGTH = 500;
 const inputBase =
-  "w-full rounded-sm border bg-transparent px-4 py-3 font-sans text-sm text-ink placeholder:text-slate-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory transition-colors duration-200 ease-out";
+  "w-full rounded-sm border bg-transparent px-4 py-3 font-sans text-sm text-inverse-content placeholder:text-hairline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface transition-colors duration-200 ease-out";
 
 function inputBorder(hasError?: boolean) {
   return hasError
     ? "border-[color:var(--color-rust)]"
-    : "border-slate-deep hover:border-ink focus-visible:border-ink";
+    : "border-hairline hover:border-surface focus-visible:border-surface";
 }
 
 /**
@@ -139,7 +139,7 @@ export function CareersInterestForm() {
       ref={revealRef}
       id="interest-form"
       aria-labelledby="interest-form-heading"
-      className="bg-ivory py-16 md:py-24"
+      className="bg-inverse-surface py-16 md:py-24"
     >
       <Container>
         <div data-reveal-item>
@@ -152,7 +152,7 @@ export function CareersInterestForm() {
           />
         </div>
 
-        <div className="mx-auto max-w-2xl rounded-sm border border-slate-deep bg-ivory p-6 md:p-12">
+        <div className="mx-auto max-w-2xl rounded-sm border border-hairline bg-inverse-surface p-6 md:p-12">
           {status === "success" ? (
             <div aria-live="polite" className="flex flex-col items-center gap-6 py-4 text-center">
               <span
@@ -169,10 +169,10 @@ export function CareersInterestForm() {
                   />
                 </svg>
               </span>
-              <h3 className="font-display text-2xl font-normal text-ink">
+              <h3 className="font-display text-2xl font-normal text-inverse-content">
                 Thanks — we&apos;ll keep this on file.
               </h3>
-              <p className="max-w-[44ch] font-sans text-sm text-ink/70">
+              <p className="max-w-[44ch] font-sans text-sm text-inverse-content/70">
                 We&apos;ll reach out if something opens up that fits.
               </p>
             </div>
@@ -265,7 +265,7 @@ export function CareersInterestForm() {
                   <button
                     type="button"
                     onClick={handleRetry}
-                    className="ml-4 font-sans text-sm text-ink/60 underline-offset-4 hover:underline"
+                    className="ml-4 font-sans text-sm text-inverse-content/60 underline-offset-4 hover:underline"
                   >
                     Try Again
                   </button>

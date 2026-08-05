@@ -17,6 +17,14 @@ type CtaBandProps = {
    * without duplicating this component. Defaults to "on-ivory" to preserve
    * the homepage/services-hub behavior this component originally shipped with. */
   tone?: "on-ink" | "on-ivory";
+  /**
+   * Optional gradient treatment — light theme only (the underlying
+   * `--gradient-verdigris-deep` custom property is unset in dark, so this is
+   * a no-op there). Only pass on the specific page instances the
+   * application map identifies (homepage + work-hub closing CtaBand). One
+   * gradient slab per page maximum.
+   */
+  gradient?: "verdigris-deep";
 };
 
 export function CtaBand({
@@ -26,17 +34,21 @@ export function CtaBand({
   primaryLabel = "Get Free Audit",
   secondary = { href: "/contact#call", label: "Book a Call" },
   tone = "on-ivory",
+  gradient,
 }: CtaBandProps = {}) {
   const revealRef = useScrollReveal<HTMLElement>();
-  const bg = tone === "on-ink" ? "bg-ink" : "bg-ivory";
-  const headingColor = tone === "on-ink" ? "text-ivory" : "text-ink";
-  const supportingColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
+  const headingColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
+  const supportingColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const gradientStyle =
+    gradient === "verdigris-deep" ? { backgroundImage: "var(--gradient-verdigris-deep)" } : undefined;
 
   return (
     <section
       ref={revealRef}
       aria-labelledby="cta-band-heading"
-      className={`${bg} py-16 md:py-32`}
+      className={`${bg} py-16 md:py-32 ${gradient ? "gradient-band" : ""}`}
+      style={gradientStyle}
     >
       <Container className="flex flex-col items-center text-center">
         <div data-reveal-item className="mx-auto flex max-w-3xl flex-col items-center">

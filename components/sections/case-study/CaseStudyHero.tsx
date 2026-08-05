@@ -41,7 +41,7 @@ export function CaseStudyHero({ study }: { study: CaseStudy }) {
   }, []);
 
   return (
-    <section ref={rootRef} aria-labelledby="case-study-hero-heading" className="relative bg-ink">
+    <section ref={rootRef} aria-labelledby="case-study-hero-heading" className="relative bg-surface">
       <div className="relative min-h-[70svh] w-full md:min-h-[100svh]">
         <MediaFrame
           alt={`${study.name} — ${study.descriptor}`}
@@ -54,17 +54,17 @@ export function CaseStudyHero({ study }: { study: CaseStudy }) {
           className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-ink/90 to-transparent"
         />
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-4 pb-8 min-[428px]:px-5 md:px-8 md:pb-12 lg:px-10 xl:px-16 2xl:px-20">
-          <p data-hero-item className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <p data-hero-item className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
             Case Study
           </p>
           <h1
             id="case-study-hero-heading"
             data-hero-item
-            className="max-w-[9ch] font-display text-[clamp(32px,7vw,72px)] font-normal leading-[1.05] text-ivory md:max-w-[14ch]"
+            className="max-w-[9ch] font-display text-[clamp(32px,7vw,72px)] font-normal leading-[1.05] text-content md:max-w-[14ch]"
           >
             {study.name}
           </h1>
-          <p data-hero-item className="font-sans text-base text-slate md:text-lg">
+          <p data-hero-item className="font-sans text-base text-hairline-strong md:text-lg">
             {study.descriptor}
           </p>
         </div>

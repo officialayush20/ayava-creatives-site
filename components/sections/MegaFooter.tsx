@@ -41,7 +41,7 @@ const linkColumns = [
 
 export function MegaFooter() {
   return (
-    <footer aria-labelledby="footer-heading" className="border-t border-slate-deep bg-ink py-16 md:py-24">
+    <footer aria-labelledby="footer-heading" className="border-t border-hairline bg-surface py-16 md:py-24">
       <h2 id="footer-heading" className="sr-only">
         Site footer
       </h2>
@@ -49,7 +49,7 @@ export function MegaFooter() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
             <p className="font-display text-lg font-normal">Ayava Creatives</p>
-            <p className="mt-2 font-sans text-sm text-slate">
+            <p className="mt-2 font-sans text-sm text-hairline-strong">
               Marketing, engineered like infrastructure.
             </p>
             <div className="mt-8">
@@ -60,7 +60,7 @@ export function MegaFooter() {
           <div className="grid grid-cols-2 gap-8 md:col-span-9 md:grid-cols-4">
             {linkColumns.map((column) => (
               <div key={column.heading}>
-                <h3 className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+                <h3 className="font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
                   {column.heading}
                 </h3>
                 <ul className="mt-4 flex flex-col gap-3">
@@ -68,7 +68,7 @@ export function MegaFooter() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="font-sans text-sm text-ivory underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                        className="font-sans text-sm text-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                       >
                         {link.label}
                       </Link>
@@ -80,8 +80,8 @@ export function MegaFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-slate-deep pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-sans text-xs text-slate">
+        <div className="mt-16 flex flex-col gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-sans text-xs text-hairline-strong">
             &copy; {new Date().getFullYear()} Ayava Creatives, Dehradun, India. All rights
             reserved.
           </p>
@@ -89,7 +89,7 @@ export function MegaFooter() {
             <li>
               <Link
                 href="/privacy"
-                className="font-sans text-xs text-slate underline-offset-4 hover:underline hover:text-ivory"
+                className="font-sans text-xs text-hairline-strong underline-offset-4 hover:underline hover:text-content"
               >
                 Privacy
               </Link>
@@ -97,7 +97,7 @@ export function MegaFooter() {
             <li>
               <Link
                 href="/terms"
-                className="font-sans text-xs text-slate underline-offset-4 hover:underline hover:text-ivory"
+                className="font-sans text-xs text-hairline-strong underline-offset-4 hover:underline hover:text-content"
               >
                 Terms
               </Link>

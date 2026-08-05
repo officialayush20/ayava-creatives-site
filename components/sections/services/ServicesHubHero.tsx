@@ -44,32 +44,32 @@ export function ServicesHubHero() {
   }, []);
 
   return (
-    <section ref={rootRef} className="bg-ink py-16 md:py-24">
+    <section ref={rootRef} className="bg-surface py-16 md:py-24">
       <Container>
         <nav aria-label="Breadcrumb" className="mb-10 md:mb-14">
-          <ol className="flex items-center gap-2 font-sans text-sm text-slate">
+          <ol className="flex items-center gap-2 font-sans text-sm text-hairline-strong">
             <li>
               <Link
                 href="/"
-                className="transition-colors duration-200 ease-out hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="transition-colors duration-200 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
               >
                 Home
               </Link>
             </li>
             <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-ivory">
+            <li aria-current="page" className="text-content">
               Services
             </li>
           </ol>
         </nav>
         <div className="max-w-3xl md:col-span-8">
-          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-slate">
+          <p data-hero-item className="mb-3 font-sans text-xs font-medium uppercase tracking-[0.18em] text-hairline-strong">
             Services
           </p>
-          <h1 data-hero-item className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-ivory">
+          <h1 data-hero-item className="font-display text-[clamp(28px,8vw,56px)] font-normal leading-[1.05] text-content">
             Fifteen services. Pick your starting point.
           </h1>
-          <p data-hero-item className="mt-4 max-w-xl font-sans text-base text-slate md:text-lg">
+          <p data-hero-item className="mt-4 max-w-xl font-sans text-base text-hairline-strong md:text-lg">
             Grouped by what you&apos;re trying to fix first.
           </p>
         </div>

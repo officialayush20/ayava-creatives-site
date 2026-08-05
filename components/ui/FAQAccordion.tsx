@@ -32,9 +32,9 @@ export function FAQAccordion({ items, tone = "on-ivory", idPrefix, className = "
     });
   }
 
-  const textColor = tone === "on-ink" ? "text-ivory" : "text-ink";
-  const borderColor = "border-slate-deep";
-  const answerColor = tone === "on-ink" ? "text-slate" : "text-slate-deep";
+  const textColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
+  const borderColor = "border-hairline";
+  const answerColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
 
   return (
     <div className={`flex flex-col ${className}`}>
@@ -51,8 +51,8 @@ export function FAQAccordion({ items, tone = "on-ivory", idPrefix, className = "
                 aria-expanded={isOpen}
                 aria-controls={answerId}
                 onClick={() => toggle(index)}
-                className={`flex w-full items-start justify-between gap-6 py-6 text-left font-sans text-base font-medium ${textColor} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 ${
-                  tone === "on-ink" ? "focus-visible:ring-offset-ink" : "focus-visible:ring-offset-ivory"
+                className={`flex w-full items-start justify-between gap-6 py-6 text-left font-sans text-base font-medium ${textColor} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                  tone === "on-ink" ? "focus-visible:ring-offset-surface" : "focus-visible:ring-offset-inverse-surface"
                 }`}
               >
                 <span>{item.question}</span>

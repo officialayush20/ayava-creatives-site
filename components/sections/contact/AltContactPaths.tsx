@@ -18,9 +18,9 @@ function ContactMethodCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-3 rounded-sm border border-slate-deep/40 p-6">
-      <h3 className="font-display text-lg font-normal text-ink">{label}</h3>
-      <p className="font-sans text-sm text-ink/70">{value}</p>
+    <div className="flex flex-col gap-3 rounded-sm border border-hairline/40 p-6">
+      <h3 className="font-display text-lg font-normal text-inverse-content">{label}</h3>
+      <p className="font-sans text-sm text-inverse-content/70">{value}</p>
       <div className="mt-2">{children}</div>
     </div>
   );
@@ -31,7 +31,7 @@ export function AltContactPaths() {
   const [calendarOpen, setCalendarOpen] = useState(false);
 
   return (
-    <section id="alt-contact" ref={revealRef} aria-labelledby="alt-contact-heading" className="bg-ivory py-16 md:py-40">
+    <section id="alt-contact" ref={revealRef} aria-labelledby="alt-contact-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Or Skip the Form"
@@ -49,7 +49,7 @@ export function AltContactPaths() {
                 aria-expanded={calendarOpen}
                 aria-controls="calendar-embed-panel"
                 onClick={() => setCalendarOpen((prev) => !prev)}
-                className="font-sans text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                className="font-sans text-sm font-medium text-inverse-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
               >
                 Book Strategy Call
               </button>
@@ -62,7 +62,7 @@ export function AltContactPaths() {
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
                 target="_blank"
                 rel="noopener"
-                className="group inline-flex items-center gap-2 font-sans text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                className="group inline-flex items-center gap-2 font-sans text-sm font-medium text-inverse-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
               >
                 Chat on WhatsApp
                 <span className="sr-only"> (opens in new tab)</span>
@@ -77,7 +77,7 @@ export function AltContactPaths() {
             <ContactMethodCard label="Email" value="Write to us directly.">
               <a
                 href="mailto:info@ayavacreatives.com"
-                className="font-sans text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                className="font-sans text-sm font-medium text-inverse-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
               >
                 info@ayavacreatives.com
               </a>
@@ -89,13 +89,13 @@ export function AltContactPaths() {
               <div className="flex flex-col gap-1">
                 <a
                   href="tel:+919548601929"
-                  className="font-sans text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  className="font-sans text-sm font-medium text-inverse-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
                 >
                   +91 95486 01929
                 </a>
                 <a
                   href="tel:+919675400058"
-                  className="font-sans text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  className="font-sans text-sm font-medium text-inverse-content underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-inverse-surface"
                 >
                   +91 96754 00058
                 </a>
@@ -107,9 +107,9 @@ export function AltContactPaths() {
         <div
           id="calendar-embed-panel"
           hidden={!calendarOpen}
-          className="mt-6 flex min-h-[240px] flex-col items-center justify-center gap-4 rounded-sm border border-dashed border-slate-deep/50 p-8 text-center"
+          className="mt-6 flex min-h-[240px] flex-col items-center justify-center gap-4 rounded-sm border border-dashed border-hairline/50 p-8 text-center"
         >
-          <p className="max-w-[42ch] font-sans text-sm text-ink/70">
+          <p className="max-w-[42ch] font-sans text-sm text-inverse-content/70">
             Calendar booking coming soon — email or WhatsApp us to schedule a call in the meantime.
           </p>
           <Button href="mailto:info@ayavacreatives.com" variant="ghost" tone="on-ivory">

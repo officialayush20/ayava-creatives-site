@@ -30,7 +30,7 @@ export function LeanTeamFeature() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="lean-team-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="lean-team-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Why Founder-Led"
@@ -41,7 +41,7 @@ export function LeanTeamFeature() {
         />
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6" data-reveal-item>
-            <p className="max-w-[52ch] font-sans text-base leading-relaxed text-ink/80 md:text-lg">
+            <p className="max-w-[52ch] font-sans text-base leading-relaxed text-inverse-content/80 md:text-lg">
               Ayava is run by one person right now — me. That&apos;s not a stage I&apos;m
               apologizing for or a fact I&apos;m hiding until it changes. It&apos;s the reason the
               rest of this page reads the way it does: when there&apos;s no bench to diffuse

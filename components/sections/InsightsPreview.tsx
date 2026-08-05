@@ -30,7 +30,7 @@ export function InsightsPreview() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="insights-heading" className="bg-ivory py-16 md:py-40">
+    <section ref={revealRef} aria-labelledby="insights-heading" className="bg-inverse-surface py-16 md:py-40">
       <Container>
         <SectionHeader
           eyebrow="Field notes"
@@ -48,13 +48,13 @@ export function InsightsPreview() {
           {upcomingAngles.map((angle) => (
             <div key={angle.title} data-reveal-item className="flex flex-col">
               <MediaFrame alt={`${angle.title} — coming soon`} aspect="16/9" />
-              <span className="mt-4 inline-block w-fit rounded-full border border-slate-deep/30 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-slate-deep">
+              <span className="mt-4 inline-block w-fit rounded-full border border-hairline/30 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-hairline">
                 Coming soon
               </span>
               <h3 className="mt-3 font-display text-lg font-normal leading-snug">
                 {angle.title}
               </h3>
-              <p className="mt-2 font-sans text-xs text-slate-deep/70">{angle.reference}</p>
+              <p className="mt-2 font-sans text-xs text-hairline/70">{angle.reference}</p>
             </div>
           ))}
         </div>

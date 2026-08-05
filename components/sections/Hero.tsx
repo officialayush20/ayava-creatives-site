@@ -23,7 +23,7 @@ function HeroCanvasSlot() {
       className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] lg:block"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,var(--color-ink-raise)_0%,transparent_60%)]" />
-      <div className="absolute right-[10%] top-1/2 h-[60%] w-px -translate-y-1/2 bg-slate-deep" />
+      <div className="absolute right-[10%] top-1/2 h-[60%] w-px -translate-y-1/2 bg-hairline" />
     </div>
   );
 }
@@ -59,11 +59,19 @@ export function Hero() {
     <section
       ref={rootRef}
       aria-labelledby="hero-heading"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden bg-surface"
     >
       <HeroCanvasSlot />
 
-      <Container className="relative z-10 flex flex-1 items-center pt-12 md:pt-16">
+      {/*
+        Dawn Mesh (light theme only — the custom property is unset in dark,
+        so this is a no-op there): scoped to the H1 + lead paragraph block
+        only, never the stat strip below. See
+        docs/light-theme-application-map.md, homepage Hero mapping.
+      */}
+      <Container
+        className="relative z-10 flex flex-1 items-center bg-[image:var(--gradient-dawn-mesh)] bg-cover pt-12 md:pt-16"
+      >
         <div className="max-w-[44ch] pt-[8vh] lg:w-7/12">
           <h1
             id="hero-heading"
@@ -74,7 +82,7 @@ export function Hero() {
           </h1>
           <p
             data-hero-item
-            className="mt-6 max-w-[44ch] font-sans text-base text-slate sm:text-lg"
+            className="mt-6 max-w-[44ch] font-sans text-base text-content-body sm:text-lg"
           >
             Ayava Creatives builds and runs the 15 systems &mdash; from Meta Ads to CRO to AI
             marketing &mdash; that take a brand from &ldquo;running ads&rdquo; to &ldquo;running
@@ -94,7 +102,7 @@ export function Hero() {
       <div
         role="region"
         aria-label="Ayava Creatives at a glance"
-        className="relative z-10 border-t border-slate-deep"
+        className="relative z-10 border-t border-hairline bg-surface"
       >
         <Container>
           <div className="grid grid-cols-2 gap-6 overflow-x-auto py-6 sm:grid-cols-3 sm:gap-8 sm:py-8">

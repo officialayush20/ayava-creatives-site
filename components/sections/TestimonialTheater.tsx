@@ -24,13 +24,13 @@ export function TestimonialTheater({ testimonials }: TestimonialTheaterProps) {
     return (
       <section
         aria-labelledby="testimonial-theater-heading"
-        className="bg-ink py-16 md:py-40"
+        className="bg-surface py-16 md:py-40"
       >
         <Container className="text-center">
           <h2 id="testimonial-theater-heading" className="font-display text-2xl font-normal">
             Client stories, coming soon.
           </h2>
-          <p className="mx-auto mt-4 max-w-md font-sans text-sm text-slate">
+          <p className="mx-auto mt-4 max-w-md font-sans text-sm text-hairline-strong">
             We&apos;re collecting and approving real client testimonials before publishing this
             section.
           </p>
@@ -42,7 +42,7 @@ export function TestimonialTheater({ testimonials }: TestimonialTheaterProps) {
   const [active] = testimonials;
 
   return (
-    <section aria-labelledby="testimonial-theater-heading" className="bg-ink py-16 md:py-40">
+    <section aria-labelledby="testimonial-theater-heading" className="bg-surface py-16 md:py-40">
       <Container>
         <h2 id="testimonial-theater-heading" className="sr-only">
           What clients say
@@ -51,7 +51,7 @@ export function TestimonialTheater({ testimonials }: TestimonialTheaterProps) {
           <p className="font-display text-2xl font-normal leading-snug md:text-3xl">
             &ldquo;{active.quote}&rdquo;
           </p>
-          <footer className="mt-6 font-sans text-sm text-slate">
+          <footer className="mt-6 font-sans text-sm text-hairline-strong">
             {active.name}, {active.company}
           </footer>
         </blockquote>

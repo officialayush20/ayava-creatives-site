@@ -39,7 +39,7 @@ export function Pricing({ description, tiers, scopeFactors }: PricingProps) {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="pricing-heading" className="bg-ivory py-16 md:py-48">
+    <section ref={revealRef} aria-labelledby="pricing-heading" className="bg-inverse-surface py-16 md:py-48">
       <Container>
         <SectionHeader
           eyebrow="Investment"
@@ -49,7 +49,7 @@ export function Pricing({ description, tiers, scopeFactors }: PricingProps) {
           align="left"
           className="mb-6"
         />
-        <p className="mb-16 max-w-[60ch] font-sans text-base text-ink/70 md:mb-20">{description}</p>
+        <p className="mb-16 max-w-[60ch] font-sans text-base text-inverse-content/70 md:mb-20">{description}</p>
 
         {tiers ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -57,15 +57,15 @@ export function Pricing({ description, tiers, scopeFactors }: PricingProps) {
               <div
                 key={tier.name}
                 data-reveal-item
-                className={`flex flex-col border border-slate-deep/40 p-8 ${
+                className={`flex flex-col border border-hairline/40 p-8 ${
                   tier.featured ? "rounded-b-sm rounded-t-none border-t-2 border-t-gold" : "rounded-sm"
                 }`}
               >
-                <h3 className="font-display text-2xl font-normal text-ink">{tier.name}</h3>
-                <p className="mt-2 font-sans text-sm text-slate-deep">Custom Quote</p>
+                <h3 className="font-display text-2xl font-normal text-inverse-content">{tier.name}</h3>
+                <p className="mt-2 font-sans text-sm text-hairline">Custom Quote</p>
                 <ul className="mt-6 flex flex-col gap-3">
                   {tier.features.map((feature) => (
-                    <li key={feature} className="font-sans text-sm text-ink/80">
+                    <li key={feature} className="font-sans text-sm text-inverse-content/80">
                       {feature}
                     </li>
                   ))}

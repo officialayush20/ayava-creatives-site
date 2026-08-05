@@ -48,10 +48,10 @@ export function LegalToc({ sections }: LegalTocProps) {
               <a
                 href={`#${section.id}`}
                 className={`flex gap-2 border-l-2 pl-3 font-sans text-sm transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-deep ${
-                  isActive ? "border-bronze text-ink" : "border-transparent text-slate-deep"
+                  isActive ? "border-bronze text-inverse-content" : "border-transparent text-hairline"
                 }`}
               >
-                <span className="text-slate-deep">{index + 1}.</span>
+                <span className="text-hairline">{index + 1}.</span>
                 {section.heading}
               </a>
             </li>

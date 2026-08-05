@@ -22,7 +22,7 @@ export function MetricsEmptyState({ resultsAnchorId }: { resultsAnchorId: string
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="metrics-heading" className="bg-ivory py-16 md:py-24">
+    <section ref={revealRef} aria-labelledby="metrics-heading" className="bg-inverse-surface py-16 md:py-24">
       <CaseStudyEmptyState
         eyebrow="Results at a Glance"
         title="Measured Numbers, Coming Soon"

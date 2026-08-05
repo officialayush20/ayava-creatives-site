@@ -20,12 +20,12 @@ export function ResultsStrip() {
   const revealRef = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={revealRef} aria-labelledby="results-heading" className="bg-ink py-16 md:py-32">
+    <section ref={revealRef} aria-labelledby="results-heading" className="bg-surface py-16 md:py-32">
       <Container>
         <h2 id="results-heading" className="sr-only">
           Results at a glance
         </h2>
-        <p data-reveal-item className="mb-10 max-w-xl font-sans text-sm text-slate">
+        <p data-reveal-item className="mb-10 max-w-xl font-sans text-sm text-hairline-strong">
           These figures are pending verification from the founder/ops team and are shown as
           placeholders until confirmed &mdash; not published as final claims.
         </p>

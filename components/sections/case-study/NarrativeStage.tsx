@@ -29,7 +29,7 @@ export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: Na
     <section
       ref={revealRef}
       aria-labelledby={headingId}
-      className={`${isInk ? "bg-ink" : "bg-ivory"} py-16 md:py-24`}
+      className={`${isInk ? "bg-surface" : "bg-inverse-surface"} py-16 md:py-24`}
     >
       <Container>
         <div className={`grid grid-cols-1 md:grid-cols-12 ${side === "b" ? "md:justify-items-end" : ""}`}>
@@ -39,7 +39,7 @@ export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: Na
           >
             <p
               className={`font-sans text-xs font-medium uppercase tracking-[0.18em] ${
-                isInk ? "text-slate" : "text-slate-deep"
+                isInk ? "text-hairline-strong" : "text-hairline"
               }`}
             >
               {stage.label}
@@ -47,7 +47,7 @@ export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: Na
             <h2
               id={headingId}
               className={`font-display text-3xl font-normal md:text-4xl ${
-                isInk ? "text-ivory" : "text-ink"
+                isInk ? "text-content" : "text-inverse-content"
               }`}
             >
               {stage.heading}
@@ -57,7 +57,7 @@ export function NarrativeStage({ stage, headingId, side, tone = "on-ivory" }: Na
                 <p
                   key={index}
                   className={`max-w-[62ch] font-sans text-base md:text-lg ${
-                    isInk ? "text-slate" : "text-slate-deep"
+                    isInk ? "text-hairline-strong" : "text-hairline"
                   }`}
                 >
                   {paragraph}

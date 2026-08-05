@@ -33,7 +33,7 @@ export default function Home() {
         <WhyAyava />
         <InsightsPreview />
         <GlobalPresence />
-        <CtaBand />
+        <CtaBand gradient="verdigris-deep" />
       </main>
       <MegaFooter />
     </>

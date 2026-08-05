@@ -44,27 +44,29 @@ export function ArticleHero({ article }: ArticleHeroProps) {
   }, []);
 
   return (
-    <section ref={rootRef} aria-labelledby="article-hero-heading" className="bg-ink py-16 md:py-24">
+    <section ref={rootRef} aria-labelledby="article-hero-heading" className="bg-surface py-16 md:py-24">
       <Container>
-        <div className="flex max-w-3xl flex-col">
+        {/* Dawn Mesh (light theme only — no-op in dark). See
+            docs/light-theme-application-map.md, Insights mapping. */}
+        <div className="flex max-w-3xl flex-col bg-[image:var(--gradient-dawn-mesh)] bg-cover">
           <div data-hero-item>
             <Tag tone="on-ink">{article.category}</Tag>
           </div>
           <h1
             id="article-hero-heading"
             data-hero-item
-            className="mt-4 max-w-[16ch] font-display text-[clamp(28px,9vw,56px)] font-normal leading-[1.05] text-ivory md:max-w-none"
+            className="mt-4 max-w-[16ch] font-display text-[clamp(28px,9vw,56px)] font-normal leading-[1.05] text-content md:max-w-none"
           >
             {article.title}
           </h1>
           {isPublished ? (
-            <p data-hero-item className="mt-6 font-sans text-sm text-slate">
+            <p data-hero-item className="mt-6 font-sans text-sm text-content-body">
               {article.author} &middot; {article.readTime} &middot; {article.publishDate}
             </p>
           ) : (
             <div data-hero-item className="mt-6 flex flex-col items-start gap-3">
-              <p className="font-sans text-sm text-slate">Coming soon &mdash; {article.angle}</p>
-              <span className="inline-flex w-fit items-center rounded-full border border-slate/40 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-slate">
+              <p className="font-sans text-sm text-content-body">Coming soon &mdash; {article.angle}</p>
+              <span className="inline-flex w-fit items-center rounded-full border border-hairline-strong/40 px-3 py-1 font-sans text-xs font-medium uppercase tracking-[0.1em] text-content-body">
                 Coming soon
               </span>
             </div>
