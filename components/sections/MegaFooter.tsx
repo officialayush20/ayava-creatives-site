@@ -6,28 +6,28 @@ const linkColumns = [
   {
     heading: "Services",
     links: [
-      { label: "Meta Ads", href: "#" },
-      { label: "Google Ads", href: "#" },
-      { label: "SEO", href: "#" },
-      { label: "Website Design", href: "#" },
-      { label: "Branding", href: "#" },
-      { label: "E-commerce Growth", href: "#" },
+      { label: "Meta Ads", href: "/services/meta-ads" },
+      { label: "Google Ads", href: "/services/google-ads" },
+      { label: "SEO", href: "/services/seo" },
+      { label: "Website Design", href: "/services/website-design" },
+      { label: "Branding", href: "/services/branding" },
+      { label: "E-commerce Growth", href: "/services/ecommerce-growth" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Work", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "About", href: "/about" },
+      { label: "Work", href: "/work" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
     heading: "Resources",
     links: [
-      { label: "Insights", href: "#" },
-      { label: "Case Studies", href: "#" },
+      { label: "Insights", href: "/insights" },
+      { label: "Case Studies", href: "/work" },
     ],
   },
   {
