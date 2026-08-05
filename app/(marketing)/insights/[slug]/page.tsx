@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildMetadata, articleJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -21,10 +23,12 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   const { slug } = await params;
   const article = getArticleBySlug(slug);
   if (!article) return {};
-  return {
+  return buildMetadata({
     title: `${article.title} | Ayava Creatives`,
-    description: article.teaser ?? article.excerpt,
-  };
+    description: article.teaser ?? article.excerpt ?? article.title,
+    path: `/insights/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
@@ -36,6 +40,24 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <>
+      {isPublished && article.publishDate && article.author ? (
+        <JsonLd
+          data={articleJsonLd({
+            headline: article.title,
+            description: article.excerpt ?? article.teaser ?? article.title,
+            path: `/insights/${slug}`,
+            datePublished: article.publishDate,
+            authorName: article.author,
+          })}
+        />
+      ) : null}
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "" },
+          { name: "Insights", path: "/insights" },
+          { name: article.title, path: `/insights/${slug}` },
+        ])}
+      />
       <SiteHeader />
       <main>
         <ArticleHero article={article} />

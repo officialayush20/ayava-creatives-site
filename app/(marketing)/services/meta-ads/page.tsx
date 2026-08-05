@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { buildMetadata, serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { ServiceHero } from "@/components/sections/service-template/ServiceHero";
@@ -15,10 +17,11 @@ import { servicePageContent } from "@/lib/service-page-content";
 
 const content = servicePageContent["meta-ads"];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Meta Ads Services | Ayava Creatives",
   description: content.metaDescription,
-};
+  path: "/services/meta-ads",
+});
 
 // Now built on the shared `components/sections/service-template/*`
 // components + `lib/service-page-content.ts`, promoted out of the
@@ -30,6 +33,20 @@ export const metadata: Metadata = {
 export default function MetaAdsPage() {
   return (
     <>
+      <JsonLd
+        data={serviceJsonLd({
+          name: content.name,
+          description: content.metaDescription,
+          path: "/services/meta-ads",
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "" },
+          { name: "Services", path: "/services" },
+          { name: content.name, path: "/services/meta-ads" },
+        ])}
+      />
       <SiteHeader />
       <main>
         <ServiceHero

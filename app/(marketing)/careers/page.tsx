@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CareersHero } from "@/components/sections/careers/CareersHero";
@@ -6,11 +7,12 @@ import { WhyAyavaEventually } from "@/components/sections/careers/WhyAyavaEventu
 import { CareersInterestForm } from "@/components/sections/careers/CareersInterestForm";
 import { RedirectBand } from "@/components/sections/careers/RedirectBand";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Careers | Ayava Creatives",
   description:
     "Ayava isn't hiring right now, but we'd still like to hear from you. Tell us a little about yourself and we'll keep it on file.",
-};
+  path: "/careers",
+});
 
 export default function CareersPage() {
   return (

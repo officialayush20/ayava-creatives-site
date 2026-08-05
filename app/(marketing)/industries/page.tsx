@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -7,11 +8,12 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { industries } from "@/lib/industries-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Industries We Serve | Ayava Creatives",
   description:
     "Ten verticals, ten different playbooks — marketing built around how each industry's buyers actually decide.",
-};
+  path: "/industries",
+});
 
 function IndustryTile({ slug, name, hook }: { slug: string; name: string; hook: string }) {
   return (

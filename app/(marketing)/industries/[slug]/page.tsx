@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -25,10 +27,11 @@ export async function generateMetadata({ params }: IndustryPageProps): Promise<M
   const content = getIndustryPageContent(slug);
   if (!industry || !content) return {};
 
-  return {
+  return buildMetadata({
     title: `${industry.name} Marketing | Ayava Creatives`,
     description: content.heroSubhead,
-  };
+    path: `/industries/${slug}`,
+  });
 }
 
 // Background rhythm per industry-page-layout-spec §0: ink (Hero) -> ivory
@@ -49,6 +52,13 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "" },
+          { name: "Industries", path: "/industries" },
+          { name: industry.name, path: `/industries/${slug}` },
+        ])}
+      />
       <SiteHeader />
       <main>
         <IndustryHero

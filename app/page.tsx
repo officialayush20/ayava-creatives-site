@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { buildMetadata, localBusinessJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
@@ -18,9 +21,17 @@ import { MegaFooter } from "@/components/sections/MegaFooter";
 // fabricated placeholders for either. Both are ready to add once real
 // content exists (see components/sections/TestimonialTheater.tsx).
 
+export const metadata: Metadata = buildMetadata({
+  title: "Ayava Creatives | Performance Marketing & Growth Studio",
+  description:
+    "Ayava Creatives is a founder-led performance marketing and growth studio — Meta Ads, Google Ads, SEO, branding, and web design, built and run by Ayush Saini.",
+  path: "",
+});
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={localBusinessJsonLd()} />
       <SiteHeader />
       <main>
         <Hero />

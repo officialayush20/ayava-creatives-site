@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -9,11 +10,12 @@ import { WhyAyavaExists } from "@/components/sections/about/WhyAyavaExists";
 import { ValuesPrinciples } from "@/components/sections/about/ValuesPrinciples";
 import { LeanTeamFeature } from "@/components/sections/about/LeanTeamFeature";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About | Ayava Creatives",
   description:
     "Ayava Creatives is built and run by Ayush Saini — a full-stack developer and growth marketer who builds the product and markets it, without an account-manager layer.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

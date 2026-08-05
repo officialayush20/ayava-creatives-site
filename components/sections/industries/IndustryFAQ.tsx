@@ -5,6 +5,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
 import { useScrollReveal } from "@/lib/useScrollReveal";
 import type { FAQItemData } from "@/lib/industry-page-content";
+import { faqPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 type IndustryFAQProps = {
   industryName: string;
@@ -13,23 +15,12 @@ type IndustryFAQProps = {
   tone: "on-ink" | "on-ivory";
 };
 
-/** FAQ — vertical-specific buyer objections, per industry-page-layout-spec §5. */
+/** FAQ — vertical-specific buyer objections, per industry-page-layout-spec §5.
+ * JSON-LD now goes through the shared `faqPageJsonLd()` builder in
+ * lib/seo.ts rather than an ad-hoc inline object. */
 export function IndustryFAQ({ industryName, slug, items, tone }: IndustryFAQProps) {
   const revealRef = useScrollReveal<HTMLElement>();
   const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
 
   return (
     <section
@@ -37,7 +28,7 @@ export function IndustryFAQ({ industryName, slug, items, tone }: IndustryFAQProp
       aria-labelledby="industry-faq-heading"
       className={`${bg} py-16 md:py-40`}
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <JsonLd data={faqPageJsonLd(items)} />
       <Container>
         <SectionHeader
           eyebrow="Questions"

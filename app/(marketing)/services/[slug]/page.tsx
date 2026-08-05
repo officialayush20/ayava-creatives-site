@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildMetadata, serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { ServiceHero } from "@/components/sections/service-template/ServiceHero";
@@ -33,10 +35,11 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   const content = getServicePageContent(slug);
   if (!content) return {};
 
-  return {
+  return buildMetadata({
     title: `${content.name} Services | Ayava Creatives`,
     description: content.metaDescription,
-  };
+    path: `/services/${slug}`,
+  });
 }
 
 // Background rhythm identical to the proven Meta Ads reference instance:
@@ -55,6 +58,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   return (
     <>
+      <JsonLd
+        data={serviceJsonLd({
+          name: content.name,
+          description: content.metaDescription,
+          path: `/services/${slug}`,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "" },
+          { name: "Services", path: "/services" },
+          { name: content.name, path: `/services/${slug}` },
+        ])}
+      />
       <SiteHeader />
       <main>
         <ServiceHero

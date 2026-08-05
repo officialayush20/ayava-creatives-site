@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WorkHero } from "@/components/sections/work/WorkHero";
 import { WorkGridSection } from "@/components/sections/work/WorkGridSection";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Our Work | Ayava Creatives",
   description:
     "Eight projects, eight industries, one founder-led process — the real portfolio behind Ayava Creatives.",
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

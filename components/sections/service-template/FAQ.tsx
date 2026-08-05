@@ -4,6 +4,8 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FAQAccordion, type FAQItemData } from "@/components/ui/FAQAccordion";
 import { useScrollReveal } from "@/lib/useScrollReveal";
+import { faqPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 type FAQProps = {
   items: FAQItemData[];
@@ -12,29 +14,15 @@ type FAQProps = {
 
 /** Promoted from `components/sections/meta-ads/FAQ.tsx`. Schema-marked per
  * service-page-layout-spec §8: question/answer text is clean plain text
- * (matches the visible copy exactly) so it stays schema-extractable. */
+ * (matches the visible copy exactly) so it stays schema-extractable. JSON-LD
+ * now goes through the shared `faqPageJsonLd()` builder in lib/seo.ts rather
+ * than an ad-hoc inline object, for consistency with every other template. */
 export function FAQ({ items, idPrefix }: FAQProps) {
   const revealRef = useScrollReveal<HTMLElement>();
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
   return (
     <section ref={revealRef} aria-labelledby="faq-heading" className="bg-surface py-16 md:py-40">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+      <JsonLd data={faqPageJsonLd(items)} />
       <Container>
         <SectionHeader
           eyebrow="Questions"

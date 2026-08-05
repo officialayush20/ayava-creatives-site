@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -6,11 +7,12 @@ import { ServicesHubHero } from "@/components/sections/services/ServicesHubHero"
 import { ServiceCategorySection } from "@/components/sections/services/ServiceCategorySection";
 import { services } from "@/lib/services-data";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Services | Ayava Creatives",
   description:
     "Fifteen services, grouped by what you're trying to fix first — from Paid Media to Growth Systems.",
-};
+  path: "/services",
+});
 
 // Per-group order fixed by the layout spec (independent of the shared data
 // file's own iteration order, which mirrors the homepage teaser instead).

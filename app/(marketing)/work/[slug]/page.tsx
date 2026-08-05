@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { buildMetadata, breadcrumbJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { MegaFooter } from "@/components/sections/MegaFooter";
 import { CaseStudyHero } from "@/components/sections/case-study/CaseStudyHero";
@@ -21,10 +23,11 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   const { slug } = await params;
   const study = getCaseStudyBySlug(slug);
   if (!study) return {};
-  return {
+  return buildMetadata({
     title: `${study.name} | Ayava Creatives`,
     description: study.cardSummary,
-  };
+    path: `/work/${slug}`,
+  });
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
@@ -42,6 +45,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   // <section> landmark rather than rendering an empty one.
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "" },
+          { name: "Work", path: "/work" },
+          { name: study.name, path: `/work/${slug}` },
+        ])}
+      />
       <SiteHeader />
       <main>
         <CaseStudyHero study={study} />
