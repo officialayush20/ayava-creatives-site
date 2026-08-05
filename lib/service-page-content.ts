@@ -481,7 +481,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "SEO scope depends on site size, technical debt, competitiveness of your keyword space, and how much content production is included — an audit-only engagement and a full content-and-link-building program are different jobs.",
+      "What we quote follows what the site actually needs. A five-page brochure site needing a technical cleanup and a thousand-SKU catalog needing sustained content and link building aren't the same job, and pricing them identically would either overcharge the small site or underfund the big one.",
     pricingScopeFactors: [
       { title: "Site size and technical debt", description: "A five-page brochure site and a thousand-page catalog carry very different technical audit scope." },
       { title: "Keyword space competitiveness", description: "Winning against a decade of accumulated authority takes more sustained work than an under-served niche." },
@@ -595,7 +595,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "Website design scope varies by page count, custom functionality (booking systems, e-commerce, gated content), and whether we're building on an existing brand system or establishing one from scratch.",
+      "A five-page landing site and a twenty-five-page platform with booking logic are different builds by any honest measure — page count, custom functionality, and whether a brand system already exists all move the number, so we quote against the actual build spec, not a tiered package.",
     pricingScopeFactors: [
       { title: "Page count", description: "A five-page site and a twenty-five-page site are different builds, not the same template scaled up." },
       { title: "Custom functionality", description: "Booking systems, e-commerce, or gated content each add real scope beyond a standard page build." },
@@ -616,7 +616,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       {
         question: "What platform do you build on — WordPress, Webflow, custom code?",
         answer:
-          "It depends on your team's technical capacity and how much you'll need to update the site yourselves. We recommend the platform that fits your actual maintenance reality, not the one that's easiest for us to build fastest.",
+          "A marketing team updating pages weekly needs a visual CMS like Webflow; a site with almost no post-launch content changes is often better served by a faster, leaner custom Next.js build with no CMS overhead at all. We pick the stack against how the site will actually be maintained six months from now, not what's fastest for us to ship.",
       },
       {
         question: "How long does a typical website project take?",
@@ -716,7 +716,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "Branding scope depends on whether this is a full identity build from zero, a strategic repositioning of an existing brand, or a narrower visual refresh — these are different engagements with different depth.",
+      "A ground-up identity build, a repositioning of a brand that already has real equity, and a narrower visual refresh sit at genuinely different depths of strategic work — we price the depth the project actually calls for, not a flat branding-package rate.",
     pricingScopeFactors: [
       { title: "Build, reposition, or refresh", description: "A from-zero identity, a strategic repositioning, and a narrower visual refresh are different depths of engagement." },
       { title: "Verbal and visual scope", description: "Full tone-of-voice and naming work adds scope beyond a visual-identity-only project." },
@@ -742,7 +742,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       {
         question: "Do you design packaging and physical collateral, or just digital?",
         answer:
-          "Both, scoped per project — the brand system is built to extend across whatever touchpoints you actually operate in, digital or physical.",
+          "Both — but they're not the same design problem. Packaging has to survive dielines, substrate, and print-vendor constraints a screen never imposes, and colors that look right in Figma can shift under a specific printing process. We scope physical collateral as its own production step, not a resize of the digital assets.",
       },
       {
         question: "What do we actually receive at the end of the engagement?",
@@ -776,7 +776,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       title: "A publishing calendar isn't a strategy.",
       paragraphs: [
         "Most content programs run on a publishing calendar, not a strategy — a blog post because “we should probably post something this week,” disconnected from what your buyer is actually searching for or where they are in their decision. It gets published, gets a handful of views, and never gets referenced again.",
-        "The second failure is treating content as a volume game rather than a compounding asset. Nobody revisits and updates the best-performing pieces. Nobody links related content together to build topical authority. Every piece starts from zero, competing against its own back catalog instead of building on it.",
+        "The second failure is treating content as a volume game rather than a compounding asset. A page that ranked position four eighteen months ago sits untouched while a competitor's fresher, updated version overtakes it. Nothing internally links a new post back to the three related pieces already published, so Google never learns the site has topical depth on the subject — each article competes against its own back catalog instead of reinforcing it.",
       ],
       quote:
         "Content that isn't built around a specific buyer question, at a specific stage, isn't a content strategy — it's a publishing habit.",
@@ -828,7 +828,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "Content marketing scope depends on production volume, content depth (short-form vs. long-form/pillar content), and whether strategy-only or full production is included.",
+      "The line item that actually moves the price is production: how many pieces, how deep each one runs (a 600-word explainer versus a 3,000-word pillar page), and whether you need strategy alone or writing carried through to publish. We quote against that reality, not a flat per-post rate.",
     pricingScopeFactors: [
       { title: "Production volume", description: "A smaller set of pieces built around real search demand is a different scope than a high-volume calendar." },
       { title: "Content depth", description: "Short-form pieces and long-form pillar content take meaningfully different production time." },
@@ -939,7 +939,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "Email/CRM scope depends on list size, number of flows needed, and whether this includes full CRM platform setup or works within an existing one.",
+      "List size, how many automated flows actually need building, and whether we're standing up a CRM from scratch or working inside one you already run — those three levers change the job, and the quote follows them, not a flat monthly retainer figure.",
     pricingScopeFactors: [
       { title: "List size", description: "Segmentation and deliverability work scale with the number of subscribers actually being managed." },
       { title: "Number of flows needed", description: "A welcome series alone is lighter than welcome, abandoned cart, post-purchase, and win-back built together." },
@@ -970,7 +970,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       {
         question: "What CRM platform should we use if we don't have one yet?",
         answer:
-          "It depends on your business model, sales complexity, and existing tech stack — we'll recommend a platform after understanding your actual requirements rather than defaulting to whichever one we're most familiar with.",
+          "A D2C store with a single funnel is usually better served by Klaviyo's e-commerce-native segmentation than a full sales CRM it doesn't need; a B2B business with a sales cycle and pipeline stages needs HubSpot or Zoho's deal-tracking, which Klaviyo doesn't do. We recommend the platform that matches your actual sales motion, not whichever one we're most familiar with.",
       },
     ],
     relatedServiceSlugs: ["ecommerce-growth", "analytics-cro", "content-marketing", "ai-marketing"],
@@ -1051,7 +1051,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "E-commerce growth scope depends on whether this is an audit-only engagement, a full funnel rebuild, or an ongoing optimization retainer.",
+      "A diagnostic pass, a full funnel rebuild, and a standing optimization retainer are three jobs at three different depths — we scope against which one your store actually needs this quarter, not a bundled package that assumes all three.",
     pricingScopeFactors: [
       { title: "Audit-only, rebuild, or retainer", description: "A diagnostic pass, a full funnel rebuild, and an ongoing optimization retainer are different engagements." },
       { title: "Catalog complexity", description: "A handful of products and a large, multi-category catalog need different merchandising depth." },
@@ -1067,7 +1067,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       {
         question: "What platform do you work with — Shopify, WooCommerce, custom builds?",
         answer:
-          "Primarily Shopify, though we can scope work on other platforms depending on your existing setup — we'll be upfront if a platform limitation is capping what we can realistically improve.",
+          "Primarily Shopify — its checkout, app ecosystem, and Liquid theming give us the most room to fix merchandising and checkout friction without a rebuild. On WooCommerce or a custom cart, some fixes (native upsells, one-click checkout) simply aren't available at the platform level, and we'll say so plainly rather than promise a workaround that doesn't exist.",
       },
       {
         question: "How is this different from Meta/Google Ads services?",
@@ -1174,7 +1174,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "Talk to Us About Your Brand",
     },
     pricingDescription:
-      "Influencer marketing scope depends on creator tier (micro vs. macro), number of partnerships, and whether this is a single campaign or an ongoing ambassador-style program.",
+      "Creator tier, how many partnerships are running in parallel, and whether this is a single activation or a standing ambassador program each change the negotiation and management load — we quote against the actual roster, not a flat per-creator rate.",
     pricingScopeFactors: [
       { title: "Creator tier", description: "Micro-influencer partnerships and macro-creator campaigns carry very different negotiation and cost profiles." },
       { title: "Number of partnerships", description: "A single-creator activation is a lighter job than a multi-creator campaign run in parallel." },
@@ -1286,7 +1286,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "Talk to Us About Your App",
     },
     pricingDescription:
-      "ASO scope depends on whether this is a new listing build, an optimization pass on an existing listing, or an ongoing program including creative testing.",
+      "A fresh listing build, an optimization pass on a listing that's already live, and an ongoing program with structured creative testing each require different research and iteration depth — we price against which of those three your app actually needs.",
     pricingScopeFactors: [
       { title: "New listing or optimization pass", description: "Building a listing from scratch and optimizing a live one require different research depth." },
       { title: "Platforms covered", description: "iOS, Android, or both — each store's algorithm is researched and optimized separately." },
@@ -1408,7 +1408,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "Talk to Us About Your Project",
     },
     pricingDescription:
-      "Video production scope depends on format count, whether this is live-action or motion graphics (or both), shoot-day requirements, and revision rounds.",
+      "What actually drives the cost on a production is format count, whether the concept calls for a shoot, animation, or both, and how many shoot days it genuinely requires — we scope against the production plan, not a flat day rate.",
     pricingScopeFactors: [
       { title: "Format count", description: "One hero cut is a different job than a full set of platform-specific exports." },
       { title: "Live-action, motion graphics, or both", description: "Shoots and animation are different production paths, often combined on one project." },
@@ -1519,7 +1519,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "Talk to Us About Your Situation",
     },
     pricingDescription:
-      "PR/reputation scope depends on whether this is proactive coverage building, ongoing review/reputation monitoring, or active crisis response — these require very different levels of engagement and urgency.",
+      "Building proactive coverage, running ongoing sentiment monitoring, and managing an active crisis sit at genuinely different urgency levels — we scope and price against which situation you're actually in, not a single retainer template stretched to cover all three.",
     pricingScopeFactors: [
       { title: "Proactive, monitoring, or crisis response", description: "Building coverage, ongoing sentiment monitoring, and active crisis response carry very different urgency and depth." },
       { title: "Urgency", description: "An active reputation issue is triaged and scoped differently from a standing intake." },
@@ -1631,7 +1631,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "Analytics/CRO scope depends on current tracking maturity (starting from broken instrumentation vs. a solid foundation) and testing cadence (one-off audit vs. ongoing testing program).",
+      "Whether we're starting from broken instrumentation or a solid analytics foundation, and whether you need a one-off audit or a standing testing program, changes the job materially — we quote against where your tracking actually is, not where a template assumes it is.",
     pricingScopeFactors: [
       { title: "Current tracking maturity", description: "Starting from broken instrumentation is a different job than building on a solid analytics foundation." },
       { title: "Testing cadence", description: "A one-off audit and an ongoing testing program are scoped and priced differently." },
@@ -1760,7 +1760,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "Talk to Us About Your Marketing Stack",
     },
     pricingDescription:
-      "AI marketing scope depends on which workflows are being automated, the complexity of integration with your existing stack, and whether this is a one-time setup or an ongoing managed service.",
+      "Which workflows are actually worth automating, how deeply they need to integrate with your existing stack, and whether this is a one-time build or an ongoing managed service — those determine the quote. We won't scope automation you don't need just to round out a package.",
     pricingScopeFactors: [
       { title: "Workflows being automated", description: "Automated reporting synthesis is a lighter job than a full personalization or segmentation build." },
       { title: "Integration complexity", description: "Connecting into an existing stack via native features or automation platforms changes the setup scope." },
@@ -1872,7 +1872,7 @@ export const servicePageContent: Record<string, ServicePageContent> = {
       ctaLabel: "See the Full Project",
     },
     pricingDescription:
-      "SMM scope depends on number of platforms managed, content production volume, and whether community management is included or handled in-house by your team.",
+      "Platform count, production volume, and whether community management sits with us or stays in-house are the real cost drivers — we quote against the platforms you're actually prioritizing, not a flat per-platform fee.",
     pricingScopeFactors: [
       { title: "Number of platforms managed", description: "One or two well-run platforms is a different scope than a presence spread across five." },
       { title: "Production volume", description: "Posting cadence and format mix directly shape the production workload each month." },
