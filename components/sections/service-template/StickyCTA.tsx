@@ -57,7 +57,7 @@ export function StickyCTA({ serviceName }: StickyCTAProps) {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/95 backdrop-blur transition-opacity duration-200 ease-out motion-reduce:transition-none ${
+      className={`sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-hairline bg-surface/95 backdrop-blur transition-opacity duration-200 ease-out motion-reduce:transition-none ${
         visible ? "visible opacity-100" : "invisible opacity-0"
       }`}
     >

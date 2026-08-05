@@ -51,7 +51,7 @@ Deep navy → cobalt → near-ink.
 
 **Allowed:** Dawn Mesh = page hero, one per page, above the fold. Cobalt Deep = exactly one slab per page (closing CTA *or* a results section, not both). Accent Rule = hairlines, subject to §3 budget.
 
-**Not allowed:** never behind body copy (Dawn Mesh may sit behind an H1 + one lead paragraph — never a paragraph stack, form, table, or card grid); never two gradient surfaces in one viewport; never on cards, buttons, chips, badges, icons, avatars (gradient buttons are the strongest template tell in 2026); never `background-clip: text`, banned permanently; never scroll-scrubbed (reveals scrub, gradients don't); total gradient surface ≤35% of page scroll height.
+**Not allowed:** never behind body copy (Dawn Mesh may sit behind an H1 + one lead paragraph — never a paragraph stack, form, table, or card grid); never two gradient surfaces in one viewport; never on cards, chips, badges, icons, avatars, or buttons except per §8 (gradient buttons are the strongest template tell in 2026 — the §8 override is a narrow, budgeted exception, not a reversal of this rule); never `background-clip: text`, banned permanently; never scroll-scrubbed (reveals scrub, gradients don't); total gradient surface ≤35% of page scroll height.
 
 ## 3. Accent — definitive call
 
@@ -148,6 +148,14 @@ Engineer rules: theme set server-rendered on `<html data-theme="light">`, **no `
 
 ## 7. Reject on sight
 
-1. Gradient button/chip/badge/icon. 2. Gradient text. 3. Any purple/violet/magenta/pink in the mesh. 4. `box-shadow` for card elevation. 5. Pure `#FFF` or `#000` anywhere. 6. Two gradient surfaces in one viewport. 7. Verdigris on an ordinal, step number, or results counter. 8. Centered eyebrow → headline → paragraph → two-buttons hero. 9. Gold reintroduced "just for the logo" on a light page. 10. Glass/blur panels floating over the mesh.
+1. Gradient button/chip/badge/icon, except per §8. 2. Gradient text. 3. Any purple/violet/magenta/pink in the mesh. 4. `box-shadow` for card elevation. 5. Pure `#FFF` or `#000` anywhere. 6. Two gradient surfaces in one viewport. 7. Cobalt on an ordinal, step number, or results counter. 8. Centered eyebrow → headline → paragraph → two-buttons hero. 9. Gold reintroduced "just for the logo" on a light page. 10. Glass/blur panels floating over the mesh, except per §8's two named surfaces.
 
-**Relevant files:** `app/globals.css` (token home), `docs/homepage-creative-review.md`, `docs/phase2-batch-creative-review.md`.
+## 8. Client-approved override (2026-08-05)
+
+Two narrow, budgeted exceptions to §2 and §7, approved directly by the client for the light theme only. Both ship already in `app/globals.css`; this section brings the spec back in sync with that implementation rather than introducing anything new.
+
+**Gradient primary buttons — permitted, budget 1 per viewport.** `.btn-primary-gradient` (applied by `Button.tsx` to every `variant="primary"`, gated to render as a gradient only under `[data-theme="light"]`) is allowed. Hard budget: **at most one gradient primary button visible in a given viewport at a time.** If a layout would otherwise put two `variant="primary"` buttons in the same viewport, only the button carrying the real conversion action keeps the gradient treatment — the other must be demoted to `secondary` (or, on the Cobalt Deep slab, flattened to a solid porcelain fill per the existing `.gradient-band .btn-primary-gradient` override) so it does not compete for the same visual weight. This is not a "gradient buttons are fine everywhere" reversal — outside `.btn-primary-gradient` on a `variant="primary"` button, gradients remain fully banned per §2/§7.
+
+**Glass/backdrop-blur — permitted on exactly two named surfaces only.** 1) The scroll-aware site header, once scrolled (`.site-header--scrolled` in `components/sections/SiteHeader.tsx`). 2) The Cobalt Deep slab's inner CTA card (`.gradient-band-card`, applied by `CtaBand.tsx`). No other component, in either theme, may set `backdrop-filter`/`-webkit-backdrop-filter` to anything other than `none`. This includes surfaces that might look like plausible "chrome" (sticky bars, mobile nav panels, modals) — those get a solid `porcelain-raise` fill instead, matching the existing `.mobile-nav-panel` and `.sticky-cta` precedents in `app/globals.css`.
+
+**Relevant files:** `app/globals.css` (token + override home), `docs/homepage-creative-review.md`, `docs/phase2-batch-creative-review.md`.

@@ -364,6 +364,51 @@
 }
 
 /*
+ * Service-page sticky CTA bar (components/sections/service-template/
+ * StickyCTA.tsx) — same exclusion-from-glass as .mobile-nav-panel above.
+ * The two-surface glass budget (light-gradient-theme-spec.md §8) is the
+ * scroll-aware header and the Cobalt Deep slab's CTA card only; a fixed
+ * blurred bar pinned to the bottom of every service page would be an
+ * unauthorized third glass surface, visible on screen at the same time as
+ * the glass header when scrolled. Light theme only — dark theme keeps its
+ * existing bg-surface/95 + backdrop-blur untouched.
+ */
+[data-theme="light"] .sticky-cta {
+  background-color: var(--color-porcelain-raise);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/*
+ * Sticky CTA bar's own primary button — light theme only. This bar and
+ * LeadCapture's primary button can both be present in the DOM at once
+ * during the bar's fade transition (StickyCTA hides itself once
+ * LeadCapture scrolls into view, but the 200ms opacity transition means
+ * both can be visually on screen for a moment). Flattening this button to
+ * a plain bordered fill keeps the one-gradient-button-per-viewport budget
+ * (§8) honest without touching Button.tsx's `variant` prop — same
+ * flatten-via-context-class technique as `.gradient-band
+ * .btn-primary-gradient` above, applied to a different context.
+ */
+[data-theme="light"] .sticky-cta .btn-primary-gradient {
+  background-image: none;
+  background-color: transparent;
+  color: var(--color-graphite);
+  border: 1px solid var(--color-rule-strong);
+}
+
+[data-theme="light"] .sticky-cta .btn-primary-gradient:hover {
+  background-image: none;
+  border-color: var(--color-cobalt);
+  box-shadow: none;
+}
+
+[data-theme="light"] .sticky-cta .btn-primary-gradient:active {
+  background-color: var(--color-porcelain-sink);
+  transform: scale(0.985);
+}
+
+/*
  * Global Presence map (components/sections/GlobalPresenceMap.tsx) — HQ
  * marker pulse and radiating sonar rings. Kept as plain CSS keyframes
  * (not GSAP) since these are simple infinite loops; the component still

@@ -81,7 +81,12 @@ function CalculatorLeadCapture({ config }: { config: Extract<LeadCaptureConfig, 
             {estimate ?? config.emptyStateText}
           </div>
 
-          <Button href="/contact" variant="primary" tone="on-ink" size="large" className="mt-8 w-full sm:w-auto">
+          {/* Secondary, not primary: this panel's calculator teaser sits
+              beside the form's own submit action in a two-column layout,
+              and per light-gradient-theme-spec.md §8 only one gradient
+              primary button may render per viewport — the form submit is
+              the real conversion action, so it keeps the gradient. */}
+          <Button href="/contact" variant="secondary" tone="on-ink" size="large" className="mt-8 w-full sm:w-auto">
             Get Full Quote
           </Button>
         </div>
