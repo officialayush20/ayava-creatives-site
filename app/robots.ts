@@ -7,7 +7,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      // /portal/ is the authenticated client-portal shell (see
+      // app/(portal)/) — never public marketing content, so it's excluded
+      // here and also absent from app/sitemap.ts.
+      disallow: ["/api/", "/portal/"],
     },
     sitemap: absoluteUrl("/sitemap.xml"),
   };
