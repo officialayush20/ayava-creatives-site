@@ -363,6 +363,59 @@
   background-color: var(--color-porcelain-raise);
 }
 
+/*
+ * Global Presence map (components/sections/GlobalPresenceMap.tsx) — HQ
+ * marker pulse and radiating sonar rings. Kept as plain CSS keyframes
+ * (not GSAP) since these are simple infinite loops; the component still
+ * gates all of this off entirely under prefers-reduced-motion by never
+ * mounting the animated classes' scroll-driven counterparts, but the
+ * keyframes themselves are also wrapped below for users who have the OS
+ * preference set (belt-and-suspenders: this file has no JS gate).
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .global-presence-dot::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    opacity: 0.5;
+    animation: global-presence-dot-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .global-presence-ring {
+    opacity: 0;
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: global-presence-ring-expand 4.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+}
+
+@keyframes global-presence-dot-pulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes global-presence-ring-expand {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(9);
+  }
+}
+
 body {
   font-family: var(--font-sans);
   /*

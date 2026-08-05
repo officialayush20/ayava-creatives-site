@@ -2,26 +2,7 @@
 
 import { Container } from "@/components/ui/Container";
 import { useScrollReveal } from "@/lib/useScrollReveal";
-
-/**
- * Static/CSS-only placeholder in place of a real map graphic (the
- * webgl-3d-artist / illustration pass comes later). The location list below
- * is the accessible source of truth, not the decorative graphic.
- */
-function MapPlaceholder() {
-  return (
-    <div
-      aria-hidden="true"
-      className="relative mx-auto flex aspect-[2/1] w-full max-w-4xl items-center justify-center overflow-hidden rounded-sm border border-hairline bg-surface-raise"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,var(--color-slate-deep)_0%,transparent_55%)]" />
-      <span className="relative h-2 w-2 rounded-full border border-viridian/60 bg-viridian" />
-      <span className="absolute font-sans text-xs uppercase tracking-[0.2em] text-hairline-strong">
-        Map graphic pending
-      </span>
-    </div>
-  );
-}
+import { GlobalPresenceMap } from "@/components/sections/GlobalPresenceMap";
 
 export function GlobalPresence() {
   const revealRef = useScrollReveal<HTMLElement>();
@@ -42,7 +23,7 @@ export function GlobalPresence() {
         </p>
 
         <div className="mt-16" data-reveal-item>
-          <MapPlaceholder />
+          <GlobalPresenceMap />
         </div>
 
         <div className="mt-12" data-reveal-item>
