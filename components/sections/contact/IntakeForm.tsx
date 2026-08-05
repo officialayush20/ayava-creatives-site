@@ -100,27 +100,29 @@ const emptyForm: FormState = {
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
-/**
- * Mock submission — there is no real backend yet.
- * TODO(backend-engineer): wire to real /api/contact endpoint. See
- * docs/contact-page-layout-spec.md §2.7 for the ContactFormPayload shape
- * and the recommended fetch('/api/contact', { method: 'POST', body: FormData | JSON })
- * strategy. This function is an obvious, isolated stub — swapping its body
- * for a real fetch call is the entire integration; nothing else in this
- * component needs to change.
- */
 async function submitContactForm(
   payload: ContactFormPayload,
 ): Promise<{ ok: true } | { ok: false; message: string }> {
-  // MOCK ONLY — simulates network latency + a successful response so the
-  // full loading/success UI is demonstrable end-to-end before a real
-  // backend exists. This must never be mistaken for a working integration.
-  // `payload` isn't sent anywhere yet (see TODO above); referenced here so
-  // its shape stays part of this function's real signature for whoever
-  // wires up the fetch call, without tripping unused-var lint in the mock.
-  void payload;
-  await new Promise((resolve) => setTimeout(resolve, 1400));
-  return { ok: true };
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = (await response.json()) as { ok: boolean; error?: string };
+    if (data.ok) {
+      return { ok: true };
+    }
+    return {
+      ok: false,
+      message: data.error || "Something went wrong. Please try again or email us directly.",
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong. Please check your connection and try again.",
+    };
+  }
 }
 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);

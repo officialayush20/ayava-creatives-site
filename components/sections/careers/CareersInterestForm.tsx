@@ -39,24 +39,29 @@ const emptyForm: FormState = {
 
 type SubmitStatus = "idle" | "loading" | "success" | "error";
 
-/**
- * Mock submission — there is no real backend yet.
- * TODO(backend-engineer): wire to a real /api/careers-interest endpoint.
- * See CareersInterestPayload above for the payload shape and
- * contact-page-layout-spec.md §2.7 for the recommended fetch strategy this
- * mirrors. This function is an obvious, isolated stub — swapping its body
- * for a real fetch call is the entire integration; nothing else in this
- * component needs to change.
- */
 async function submitCareersInterest(
   payload: CareersInterestPayload,
 ): Promise<{ ok: true } | { ok: false; message: string }> {
-  // MOCK ONLY — simulates network latency + a successful response so the
-  // full loading/success UI is demonstrable end-to-end before a real
-  // backend exists. This must never be mistaken for a working integration.
-  void payload;
-  await new Promise((resolve) => setTimeout(resolve, 1200));
-  return { ok: true };
+  try {
+    const response = await fetch("/api/careers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = (await response.json()) as { ok: boolean; error?: string };
+    if (data.ok) {
+      return { ok: true };
+    }
+    return {
+      ok: false,
+      message: data.error || "Something went wrong. Please try again or email us directly.",
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "Something went wrong. Please check your connection and try again.",
+    };
+  }
 }
 
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
