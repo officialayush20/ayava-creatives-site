@@ -154,7 +154,8 @@ export default function HeroLattice() {
       dpr={[1, 1.75]}
       camera={{ position: [0, 0, 4.4], fov: 38 }}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
-      style={{ position: "absolute", inset: 0 }}
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      resize={{ debounce: 0 }}
     >
       <LatticeScene />
     </Canvas>
