@@ -24,7 +24,8 @@ export function CaseStudyCard({ study, variant = "standard" }: CaseStudyCardProp
       className="group block focus-visible:outline-none"
     >
       <MediaFrame
-        alt={`${study.name} — ${study.descriptor}`}
+        src={study.screenshotUrl}
+        alt={study.screenshotAlt}
         aspect={isFeatured ? "16/9" : "4/5"}
         className="transition-transform duration-300 ease-out group-hover:scale-[1.02] group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-inverse-surface"
       />

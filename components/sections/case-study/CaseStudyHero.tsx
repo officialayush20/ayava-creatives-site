@@ -2,13 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { MediaFrame } from "@/components/ui/MediaFrame";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 import type { CaseStudy } from "@/lib/case-studies-data";
 
 /**
- * Full-bleed case-study hero (case-study-layout-spec.md §1). No real hero
- * assets exist for any of the 8 projects yet — MediaFrame's built-in
- * "Image pending" honest placeholder renders instead of a stock substitute.
+ * Full-bleed case-study hero (case-study-layout-spec.md §1). Renders the
+ * real, verified live-site screenshot for each of the 8 projects, with a
+ * "Visit Live Site" external link.
  *
  * Entry animation mirrors the homepage Hero: a mount-time tween (not
  * ScrollTrigger, since this is always above the fold on load).
@@ -44,7 +45,8 @@ export function CaseStudyHero({ study }: { study: CaseStudy }) {
     <section ref={rootRef} aria-labelledby="case-study-hero-heading" className="relative bg-surface">
       <div className="relative min-h-[70svh] w-full md:min-h-[100svh]">
         <MediaFrame
-          alt={`${study.name} — ${study.descriptor}`}
+          src={study.screenshotUrl}
+          alt={study.screenshotAlt}
           aspect="16/9"
           priority
           className="absolute inset-0 h-full min-h-[70svh] w-full rounded-none md:min-h-[100svh]"
@@ -67,6 +69,11 @@ export function CaseStudyHero({ study }: { study: CaseStudy }) {
           <p data-hero-item className="font-sans text-base text-hairline-strong md:text-lg">
             {study.descriptor}
           </p>
+          <div data-hero-item className="mt-2">
+            <ArrowLink href={study.liveUrl} tone="on-ink" external>
+              Visit Live Site
+            </ArrowLink>
+          </div>
         </div>
       </div>
     </section>

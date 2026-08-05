@@ -6,6 +6,7 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 import { CaseStudyEmptyState } from "@/components/ui/CaseStudyEmptyState";
 import { useScrollReveal } from "@/lib/useScrollReveal";
+import { getCaseStudyBySlug } from "@/lib/case-studies-data";
 import type { CaseStudyStateA, CaseStudyStateB } from "@/lib/industry-page-content";
 
 type IndustryCaseStudyProps = {
@@ -55,6 +56,8 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone, gradient }: I
   }
 
   const bodyColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
+  const projectSlug = caseStudy.href.replace("/work/", "");
+  const project = getCaseStudyBySlug(projectSlug);
 
   return (
     <section
@@ -78,7 +81,11 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone, gradient }: I
           className="group grid grid-cols-1 gap-8 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 md:grid-cols-12 md:gap-10"
         >
           <div className="md:col-span-7">
-            <MediaFrame alt={`${caseStudy.title} project preview`} aspect="16/9" />
+            <MediaFrame
+              src={project?.screenshotUrl}
+              alt={project?.screenshotAlt ?? `${caseStudy.title} project preview`}
+              aspect="16/9"
+            />
           </div>
           <div className="flex flex-col justify-center md:col-span-5">
             <h3

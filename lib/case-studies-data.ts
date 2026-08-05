@@ -24,6 +24,12 @@ export type CaseStudy = {
   };
   /** Whether >=4 real, rights-cleared gallery assets exist. None do yet. */
   hasGallery: boolean;
+  /** Live, verified project URL — "Visit Live Site" link. */
+  liveUrl: string;
+  /** Real screenshot of the live site, hosted on the founder's own portfolio site. */
+  screenshotUrl: string;
+  /** Descriptive alt text for the screenshot. */
+  screenshotAlt: string;
 };
 
 /**
@@ -89,6 +95,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://ayushsainisample1.netlify.app",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/aura-estates.webp",
+    screenshotAlt: "Aura Estates luxury real-estate landing page screenshot",
   },
   {
     id: "college-iq",
@@ -134,6 +144,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://collegeiqapp.netlify.app",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/college-iq.webp",
+    screenshotAlt: "College IQ AI-driven EdTech platform marketing site screenshot",
   },
   {
     id: "nextepsolution",
@@ -178,6 +192,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://nextepsolution.com",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/nextepsolution.webp",
+    screenshotAlt: "NextepSolution B2B CRM platform website screenshot",
   },
   {
     id: "nextep-ventures",
@@ -221,6 +239,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://nextepventures.com",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/nextep-ventures.webp",
+    screenshotAlt: "Nextep Ventures B2B marketplace and auction platform screenshot",
   },
   {
     id: "dreamzcraft",
@@ -265,6 +287,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://dreamzcraft.com",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/dreamzcraft.webp",
+    screenshotAlt: "Dreamzcraft website architecture homepage screenshot",
   },
   {
     id: "finetaxconsultancy",
@@ -309,6 +335,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://finetaxconsultancy.com",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/finetaxconsultancy.webp",
+    screenshotAlt: "FineTaxConsultancy tax and accounting consultancy website screenshot",
   },
   {
     id: "woodcraft-store-premium",
@@ -354,6 +384,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://woodcrafts-store.netlify.app",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/woodcraft-store.webp",
+    screenshotAlt: "Woodcraft Store Premium e-commerce storefront screenshot",
   },
   {
     id: "wooden-handicraft-3d",
@@ -398,6 +432,10 @@ export const caseStudies: CaseStudy[] = [
       },
     },
     hasGallery: false,
+    liveUrl: "https://wooden-handicraft-site.netlify.app",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/wooden-handicraft.webp",
+    screenshotAlt: "Wooden Handicraft 3D product-showcase e-commerce screenshot",
   },
 ];
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { MediaFrame } from "@/components/ui/MediaFrame";
+import { ArrowLink } from "@/components/ui/ArrowLink";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
 
 /**
@@ -64,6 +65,14 @@ export function FounderHero() {
               growth marketer who builds the product and markets it, without handing either off
               to someone else.
             </p>
+            <ArrowLink
+              href="https://www.linkedin.com/in/ayush-saini-708192361/"
+              tone="on-ink"
+              className="mt-6 w-fit"
+              external
+            >
+              Connect with Ayush on LinkedIn
+            </ArrowLink>
           </div>
           <div className="md:col-span-5" data-hero-item>
             <MediaFrame

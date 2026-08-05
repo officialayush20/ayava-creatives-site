@@ -17,6 +17,9 @@ const caseStudies = [
     strategy:
       "Ayava designed and built a landing-page experience centered on visual restraint and property-led storytelling, engineered to hold a high-intent buyer's attention through the full decision journey.",
     results: "[AURA ESTATES METRICS — TBC, pending client data]",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/aura-estates.webp",
+    screenshotAlt: "Aura Estates luxury real-estate landing page screenshot",
   },
   {
     name: "College IQ",
@@ -27,6 +30,9 @@ const caseStudies = [
     strategy:
       "Ayava architected the platform's marketing site around clarity-first UX — mapping the AI-powered learning journey into a structure a first-time visitor could understand in under a minute.",
     results: "[COLLEGE IQ METRICS — TBC, pending client data]",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/college-iq.webp",
+    screenshotAlt: "College IQ AI-driven EdTech platform marketing site screenshot",
   },
   {
     name: "NextepSolution",
@@ -37,6 +43,9 @@ const caseStudies = [
     strategy:
       "Ayava built the platform's web architecture around use-case-led navigation, positioning NextepSolution's capabilities against the operational problems its buyers actually search for.",
     results: "[NEXTEPSOLUTION METRICS — TBC, pending client data]",
+    screenshotUrl:
+      "https://ayushsainiportfolio.netlify.app/projects/screenshots/nextepsolution.webp",
+    screenshotAlt: "NextepSolution B2B CRM platform website screenshot",
   },
 ];
 
@@ -56,7 +65,8 @@ function CaseStudySpread({
     >
       <div className={`md:col-span-7 ${reverse ? "md:order-2" : "md:order-1"}`}>
         <MediaFrame
-          alt={`${study.name} project preview`}
+          src={study.screenshotUrl}
+          alt={study.screenshotAlt}
           aspect="4/5"
           className="transition-transform duration-300 ease-out group-hover:scale-[1.03] md:aspect-[16/9]"
         />

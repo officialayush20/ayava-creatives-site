@@ -71,7 +71,8 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
         <div data-reveal-item className="group grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-10">
           <div className={`md:col-span-7 ${imageLeft ? "md:order-1" : "md:order-2"}`}>
             <MediaFrame
-              alt={`${project?.name ?? caseStudy.heading} project preview`}
+              src={project?.screenshotUrl}
+              alt={project?.screenshotAlt ?? `${caseStudy.heading} project preview`}
               aspect="16/9"
               className="border border-transparent transition-colors duration-200 ease-out group-hover:border-accent"
             />
