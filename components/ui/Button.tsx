@@ -68,17 +68,22 @@ export function Button({
     large: "px-8 py-4 text-base",
   };
 
+  // `btn-primary-gradient` is a no-op class in dark theme (the rule that
+  // reads it lives entirely under `[data-theme="light"] .btn-primary-gradient`
+  // in globals.css) — the dark theme's `bg-content text-surface` primary
+  // fill is completely unaffected by adding this class name. Only the
+  // primary variant gets it; secondary/ghost are untouched in both themes.
   const variants = {
     "on-ink": {
       primary:
-        "bg-content text-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
+        "btn-primary-gradient bg-content text-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
       secondary:
         "bg-transparent text-content border border-hairline-strong hover:border-accent hover:text-content rounded-full",
       ghost: "bg-transparent text-content underline-offset-4 hover:underline px-0 py-1",
     },
     "on-ivory": {
       primary:
-        "bg-inverse-content text-inverse-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
+        "btn-primary-gradient bg-inverse-content text-inverse-surface hover:shadow-[0_0_0_1px_var(--color-accent)] rounded-full",
       secondary:
         "bg-transparent text-inverse-content border border-hairline hover:border-accent hover:text-inverse-content rounded-full",
       ghost: "bg-transparent text-inverse-content underline-offset-4 hover:underline px-0 py-1",

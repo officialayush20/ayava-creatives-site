@@ -19,12 +19,15 @@ type CtaBandProps = {
   tone?: "on-ink" | "on-ivory";
   /**
    * Optional gradient treatment — light theme only (the underlying
-   * `--gradient-verdigris-deep` custom property is unset in dark, so this is
+   * `--gradient-cobalt-deep` custom property is unset in dark, so this is
    * a no-op there). Only pass on the specific page instances the
    * application map identifies (homepage + work-hub closing CtaBand). One
-   * gradient slab per page maximum.
+   * gradient slab per page maximum. When set, the inner content wrapper also
+   * gets `.gradient-band-card` (light-theme-only subtle glass treatment —
+   * see globals.css) and the primary button flattens to solid porcelain/
+   * cobalt instead of gradient-on-gradient (handled in globals.css).
    */
-  gradient?: "verdigris-deep";
+  gradient?: "cobalt-deep";
 };
 
 export function CtaBand({
@@ -41,7 +44,7 @@ export function CtaBand({
   const headingColor = tone === "on-ink" ? "text-content" : "text-inverse-content";
   const supportingColor = tone === "on-ink" ? "text-hairline-strong" : "text-hairline";
   const gradientStyle =
-    gradient === "verdigris-deep" ? { backgroundImage: "var(--gradient-verdigris-deep)" } : undefined;
+    gradient === "cobalt-deep" ? { backgroundImage: "var(--gradient-cobalt-deep)" } : undefined;
 
   return (
     <section
@@ -51,7 +54,12 @@ export function CtaBand({
       style={gradientStyle}
     >
       <Container className="flex flex-col items-center text-center">
-        <div data-reveal-item className="mx-auto flex max-w-3xl flex-col items-center">
+        <div
+          data-reveal-item
+          className={`mx-auto flex max-w-3xl flex-col items-center ${
+            gradient ? "gradient-band-card rounded-sm p-8 md:p-12" : ""
+          }`}
+        >
           <h2
             id="cta-band-heading"
             className={`font-display text-[clamp(28px,5vw,52px)] font-normal leading-[1.05] ${headingColor}`}

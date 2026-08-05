@@ -16,13 +16,13 @@ type IndustryCaseStudyProps = {
    * per-page rhythm table in the page component, not hardcoded here. */
   tone: "on-ink" | "on-ivory";
   /**
-   * Optional Verdigris Deep treatment — light theme only, no-op in dark
+   * Optional Cobalt Deep treatment — light theme only, no-op in dark
    * (the underlying custom property is unset there so the section keeps its
    * normal `tone`-driven flat background). Only pass on state-A (real,
    * matched-project) case studies per the application map — never on the
    * empty state.
    */
-  gradient?: "verdigris-deep";
+  gradient?: "cobalt-deep";
 };
 
 /**
@@ -35,8 +35,8 @@ export function IndustryCaseStudy({ industryName, caseStudy, tone, gradient }: I
   const revealRef = useScrollReveal<HTMLElement>();
   const bg = tone === "on-ink" ? "bg-surface" : "bg-inverse-surface";
   const gradientStyle =
-    gradient === "verdigris-deep" && caseStudy.state === "A"
-      ? { backgroundImage: "var(--gradient-verdigris-deep)" }
+    gradient === "cobalt-deep" && caseStudy.state === "A"
+      ? { backgroundImage: "var(--gradient-cobalt-deep)" }
       : undefined;
   const gradientClass = gradientStyle ? "gradient-band" : "";
 

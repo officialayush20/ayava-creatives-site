@@ -10,16 +10,18 @@ Pure `#FFFFFF` is banned — cold, cheap, and it kills the gradient, because a g
 
 | Role | Hex | Use |
 |---|---|---|
-| canvas | `#F7F5F2` | Primary background |
-| canvas-raise | `#FCFBF9` | Cards, sticky bars. Elevation by *lightness*, never shadow |
-| canvas-sink | `#EFECE7` | Recessed bands, quotes, alternating sections |
-| ink | `#14161B` | Display + primary UI text |
-| ink-body | `#3A3F47` | Body copy |
-| ink-muted | `#666C76` | Metadata, captions. **Floor — never lighter** |
-| rule | `#DCD8D1` | Hairlines, default borders |
-| rule-strong | `#B9B3A9` | Hover/active borders, table head rules |
+| canvas | `#F6F3F2` | Primary background |
+| canvas-raise | `#FCF9F8` | Cards, sticky bars. Elevation by *lightness*, never shadow |
+| canvas-sink | `#EAE8E8` | Recessed bands, quotes, alternating sections |
+| ink | `#1C1B1B` | Display + primary UI text |
+| ink-body | `#434656` | Body copy |
+| ink-muted | `#61647A` | Metadata, captions. **Floor — never lighter** |
+| rule | `#DAD9DE` | Hairlines, default borders |
+| rule-strong | `#B6B5C1` | Hover/active borders, table head rules |
 | inverse-surface | `#0F1114` | Rare flat dark slab when not using Gradient B |
-| inverse-ink | `#F7F5F2` | Text on any dark/gradient surface |
+| inverse-ink | `#F6F3F2` | Text on any dark/gradient surface |
+
+*(Revised 2026-08-05: palette shifted cooler/bluer per creative-director review; accent renamed verdigris → cobalt throughout, see §3/§6.)*
 
 Section rhythm replaces ink/ivory alternation with `canvas → canvas-sink → canvas → gradient slab`. **The same-tone adjacency ban stands** — two `canvas` sections may never touch (this defect has already shipped 4–5 times in the dark theme per the phase-2 review; pre-banned here). **No `box-shadow` in this theme except the focus ring** — soft shadows are the fastest route to SaaS-template.
 
@@ -37,17 +39,17 @@ background-image:
   radial-gradient(90% 80% at 62% 96%, #EDE5D6 0%, rgba(237,229,214,0) 66%);
 ```
 
-Pale verdigris → pale glacial blue → pale sand. The sand bloom is the ghost of the dark theme's gold: brand continuity without putting literal gold on a light page. **No magenta/violet/pink anywhere** — the purple→pink AI ramp is the exact cliché this theme exists to avoid. Motion: bloom centers may drift ≤4% of viewport over ≥20s on `cubic-bezier(0.16,1,0.3,1)`; static under `prefers-reduced-motion`. No hue rotation, no pulse, no mouse-follow.
+Pale cobalt → pale glacial blue → pale sand. The sand bloom is the ghost of the dark theme's gold: brand continuity without putting literal gold on a light page. **No magenta/violet/pink anywhere** — the purple→pink AI ramp is the exact cliché this theme exists to avoid. Motion: bloom centers may drift ≤4% of viewport over ≥20s on `cubic-bezier(0.16,1,0.3,1)`; static under `prefers-reduced-motion`. No hue rotation, no pulse, no mouse-follow.
 
-**Gradient B — "Verdigris Deep"** (inverted closing slab):
+**Gradient B — "Cobalt Deep"** (inverted closing slab):
 ```css
-linear-gradient(152deg, #06201F 0%, #0E4B47 46%, #10365C 100%);
+linear-gradient(152deg, #071734 0%, #0E2E6E 48%, #17203C 100%);
 ```
-Teal → deep teal → ink-cobalt.
+Deep navy → cobalt → near-ink.
 
-**Gradient C — "Accent Rule"** (hairline only): `linear-gradient(90deg, #0E6E6B 0%, #2E6FA8 100%)`. Permitted **only at 1–2px** — active nav/filter underline, top rule of a stat block, progress rail. Direct heir of the gold-hairline rule. Never a fill, never all four sides.
+**Gradient C — "Accent Rule"** (hairline only): `linear-gradient(90deg, #0B39A8 0%, #4A7FBF 100%)`. Permitted **only at 1–2px** — active nav/filter underline, top rule of a stat block, progress rail. Direct heir of the gold-hairline rule. Never a fill, never all four sides.
 
-**Allowed:** Dawn Mesh = page hero, one per page, above the fold. Verdigris Deep = exactly one slab per page (closing CTA *or* a results section, not both). Accent Rule = hairlines, subject to §3 budget.
+**Allowed:** Dawn Mesh = page hero, one per page, above the fold. Cobalt Deep = exactly one slab per page (closing CTA *or* a results section, not both). Accent Rule = hairlines, subject to §3 budget.
 
 **Not allowed:** never behind body copy (Dawn Mesh may sit behind an H1 + one lead paragraph — never a paragraph stack, form, table, or card grid); never two gradient surfaces in one viewport; never on cards, buttons, chips, badges, icons, avatars (gradient buttons are the strongest template tell in 2026); never `background-clip: text`, banned permanently; never scroll-scrubbed (reveals scrub, gradients don't); total gradient surface ≤35% of page scroll height.
 
@@ -55,9 +57,11 @@ Teal → deep teal → ink-cobalt.
 
 **Gold is retired in this theme.** `#CBA135` on `#F7F5F2` is ~2.1:1 — fails AA at every size. Darkening it to pass makes it bronze, at which point it isn't the brand's gold. On light grounds gold also stops reading as bullion and starts reading as wedding stationery. It survives only as the pale-sand bloom in Dawn Mesh.
 
-**The accent is Verdigris `#0E6E6B`** — 5.6:1 on canvas, so unlike gold it can actually *be* the accent rather than a decoration. It's the light-theme heir of the dark theme's viridian: same bloodline, different job, so the two themes are one brand at two temperatures. On dark/gradient-B surfaces use `accent-raise #6FD3C6`; `#0E6E6B` on dark fails and is banned. The two may not share a viewport.
+**The accent is Cobalt `#0B39A8`** — ~8.76:1 on canvas, so unlike gold it can actually *be* the accent rather than a decoration. It's the light-theme heir of the dark theme's viridian: same bloodline, different job, so the two themes are one brand at two temperatures. On dark/gradient-B surfaces use `accent-raise #A5C3FF`; `#0B39A8` on dark fails and is banned. The two may not share a viewport.
 
-**Rule (successor to "gold = evidence"): Verdigris marks proof and intent — nothing else.** Permitted: real metric values, Gradient-C hairlines, focus rings, hover link underlines, one active-state bottom edge. **Banned:** list ordinals, step numbers, filter/result counters, icon fills, badges, section eyebrows, large headings, hover color-change on display-scale type — every one of these is a logged dark-theme violation, pre-banned here. Budget ≤4% of viewport.
+*(Revised 2026-08-05: accent renamed verdigris → cobalt, hue shifted teal → blue per creative-director review. Same usage discipline carries over unchanged.)*
+
+**Rule (successor to "gold = evidence"): Cobalt marks proof and intent — nothing else.** Permitted: real metric values, Gradient-C hairlines, focus rings, hover link underlines, one active-state bottom edge. **Banned:** list ordinals, step numbers, filter/result counters, icon fills, badges, section eyebrows, large headings, hover color-change on display-scale type — every one of these is a logged dark-theme violation, pre-banned here. Budget ≤4% of viewport.
 
 **No second jewel tone.** The gradient *is* the chromatic range; a data-viz jewel on top of a three-hue mesh is where this becomes decoration. Data-viz uses accent + neutral tints of `ink`.
 
@@ -71,9 +75,11 @@ Optical adjustments, because dark-on-light is a different problem: display track
 
 ## 5. Contrast — including on gradients
 
-On `#F7F5F2`: ink 17.1:1 (AAA) · ink-body 9.6:1 (AAA) · ink-muted 4.86:1 (AA, floor) · accent 5.6:1 (AA) · error 5.9:1 (AA). On `canvas-sink` ink-muted drops to ~4.55:1 — margin too thin, so **ink-muted is banned on canvas-sink**; use ink-body.
+On `#F6F3F2`: ink ~16.8:1 (AAA) · ink-body ~9.2:1 (AAA) · ink-muted ~4.7:1 (AA, floor) · accent ~8.76:1 (AAA) · error 5.9:1 (AA). On `canvas-sink` ink-muted drops below floor — margin too thin, so **ink-muted is banned on canvas-sink**; use ink-body.
 
-**Gradients, explicitly:** Dawn Mesh contrast is guaranteed *by stop selection*, not overlay — every stop sits at ≥0.76 relative luminance, so worst-case ink is ~14:1 and ink-body ~8:1. **ink-muted is banned on Dawn Mesh** (worst case ~4.1:1, fails). No scrim needed and **no scrim permitted** — a scrim mutes the exact thing that makes the mesh premium. Verdigris Deep is contrast-safe by construction: lightest stop `#10365C` is 11.3:1 against `#F7F5F2`, so headlines, body and buttons all sit directly on it; `accent-raise` on it is ~10:1. If a fourth gradient is ever introduced, text on it requires a solid ≥0.72-alpha scrim — but the correct answer is to not introduce one. Focus ring: `2px solid #0E6E6B` (`#6FD3C6` on dark) with 2px surface-colored offset; the ring is never a gradient.
+**Gradients, explicitly:** Dawn Mesh contrast is guaranteed *by stop selection*, not overlay — every stop sits at high relative luminance, so worst-case ink and ink-body stay comfortably AA/AAA. **ink-muted is banned on Dawn Mesh**. No scrim needed and **no scrim permitted** — a scrim mutes the exact thing that makes the mesh premium. Cobalt Deep is contrast-safe by construction: lightest stop `#17203C` is well above 10:1 against `#F6F3F2`, so headlines, body and buttons all sit directly on it; `accent-raise` on it stays high-contrast. If a fourth gradient is ever introduced, text on it requires a solid ≥0.72-alpha scrim — but the correct answer is to not introduce one. Focus ring: `2px solid #0B39A8` (`#A5C3FF` on dark) with 2px surface-colored offset; the ring is never a gradient.
+
+*(Revised 2026-08-05: all hex/contrast figures updated for the cobalt palette shift — see §1/§3/§6.)*
 
 ## 6. Token naming + coexistence
 
@@ -84,11 +90,11 @@ On `#F7F5F2`: ink 17.1:1 (AAA) · ink-body 9.6:1 (AAA) · ink-muted 4.86:1 (AA, 
   /* existing dark literals unchanged — --color-ink, --color-ivory, --color-gold, ... */
 
   /* Atelier Light literals (namespaced, no collision) */
-  --color-porcelain: #f7f5f2;      --color-porcelain-raise: #fcfbf9;
-  --color-porcelain-sink: #efece7; --color-graphite: #14161b;
-  --color-graphite-body: #3a3f47;  --color-graphite-muted: #666c76;
-  --color-rule: #dcd8d1;           --color-rule-strong: #b9b3a9;
-  --color-verdigris: #0e6e6b;      --color-verdigris-raise: #6fd3c6;
+  --color-porcelain: #f6f3f2;      --color-porcelain-raise: #fcf9f8;
+  --color-porcelain-sink: #eae8e8; --color-graphite: #1c1b1b;
+  --color-graphite-body: #434656;  --color-graphite-muted: #61647a;
+  --color-rule: #dad9de;           --color-rule-strong: #b6b5c1;
+  --color-cobalt: #0b39a8;         --color-cobalt-raise: #a5c3ff;
   --color-rust-light: #a33826;
 
   /* semantic roles — what components consume (dark defaults) */
@@ -113,22 +119,30 @@ On `#F7F5F2`: ink 17.1:1 (AAA) · ink-body 9.6:1 (AAA) · ink-muted 4.86:1 (AA, 
   --color-content-muted: var(--color-graphite-muted);
   --color-hairline: var(--color-rule);
   --color-hairline-strong: var(--color-rule-strong);
-  --color-accent: var(--color-verdigris);
-  --color-accent-raise: var(--color-verdigris-raise);
+  --color-accent: var(--color-cobalt);
+  --color-accent-raise: var(--color-cobalt-raise);
   --color-inverse-surface: #0f1114;
   --color-inverse-content: var(--color-porcelain);
   --color-danger: var(--color-rust-light);
 
   --gradient-dawn-mesh:
-    radial-gradient(80% 70% at 12% 8%,  #d9e6e4 0%, rgba(217,230,228,0) 62%),
-    radial-gradient(70% 60% at 88% 18%, #dde3ee 0%, rgba(221,227,238,0) 58%),
-    radial-gradient(90% 80% at 62% 96%, #ede5d6 0%, rgba(237,229,214,0) 66%);
-  --gradient-verdigris-deep:
-    linear-gradient(152deg, #06201f 0%, #0e4b47 46%, #10365c 100%);
+    radial-gradient(80% 70% at 12% 8%,  #e4ebf7 0%, rgba(228,235,247,0) 62%),
+    radial-gradient(70% 60% at 88% 18%, #dee5f2 0%, rgba(222,229,242,0) 58%),
+    radial-gradient(90% 80% at 62% 96%, #efe9e0 0%, rgba(239,233,224,0) 66%);
+  --gradient-cobalt-deep:
+    linear-gradient(152deg, #071734 0%, #0e2e6e 48%, #17203c 100%);
   --gradient-accent-rule:
-    linear-gradient(90deg, #0e6e6b 0%, #2e6fa8 100%);
+    linear-gradient(90deg, #0b39a8 0%, #4a7fbf 100%);
+
+  /* Gradient buttons + glass header/CTA-card — added by a later creative
+     review pass; see app/globals.css for --gradient-cobalt-action(-hover),
+     --glass-porcelain, --glass-hairline, and the .btn-primary-gradient /
+     .site-header / .gradient-band-card rules. Deliberately not repeated
+     here verbatim to avoid this doc drifting from the implementation. */
 }
 ```
+
+*(Revised 2026-08-05: literals/roles renamed verdigris → cobalt with new hex values throughout this block, matching app/globals.css exactly.)*
 
 Engineer rules: theme set server-rendered on `<html data-theme="light">`, **no `prefers-color-scheme`** (stays an editorial choice, consistent with the existing decision documented in `globals.css`). Every gradient must come from a `--gradient-*` token — a raw `linear-gradient(`/`radial-gradient(` literal anywhere in `components/` is a review failure; that's how the budget stays auditable by grep. The existing `tone="on-ink" | "on-ivory"` prop generalizes to `tone="default" | "inverse"` resolving through semantic tokens, so `Button`, `SectionHeader`, `ArrowLink`, `Tag`, `StatCounter` get one refactor, not duplicate light-theme components. Nothing in this spec edits or deletes the dark literals.
 

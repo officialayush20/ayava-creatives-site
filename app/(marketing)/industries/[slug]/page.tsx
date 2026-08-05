@@ -72,7 +72,7 @@ export default async function IndustryPage({ params }: IndustryPageProps) {
           industryName={industry.name}
           caseStudy={content.caseStudy}
           tone="on-ivory"
-          gradient="verdigris-deep"
+          gradient="cobalt-deep"
         />
         <IndustryFAQ
           industryName={industry.name}

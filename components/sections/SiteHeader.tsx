@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -23,9 +23,26 @@ const navLinks = [
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  // Scroll-aware glass treatment — light theme only (see `.site-header` /
+  // `.site-header--scrolled` in globals.css, both scoped under
+  // [data-theme="light"]). In dark theme these classes are inert no-ops;
+  // the header keeps its existing bg-surface/95 + backdrop-blur classes
+  // below unchanged in both themes, so dark rendering never changes.
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-surface/95 backdrop-blur">
+    <header
+      className={`site-header sticky top-0 z-50 border-b border-hairline bg-surface/95 backdrop-blur ${
+        scrolled ? "site-header--scrolled" : ""
+      }`}
+    >
       <Container>
         <div className="flex h-20 items-center justify-between">
           <Link
@@ -81,7 +98,11 @@ export function SiteHeader() {
       </Container>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Primary" className="border-t border-hairline md:hidden">
+        <nav
+          id="mobile-nav"
+          aria-label="Primary"
+          className="mobile-nav-panel border-t border-hairline md:hidden"
+        >
           <Container>
             <ul className="flex flex-col gap-1 py-6">
               {navLinks.map((link) => (

@@ -58,7 +58,7 @@ export function CaseStudySpotlight({ caseStudy, imageLeft = true }: CaseStudySpo
       id="case-study"
       aria-labelledby="case-study-heading"
       className="bg-ink py-16 md:py-40 gradient-band"
-      style={{ backgroundImage: "var(--gradient-verdigris-deep)" }}
+      style={{ backgroundImage: "var(--gradient-cobalt-deep)" }}
     >
       <Container>
         <SectionHeader

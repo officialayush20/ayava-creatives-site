@@ -44,7 +44,7 @@ export default function Home() {
         <WhyAyava />
         <InsightsPreview />
         <GlobalPresence />
-        <CtaBand gradient="verdigris-deep" />
+        <CtaBand gradient="cobalt-deep" />
       </main>
       <MegaFooter />
     </>

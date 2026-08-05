@@ -27,7 +27,7 @@ export default function WorkPage() {
           primaryLabel="Get Free Audit"
           secondary={{ href: "/contact#call", label: "Book a Call" }}
           tone="on-ink"
-          gradient="verdigris-deep"
+          gradient="cobalt-deep"
         />
       </main>
       <MegaFooter />
