@@ -29,7 +29,10 @@ const LIGHT: LatticeColors = {
  * required, matching the rest of the site's instant theme-switch behavior).
  */
 export function useThemeColors(): LatticeColors {
-  const [colors, setColors] = useState<LatticeColors>(DARK);
+  const [colors, setColors] = useState<LatticeColors>(() => {
+    if (typeof document === "undefined") return DARK;
+    return document.documentElement.dataset.theme === "light" ? LIGHT : DARK;
+  });
 
   useEffect(() => {
     const root = document.documentElement;

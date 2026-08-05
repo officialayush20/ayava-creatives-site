@@ -18,16 +18,19 @@ function mulberry32(seed: number) {
   };
 }
 
-// Dehradun's position within the visual's abstract coordinate space (not a
-// literal equirectangular projection — see component doc comment below).
-const HQ = { x: 30, y: 46 };
+// Dehradun's position within the visual's abstract coordinate space — chosen
+// for composition (left-third, aligned with the site's left-aligned
+// editorial axis), not derived from any real map projection. The aspect
+// ratio below is deliberately non-map-like so this never reads as "a map
+// with our locations."
+const HQ = { x: 24, y: 46 };
 
 type Dot = { x: number; y: number; r: number; o: number };
 
 function buildDotField(): Dot[] {
   const rand = mulberry32(1337);
   const dots: Dot[] = [];
-  for (let i = 0; i < 220; i++) {
+  for (let i = 0; i < 90; i++) {
     const x = rand() * 100;
     const y = rand() * 100;
     const dist = Math.hypot(x - HQ.x, (y - HQ.y) * 1.4);
@@ -67,8 +70,12 @@ const DOTS = buildDotField();
  * the same page would cost real frame budget for a secondary, below-the-
  * fold section that reads best restrained anyway. This keeps the section
  * static-renderable (no canvas, no lazy JS bundle to code-split) while
- * still achieving genuine depth: three parallax layers moving at different
- * scroll-scrub rates, elevation via drop-shadow, and a gradient vignette.
+ * still achieving genuine depth via three parallax layers moving at
+ * different scroll-scrub rates, with elevation carried by contrast (a plain
+ * ring on the HQ marker) rather than glow/shadow effects. The frame's aspect
+ * ratio and dot density are tuned to read as an abstract composition, not a
+ * world-map projection — the HQ position is chosen for layout balance, not
+ * geographic accuracy.
  */
 export function GlobalPresenceMap() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -106,19 +113,10 @@ export function GlobalPresenceMap() {
     <div
       ref={rootRef}
       aria-hidden="true"
-      className="relative mx-auto aspect-[2/1] w-full max-w-4xl overflow-hidden rounded-sm border border-hairline bg-surface-raise"
+      className="relative mx-auto aspect-[3/2] w-full max-w-4xl overflow-hidden rounded-sm border border-hairline bg-surface-raise"
     >
-      {/* Base elevation gradient — reads as depth without a literal ground plane */}
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          background:
-            "radial-gradient(60% 70% at 30% 46%, var(--color-accent) 0%, transparent 70%)",
-        }}
-      />
-
       <svg
-        viewBox="0 0 100 50"
+        viewBox="0 0 100 66.67"
         preserveAspectRatio="xMidYMid slice"
         className="absolute inset-0 h-full w-full"
       >
@@ -128,7 +126,7 @@ export function GlobalPresenceMap() {
             <circle
               key={i}
               cx={d.x}
-              cy={d.y * 0.5}
+              cy={d.y * 0.667}
               r={d.r * 0.35}
               className="fill-hairline-strong"
               opacity={d.o}
@@ -142,7 +140,7 @@ export function GlobalPresenceMap() {
             <circle
               key={i}
               cx={HQ.x}
-              cy={HQ.y * 0.5}
+              cy={HQ.y * 0.667}
               r={2}
               className="global-presence-ring fill-none stroke-accent"
               strokeWidth={0.15}
@@ -158,10 +156,7 @@ export function GlobalPresenceMap() {
         className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-2"
         style={{ left: `${HQ.x}%`, top: `${HQ.y}%` }}
       >
-        <span
-          className="global-presence-dot relative flex h-2.5 w-2.5 items-center justify-center rounded-full bg-accent"
-          style={{ filter: "drop-shadow(0 2px 6px var(--color-accent))" }}
-        />
+        <span className="global-presence-dot relative flex h-2.5 w-2.5 items-center justify-center rounded-full bg-accent ring-1 ring-surface" />
         <span className="whitespace-nowrap font-sans text-[10px] uppercase tracking-[0.2em] text-content">
           Dehradun &mdash; HQ
         </span>

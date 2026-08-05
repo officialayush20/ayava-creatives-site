@@ -36,14 +36,7 @@ function StaticFallback() {
       aria-hidden="true"
       className="absolute inset-0 flex items-center justify-center"
     >
-      <div
-        className="h-[70%] w-[70%] rounded-full opacity-70"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, var(--color-accent) 0%, transparent 2%), " +
-            "repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 11%, var(--color-hairline) 11.4%, transparent 11.8%)",
-        }}
-      />
+      <div className="h-[60%] w-[80%] rounded-sm border border-hairline opacity-70" />
     </div>
   );
 }

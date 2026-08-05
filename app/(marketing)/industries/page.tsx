@@ -25,7 +25,7 @@ function IndustryTile({ slug, name, hook }: { slug: string; name: string; hook: 
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(160deg,var(--color-ink-raise)_0%,var(--color-slate-deep)_100%)] opacity-70 transition-transform duration-300 ease-out group-hover:scale-105"
+        className="absolute inset-0 bg-surface-sink opacity-70 transition-transform duration-300 ease-out group-hover:scale-105"
       />
       <div className="relative">
         <h3 className="font-sans text-sm font-medium text-content md:text-base">{name}</h3>

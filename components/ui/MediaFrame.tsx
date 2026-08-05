@@ -47,7 +47,7 @@ export function MediaFrame({
         <div
           role="img"
           aria-label={alt}
-          className="absolute inset-0 flex items-center justify-center border border-hairline bg-[linear-gradient(135deg,var(--color-ink-raise)_0%,var(--color-slate-deep)_100%)]"
+          className="absolute inset-0 flex items-center justify-center border border-hairline bg-surface-sink"
         >
           <span className="font-sans text-xs uppercase tracking-[0.2em] text-hairline-strong">
             Image pending

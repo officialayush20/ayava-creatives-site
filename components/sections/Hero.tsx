@@ -26,7 +26,7 @@ function HeroCanvasSlot() {
       aria-hidden="true"
       className="pointer-events-none absolute inset-y-0 right-0 hidden w-[42%] lg:block"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,var(--color-ink-raise)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-surface-raise opacity-40" />
       <HeroCanvas />
       <div className="absolute right-[10%] top-1/2 h-[60%] w-px -translate-y-1/2 bg-hairline" />
     </div>
