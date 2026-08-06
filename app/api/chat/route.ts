@@ -83,7 +83,12 @@ export async function POST(request: Request) {
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      // "gemini-1.5-flash" was retired and returns 404 on this API version —
+      // confirmed live against the account's actual /v1beta/models listing.
+      // "gemini-flash-latest" is a stable alias Google keeps pointed at the
+      // current recommended Flash model, so this doesn't silently break
+      // again the next time a dated model name is deprecated.
+      model: "gemini-flash-latest",
       systemInstruction: CHATBOT_KNOWLEDGE,
       generationConfig: {
         // Keeps a single reply short and bounded — protects against runaway
@@ -93,13 +98,39 @@ export async function POST(request: Request) {
       },
     });
 
-    const history = messages.slice(0, -1).map((message) => ({
+    // The widget seeds its local state with a scripted greeting bubble
+    // (role: "model") that was never an actual Gemini turn — the Gemini API
+    // rejects a history whose first entry isn't role "user" ("First content
+    // should be with role 'user', got model"), which broke every first
+    // real exchange. Strip any leading "model"-role messages (the scripted
+    // greeting, and defensively any others) before building history.
+    const historySource = messages.slice(0, -1);
+    let firstUserIndex = historySource.findIndex((m) => m.role === "user");
+    if (firstUserIndex === -1) firstUserIndex = historySource.length;
+    const history = historySource.slice(firstUserIndex).map((message) => ({
       role: message.role,
       parts: [{ text: message.text }],
     }));
 
     const chat = model.startChat({ history });
-    const result = await chat.sendMessage(lastMessage.text);
+
+    // Gemini's shared free-tier capacity returns transient 503 "high
+    // demand" errors under normal, expected load (confirmed live — not
+    // rate-limit exhaustion, the same request succeeds moments later). One
+    // short retry meaningfully improves real-world reliability for
+    // visitors instead of surfacing an error on an ordinary transient
+    // blip; a second failure is treated as real and reported normally.
+    let result;
+    try {
+      result = await chat.sendMessage(lastMessage.text);
+    } catch (firstError) {
+      const message = firstError instanceof Error ? firstError.message : "";
+      if (!message.includes("503")) throw firstError;
+      console.error("[api/chat] Gemini 503, retrying once:", message);
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      result = await chat.sendMessage(lastMessage.text);
+    }
+
     const text = result.response.text().trim();
 
     if (!text) {
