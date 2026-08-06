@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 // Interim stand-ins for the licensed display/sans typefaces (see
 // app/globals.css for the full fallback rationale). Both are free on Google
@@ -82,6 +83,15 @@ export default function RootLayout({
       <body className="min-h-screen bg-surface text-content font-sans antialiased">
         <SmoothScrollProvider />
         {children}
+        {/*
+          Mounted at the true root (not app/(marketing)/layout.tsx) because
+          route groups only wrap files physically nested inside them, and
+          app/page.tsx (the homepage) lives outside the (marketing) folder —
+          that layout never applied to "/". ChatWidget self-excludes from
+          /portal via a pathname check instead, so it doesn't depend on
+          route-group folder placement staying correct as pages are added.
+        */}
+        <ChatWidget />
       </body>
     </html>
   );
