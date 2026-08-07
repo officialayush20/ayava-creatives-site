@@ -91,9 +91,17 @@ export async function POST(request: Request) {
       model: "gemini-flash-latest",
       systemInstruction: CHATBOT_KNOWLEDGE,
       generationConfig: {
-        // Keeps a single reply short and bounded — protects against runaway
-        // token usage/cost on the paid tier and keeps the widget snappy.
-        maxOutputTokens: 400,
+        // gemini-flash-latest has "thinking" enabled by default, and those
+        // reasoning tokens are deducted from the same maxOutputTokens budget
+        // before the visible reply is written — with a low cap this was
+        // silently eating the whole budget on reasoning and truncating the
+        // actual answer mid-sentence (confirmed live: replies were cutting
+        // off after ~15-20 words with no closing punctuation).
+        // `thinkingConfig: { thinkingBudget: 0 }` would disable this, but
+        // the installed @google/generative-ai@0.24.1 SDK sends a request
+        // shape the API rejects with 400 "invalid argument" for that field
+        // (confirmed live) — so the fix here is generous headroom instead.
+        maxOutputTokens: 2048,
         temperature: 0.6,
       },
     });

@@ -7,7 +7,10 @@ import { prefersReducedMotion } from "@/lib/gsap";
 // Code-split: the three/@react-three/fiber bundle only downloads once this
 // component mounts client-side, and only for visitors who pass the
 // reduced-motion + WebGL checks below — it never blocks the hero's LCP text.
-const HeroLattice = dynamic(() => import("@/components/three/HeroLattice"), {
+// Renders the real Ayava mark as a 3D plaque (components/three/HeroLogoObject.tsx).
+// The earlier abstract grid-lattice (components/three/HeroLattice.tsx) is kept
+// in the repo for reference/reuse but no longer mounted here.
+const HeroLogoObject = dynamic(() => import("@/components/three/HeroLogoObject"), {
   ssr: false,
 });
 
@@ -59,5 +62,5 @@ export function HeroCanvas() {
     return <StaticFallback />;
   }
 
-  return <HeroLattice />;
+  return <HeroLogoObject />;
 }

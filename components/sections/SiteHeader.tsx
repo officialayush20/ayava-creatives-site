@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -47,9 +48,25 @@ export function SiteHeader() {
         <div className="flex h-20 items-center justify-between">
           <Link
             href="/"
-            className="font-display text-lg font-normal text-content focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+            aria-label="Ayava Creatives — home"
           >
-            Ayava Creatives
+            <Image
+              src="/logo-mark-dark-bg.png"
+              alt="Ayava Creatives"
+              width={160}
+              height={128}
+              className="site-logo-dark h-12 w-auto"
+              priority
+            />
+            <Image
+              src="/logo-mark-light-bg.png"
+              alt="Ayava Creatives"
+              width={160}
+              height={128}
+              className="site-logo-light h-12 w-auto"
+              priority
+            />
           </Link>
 
           <nav aria-label="Primary" className="hidden md:flex md:items-center md:gap-6">

@@ -171,6 +171,20 @@
  * light only — the dark theme has no gradients). See
  * docs/light-gradient-theme-spec.md §6.
  */
+/* Theme-reactive logo mark: dark-bg (white wordmark) shows by default (dark
+   theme is root default), light-bg (graphite wordmark) shows under
+   [data-theme="light"] only. Two <Image> elements, CSS toggles visibility —
+   avoids a JS/hydration flash since [data-theme] is set before paint. */
+.site-logo-light {
+  display: none;
+}
+[data-theme="light"] .site-logo-dark {
+  display: none;
+}
+[data-theme="light"] .site-logo-light {
+  display: block;
+}
+
 [data-theme="light"] {
   --role-surface: var(--color-porcelain);
   --role-surface-raise: var(--color-porcelain-raise);

@@ -34,9 +34,10 @@ export type LegalDoc = {
  *  - The client portal (app/(portal)/): single founder-admin login only,
  *    no client accounts or client data stored yet.
  *  - No analytics/tracking cookies are currently wired into the site (GA4
- *    was explicitly deferred). The only client-side storage in use is a
- *    theme-preference value in localStorage (see components/ui/ThemeToggle.tsx)
- *    — not a cookie, and not used for tracking.
+ *    was explicitly deferred). This site does not use any client-side
+ *    storage (no cookies, no localStorage) for preferences or tracking —
+ *    the "Prism" visual theme is server-rendered and fixed, not user-toggled
+ *    (see docs/gradient-forward-theme-spec.md).
  *  - No payment processing occurs on the site itself; pricing is
  *    quote-based via /contact.
  *
@@ -81,10 +82,6 @@ export const privacyDoc: LegalDoc = {
         {
           type: "paragraph",
           text: "This site does not currently run third-party analytics or advertising tracking (for example, we do not currently use Google Analytics or any similar tool). Our hosting provider and email/CRM providers may automatically log standard technical information — such as IP address, browser type, and request timestamps — as an ordinary part of operating a website and delivering email; we do not separately collect or combine this information for profiling or advertising. If we add analytics, advertising pixels, or cookie-based tracking in the future, this policy will be updated before that tool goes live, and a cookie-consent mechanism will be added if legally required.",
-        },
-        {
-          type: "paragraph",
-          text: "The only information this site currently stores in your browser is a single, non-personal preference — whether you selected the light or dark visual theme — saved in your browser's local storage. This is not a cookie, is never transmitted to our servers, is not used to identify or track you, and can be cleared at any time by clearing your browser's site data.",
         },
       ],
     },
@@ -141,7 +138,7 @@ export const privacyDoc: LegalDoc = {
       body: [
         {
           type: "paragraph",
-          text: "This site does not currently set any tracking or advertising cookies. The only browser-side storage in use is the non-personal theme preference described in \"Information We Collect\" above, stored in local storage rather than a cookie.",
+          text: "This site does not currently set any tracking or advertising cookies, and does not use any browser-side storage (cookies or local storage) at all.",
         },
         {
           type: "paragraph",

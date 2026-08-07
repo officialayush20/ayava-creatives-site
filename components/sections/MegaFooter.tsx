@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { NewsletterForm } from "@/components/ui/NewsletterForm";
@@ -48,7 +49,20 @@ export function MegaFooter() {
       <Container>
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           <div className="md:col-span-3">
-            <p className="font-display text-lg font-normal">Ayava Creatives</p>
+            <Image
+              src="/logo-mark-dark-bg.png"
+              alt="Ayava Creatives"
+              width={160}
+              height={128}
+              className="site-logo-dark h-14 w-auto"
+            />
+            <Image
+              src="/logo-mark-light-bg.png"
+              alt="Ayava Creatives"
+              width={160}
+              height={128}
+              className="site-logo-light h-14 w-auto"
+            />
             <p className="mt-2 font-sans text-sm text-hairline-strong">
               Marketing, engineered like infrastructure.
             </p>
