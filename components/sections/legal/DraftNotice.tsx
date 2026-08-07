@@ -15,9 +15,10 @@ export function DraftNotice() {
           Draft &mdash; Pending Legal Review
         </p>
         <p className="mt-2 max-w-[70ch] font-sans text-sm text-hairline-strong">
-          This page is placeholder content for structural/design purposes only. It has not been
-          reviewed by counsel and must not be treated as Ayava Creatives&apos; actual
-          privacy/terms policy until replaced with reviewed copy.
+          This is a substantive draft, written to reflect this site&apos;s actual data
+          practices and service terms &mdash; it is not generic filler. It has not been
+          reviewed by a licensed advocate, however, and must not be relied upon as
+          Ayava Creatives&apos; final, legally binding policy until that review is complete.
         </p>
       </Container>
     </div>
